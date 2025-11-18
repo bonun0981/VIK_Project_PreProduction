@@ -72,7 +72,9 @@ mono_crash.*
 *.unitypackage
 *.unitypackage.meta
 *.app
-
+libburst-llvm-*.dylib
+libburst-llvm-*.so
+libburst-llvm-*.dll
 # Crashlytics generated file
 crashlytics-build.properties
 
