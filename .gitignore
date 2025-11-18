@@ -54,7 +54,9 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
-
+libburst-llvm-*.dylib
+libburst-llvm-*.so
+libburst-llvm-*.dll
 # Unity3D generated meta files
 *.pidb.meta
 *.pdb.meta
