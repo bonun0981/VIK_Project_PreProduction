@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float runSpeed = 6f;
     [SerializeField] private float turnSpeed = 10f; // rotation speed
     [SerializeField] private float gravity = -9.81f;
-
+    [SerializeField] private float jumpHeight = 1.5f;
     private float inputX;
     private float inputY;
 
@@ -20,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+       
+
         characterController = GetComponent<CharacterController>();
     }
 
@@ -28,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
         InputManager();
         MovementMode();
         GroundMovement();
+        Jump();
         RotateCharacter();
     }
 
@@ -76,6 +79,8 @@ public class PlayerMovement : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(move);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
         }
+
+       
     }
 
     public void MovementMode()
@@ -90,5 +95,25 @@ public class PlayerMovement : MonoBehaviour
             playerController.SetBool("isRunning", false); 
             walkSpeed = originalwalkSpeed;
         }
+    }
+
+    public void Jump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space)&&characterController.isGrounded)
+        {
+            playerController.SetTrigger("Jump");
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
+
+        if (characterController.isGrounded == false)
+        {
+            playerController.SetBool("isFalling", true);
+        }
+        else if (characterController.isGrounded == true)
+        {
+            playerController.SetBool("isFalling", false);
+        }
+
+
     }
 }
