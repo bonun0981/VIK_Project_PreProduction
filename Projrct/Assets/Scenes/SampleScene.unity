@@ -655,6 +655,67 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &655388477
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1140908429953661830, guid: cfc41ae3b59e3b241af11daafc255f8c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 565.7022
+      objectReference: {fileID: 0}
+    - target: {fileID: 1140908429953661830, guid: cfc41ae3b59e3b241af11daafc255f8c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 1140908429953661830, guid: cfc41ae3b59e3b241af11daafc255f8c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 613.99445
+      objectReference: {fileID: 0}
+    - target: {fileID: 1140908429953661830, guid: cfc41ae3b59e3b241af11daafc255f8c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1140908429953661830, guid: cfc41ae3b59e3b241af11daafc255f8c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1140908429953661830, guid: cfc41ae3b59e3b241af11daafc255f8c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1140908429953661830, guid: cfc41ae3b59e3b241af11daafc255f8c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1140908429953661830, guid: cfc41ae3b59e3b241af11daafc255f8c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1140908429953661830, guid: cfc41ae3b59e3b241af11daafc255f8c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1140908429953661830, guid: cfc41ae3b59e3b241af11daafc255f8c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8967772241987015490, guid: cfc41ae3b59e3b241af11daafc255f8c, type: 3}
+      propertyPath: m_Name
+      value: Cube (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8967772241987015490, guid: cfc41ae3b59e3b241af11daafc255f8c, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cfc41ae3b59e3b241af11daafc255f8c, type: 3}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -718,6 +779,7 @@ GameObject:
   - component: {fileID: 1081338166}
   - component: {fileID: 1081338171}
   - component: {fileID: 1081338172}
+  - component: {fileID: 1081338173}
   m_Layer: 6
   m_Name: Enemy Dummy
   m_TagString: Enemy
@@ -841,7 +903,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 32
   m_CollisionDetection: 0
 --- !u!114 &1081338172
 MonoBehaviour:
@@ -856,6 +918,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+--- !u!114 &1081338173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1081338165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Graph: {fileID: 5612406532308632181, guid: e308c74cdc35f184d89ac2feba8f8597, type: 2}
+  m_BlackboardVariableOverridesList:
+  - rid: 795639164479996184
+  m_OriginalGraph: {fileID: 0}
+  m_IsInitialised: 0
+  m_IsStarted: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 795639164479996184
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 1081338165}
 --- !u!1 &1252364477
 GameObject:
   m_ObjectHideFlags: 0
@@ -2225,3 +2316,4 @@ SceneRoots:
   - {fileID: 1081338169}
   - {fileID: 1903793557}
   - {fileID: 531146122}
+  - {fileID: 655388477}
