@@ -6,21 +6,23 @@ public class PlayerDamage : MonoBehaviour
 {
     [SerializeField] float DamageAmount = 40f;
     [SerializeField]BoxCollider hitBox;
-    
+    Vector3 hitBoxDirection;
+    GameObject player;
     private void Start()
     {
         hitBox=GetComponent<BoxCollider>();
+        player = GameObject.FindWithTag("Player");  
     }
-
+   
     private void OnTriggerEnter(Collider other)
     {
-        
-          if(other.CompareTag("Enemy"))
+        hitBoxDirection = player.transform.forward; 
+        if (other.CompareTag("Enemy"))
           {
               Enemy enemy = other.GetComponent<Enemy>();
               if(enemy != null)
               {
-                  enemy.TakeDamage(DamageAmount);
+                  enemy.TakeDamage(DamageAmount,hitBoxDirection);
               }
             else
             {

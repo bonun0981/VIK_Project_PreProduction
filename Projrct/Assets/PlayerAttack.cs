@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     Animator attackAnimation;
-
+    [SerializeField]BoxCollider hitBox;
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -45,5 +45,14 @@ public class PlayerAttack : MonoBehaviour
     {
         //attackAnimation.applyRootMotion = true;
         attackAnimation.SetBool("CanAttack", true);
+    }
+
+    public void EnableHitBox()
+    {
+        hitBox.enabled = true;
+    }
+    public void DisableHitBox()
+    {
+        hitBox.enabled = false;
     }
 }
