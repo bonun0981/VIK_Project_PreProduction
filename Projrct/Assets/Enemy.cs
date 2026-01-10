@@ -5,13 +5,13 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] Material originalMat;
     [SerializeField] Material damageMat;
-    [SerializeField] MeshRenderer reder;
+    [SerializeField] MeshRenderer render;
     [SerializeField] float flashTime = 0.75f;
 
     [SerializeField] float health = 100f;
     [SerializeField]Rigidbody enemyRigidbody;
     private float knockbackForce = 2.75f;
-
+    
     private void Start()
     {
         
@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
         health -= damage;
         enemyRigidbody.AddForce(playerDirection * knockbackForce, ForceMode.Impulse);
         StartCoroutine(TakeDamageFlash(flashTime)); 
-
+        StartCoroutine(freeztime(0.1f, 0.06f));
 
 
 
@@ -38,8 +38,21 @@ public class Enemy : MonoBehaviour
 
     IEnumerator TakeDamageFlash(float time)
     {
-       reder.material=damageMat;
+        
+        render.material=damageMat;
         yield return new WaitForSeconds(time);
-        reder.material=originalMat;
+        render.material=originalMat;
+       
+    }
+
+    IEnumerator freeztime(float slowScale,float duration)
+    {
+        Time.timeScale = slowScale;
+        Time.fixedDeltaTime = 0.02f * slowScale;
+
+        yield return new WaitForSecondsRealtime(duration);
+
+        Time.timeScale = 1f;
+        Time.fixedDeltaTime = 0.02f;
     }
 }

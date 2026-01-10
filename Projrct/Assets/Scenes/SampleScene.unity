@@ -184,7 +184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalMat: {fileID: 2100000, guid: fdf8b349332891c4b90104bd0f7cd86c, type: 2}
   damageMat: {fileID: 2100000, guid: 37d76c9b5c4fb634a9c43d15e0025bf0, type: 2}
-  reder: {fileID: 158530522}
+  render: {fileID: 158530522}
   flashTime: 0.5
   health: 100
   enemyRigidbody: {fileID: 158530520}
@@ -662,7 +662,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalMat: {fileID: 2100000, guid: fdf8b349332891c4b90104bd0f7cd86c, type: 2}
   damageMat: {fileID: 2100000, guid: 37d76c9b5c4fb634a9c43d15e0025bf0, type: 2}
-  reder: {fileID: 432176392}
+  render: {fileID: 432176392}
   flashTime: 0.5
   health: 100
   enemyRigidbody: {fileID: 432176390}
@@ -1362,7 +1362,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalMat: {fileID: 2100000, guid: fdf8b349332891c4b90104bd0f7cd86c, type: 2}
   damageMat: {fileID: 2100000, guid: 37d76c9b5c4fb634a9c43d15e0025bf0, type: 2}
-  reder: {fileID: 814508139}
+  render: {fileID: 814508139}
   flashTime: 0.5
   health: 100
   enemyRigidbody: {fileID: 814508137}
@@ -1908,7 +1908,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalMat: {fileID: 2100000, guid: fdf8b349332891c4b90104bd0f7cd86c, type: 2}
   damageMat: {fileID: 2100000, guid: 37d76c9b5c4fb634a9c43d15e0025bf0, type: 2}
-  reder: {fileID: 1081338167}
+  render: {fileID: 1081338167}
   flashTime: 0.5
   health: 100
   enemyRigidbody: {fileID: 1081338171}
@@ -2222,7 +2222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalMat: {fileID: 2100000, guid: fdf8b349332891c4b90104bd0f7cd86c, type: 2}
   damageMat: {fileID: 2100000, guid: 37d76c9b5c4fb634a9c43d15e0025bf0, type: 2}
-  reder: {fileID: 1318969880}
+  render: {fileID: 1318969880}
   flashTime: 0.5
   health: 100
   enemyRigidbody: {fileID: 1318969878}
@@ -2655,7 +2655,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalMat: {fileID: 2100000, guid: fdf8b349332891c4b90104bd0f7cd86c, type: 2}
   damageMat: {fileID: 2100000, guid: 37d76c9b5c4fb634a9c43d15e0025bf0, type: 2}
-  reder: {fileID: 1345263509}
+  render: {fileID: 1345263509}
   flashTime: 0.5
   health: 100
   enemyRigidbody: {fileID: 1345263507}
