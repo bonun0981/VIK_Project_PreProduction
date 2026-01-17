@@ -264,23 +264,6 @@ AnimatorStateMachine:
   m_ExitPosition: {x: 290, y: -120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -4563182580871855980}
-<<<<<<< HEAD
-=======
---- !u!114 &-312372230565831683
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94d12e95b595ec546a8b469456098d8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eventName: Test
-  triggerTime: 0
->>>>>>> f46e5ab (add animation event system to project)
 --- !u!91 &9100000
 AnimatorController:
   m_ObjectHideFlags: 0
@@ -371,12 +354,7 @@ AnimatorState:
   m_Transitions:
   - {fileID: -8729501929266297464}
   - {fileID: 7040185304712036542}
-<<<<<<< HEAD
   m_StateMachineBehaviours: []
-=======
-  m_StateMachineBehaviours:
-  - {fileID: -312372230565831683}
->>>>>>> f46e5ab (add animation event system to project)
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
