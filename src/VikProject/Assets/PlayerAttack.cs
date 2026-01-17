@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    Animator attackAnimation;
+    [SerializeField]Animator attackAnimation;
     [SerializeField]BoxCollider hitBox;
     private void Update()
     {

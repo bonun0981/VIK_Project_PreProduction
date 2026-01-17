@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
         health -= damage;
         enemyRigidbody.AddForce(playerDirection * knockbackForce, ForceMode.Impulse);
         StartCoroutine(TakeDamageFlash(flashTime)); 
-        StartCoroutine(freeztime(0.1f, 0.06f));
+        StartCoroutine(freeztime(0.5f, 0.06f));
 
 
 
