@@ -111,7 +111,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (characterController.isGrounded == true)
         {
-            playerController.SetBool("isFalling", false);
+           // playerController.SetBool("isFalling", false);
         }
 
 
