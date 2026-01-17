@@ -2,33 +2,58 @@ using UnityEngine;
 
 public class PlayeAnimationEventStateMachine : StateMachineBehaviour
 {
-    public string eventName;
+    [Header("Start Event")]
+    public string startEventName;
     [Range(0f, 1f)] public float triggerTime;
 
-    bool hasTriggered;
+    [Header("End Event (optional)")]
+    public string endEventName;
+    [Range(0f, 1f)] public float endTime; 
+
+    private bool startTriggered;
+    private bool endTriggered;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        hasTriggered = false;
+        startTriggered = false;
+        endTriggered = false;
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        float currentTime = stateInfo.normalizedTime % 1;
+        float currentTime = stateInfo.normalizedTime % 1f;
 
-        if (!hasTriggered && currentTime >= triggerTime)
+       
+        if (!startTriggered && currentTime >= triggerTime)
         {
-            NotifyReceiver(animator);
-            hasTriggered = true;
+            NotifyReceiver(animator, startEventName);
+            startTriggered = true;
+        }
+
+        
+        if (endTime > 0f && startTriggered && !endTriggered && currentTime >= endTime)
+        {
+            NotifyReceiver(animator, endEventName);
+            endTriggered = true;
         }
     }
+     
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Debug.Log("Exit State Animation Event Triggered");
+       
+        if (endTime > 0f && startTriggered && !endTriggered)
+        {
+            NotifyReceiver(animator, endEventName);
+        }
     }
-    void NotifyReceiver(Animator animator)
+
+    private void NotifyReceiver(Animator animator, string eventName)
     {
-        AnimationReceiverEvent receiver = animator.GetComponent<AnimationReceiverEvent>();
+        if (string.IsNullOrEmpty(eventName)) return;
+
+        AnimationReceiverEvent receiver =
+            animator.GetComponent<AnimationReceiverEvent>();
+
         if (receiver != null)
         {
             receiver.ReceiveEvent(eventName);

@@ -61,4 +61,8 @@ public class PlayerAttack : MonoBehaviour
     {
         Debug.Log("Animaiton event has triggers");
     }
+    public void DebugTestend()
+    {
+        Debug.Log("second Animaiton event has triggers ");
+    }
 }
