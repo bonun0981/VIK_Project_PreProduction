@@ -55,4 +55,10 @@ public class PlayerAttack : MonoBehaviour
     {
         hitBox.enabled = false;
     }
+
+
+    public void DebugTest()
+    {
+        Debug.Log("Animaiton event has triggers");
+    }
 }

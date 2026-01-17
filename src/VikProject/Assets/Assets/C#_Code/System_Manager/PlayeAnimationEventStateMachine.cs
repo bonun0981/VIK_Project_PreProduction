@@ -22,7 +22,10 @@ public class PlayeAnimationEventStateMachine : StateMachineBehaviour
             hasTriggered = true;
         }
     }
-
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        Debug.Log("Exit State Animation Event Triggered");
+    }
     void NotifyReceiver(Animator animator)
     {
         AnimationReceiverEvent receiver = animator.GetComponent<AnimationReceiverEvent>();
