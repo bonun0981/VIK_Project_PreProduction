@@ -7,7 +7,16 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: CanAttack
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: Attack
+    m_EventTreshold: 0
+  - m_ConditionMode: 6
+    m_ConditionEvent: Combo
+    m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6780990549609294869}
   m_Solo: 0
@@ -22,6 +31,24 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-8588108553223406943
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94d12e95b595ec546a8b469456098d8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startEventName: start attack
+  startUpdateEventName: enable hitbox
+  triggerTime: 0.33
+  endUpdateEventName: disable hitbox
+  endTime: 0.39
+  exitEventName: 
 --- !u!1101 &-8188074912355951535
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -29,7 +56,16 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: CanAttack
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: Attack
+    m_EventTreshold: 0
+  - m_ConditionMode: 6
+    m_ConditionEvent: Combo
+    m_EventTreshold: 2
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1480042568239861164}
   m_Solo: 0
@@ -94,6 +130,24 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-5572849729245312619
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94d12e95b595ec546a8b469456098d8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startEventName: 
+  startUpdateEventName: third attack
+  triggerTime: 0
+  endUpdateEventName: reset attack
+  endTime: 0.987
+  exitEventName: 
 --- !u!1102 &-4563182580871855980
 AnimatorState:
   serializedVersion: 6
@@ -143,6 +197,24 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-3610707534283773475
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94d12e95b595ec546a8b469456098d8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startEventName: start attack
+  startUpdateEventName: enable hitbox
+  triggerTime: 0.326
+  endUpdateEventName: disable hitbox
+  endTime: 0.362
+  exitEventName: 
 --- !u!1102 &-3537068027907000548
 AnimatorState:
   serializedVersion: 6
@@ -211,7 +283,9 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -4328963035706136148}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -5572849729245312619}
+  - {fileID: -8588108553223406943}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -356,6 +430,7 @@ AnimatorState:
   - {fileID: 7040185304712036542}
   m_StateMachineBehaviours:
   - {fileID: 2245985702241113068}
+  - {fileID: 6442983946342958448}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -407,11 +482,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94d12e95b595ec546a8b469456098d8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startEventName: 
-  startUpdateEventName: 
-  triggerTime: 0.16
-  endUpdateEventName: 
-  endTime: 0.26
+  startEventName: start attack
+  startUpdateEventName: enable hitbox
+  triggerTime: 0.213
+  endUpdateEventName: disable hitbox
+  endTime: 0.25
   exitEventName: 
 --- !u!1101 &4371505428644277648
 AnimatorStateTransition:
@@ -421,9 +496,6 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: CanAttack
-    m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: Attack
     m_EventTreshold: 0
@@ -444,6 +516,24 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &6442983946342958448
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94d12e95b595ec546a8b469456098d8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startEventName: 
+  startUpdateEventName: first attack
+  triggerTime: 0
+  endUpdateEventName: reset attack
+  endTime: 0.986
+  exitEventName: 
 --- !u!1102 &6780990549609294869
 AnimatorState:
   serializedVersion: 6
@@ -457,7 +547,9 @@ AnimatorState:
   m_Transitions:
   - {fileID: -8188074912355951535}
   - {fileID: -7365158047660045767}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 7671249122385235279}
+  - {fileID: -3610707534283773475}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -494,6 +586,24 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &7671249122385235279
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94d12e95b595ec546a8b469456098d8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startEventName: 
+  startUpdateEventName: second attack
+  triggerTime: 0
+  endUpdateEventName: reset attack
+  endTime: 0.987
+  exitEventName: 
 --- !u!1102 &9200508542979165157
 AnimatorState:
   serializedVersion: 6

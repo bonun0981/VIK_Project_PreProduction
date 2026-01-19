@@ -24,7 +24,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     holdDuration: 0
-    fadeOutDuration: 0.3
+    fadeOutDuration: 5
     fadeOutCurve:
       serializedVersion: 2
       m_Curve:
@@ -51,9 +51,9 @@ MonoBehaviour:
       m_RotationOrder: 4
   positionShake:
     noiseType: 1
-    amplitude: {x: 0.2, y: 0.2, z: 0.2}
+    amplitude: {x: 5, y: 5, z: 5}
     frequency: {x: 0, y: 0, z: 0}
   rotationShake:
-    noiseType: 0
-    amplitude: {x: 0, y: 0, z: 0}
+    noiseType: 1
+    amplitude: {x: 1, y: 1, z: 1}
     frequency: {x: 0, y: 0, z: 0}

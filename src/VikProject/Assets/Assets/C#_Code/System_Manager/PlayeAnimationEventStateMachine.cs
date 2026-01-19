@@ -24,7 +24,11 @@ public class PlayeAnimationEventStateMachine : StateMachineBehaviour
     {
         startTriggered = false;
         endTriggered = false;
-        NotifyReceiver(animator, startEventName);
+        if (!string.IsNullOrEmpty(startEventName))
+        {
+            NotifyReceiver(animator, startEventName);
+        }
+            
         
     }
 
@@ -52,7 +56,11 @@ public class PlayeAnimationEventStateMachine : StateMachineBehaviour
        
         if (endTime > 0f && startTriggered && !endTriggered)
         {
-            NotifyReceiver(animator, exitEventName);
+            if(!string.IsNullOrEmpty(exitEventName))
+            {
+                NotifyReceiver(animator, exitEventName);
+            }
+            
         }
     }
 

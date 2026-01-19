@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using SmoothShakeFree;
 
 public class Enemy : MonoBehaviour
 {
@@ -11,10 +12,12 @@ public class Enemy : MonoBehaviour
     [SerializeField] float health = 100f;
     [SerializeField]Rigidbody enemyRigidbody;
     private float knockbackForce = 2.75f;
-    
+    private SmoothShake shake;
+    GameObject shakeManager;
     private void Start()
     {
-        
+        shakeManager = GameObject.FindWithTag("ShakeController");
+        shake= shakeManager.GetComponent<SmoothShake>();
     }
     public void TakeDamage(float damage,Vector3 playerDirection)
     {
@@ -22,7 +25,7 @@ public class Enemy : MonoBehaviour
         enemyRigidbody.AddForce(playerDirection * knockbackForce, ForceMode.Impulse);
         StartCoroutine(TakeDamageFlash(flashTime)); 
         StartCoroutine(freeztime(0.5f, 0.06f));
-
+        shake.StartShake();
 
 
         if (health <= 0)
