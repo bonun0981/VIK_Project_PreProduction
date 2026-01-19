@@ -86,9 +86,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.47825384
+  m_TransitionDuration: 0.35916212
   m_TransitionOffset: 0
-  m_ExitTime: 0.012435962
+  m_ExitTime: 0.0124359615
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -191,7 +191,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.32730135
+  m_TransitionDuration: 0.18341646
   m_TransitionOffset: 0
   m_ExitTime: 0
   m_HasExitTime: 0
@@ -333,7 +333,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.70743597
+  m_TransitionDuration: 0.2153498
   m_TransitionOffset: 0
   m_ExitTime: 0
   m_HasExitTime: 0
@@ -387,7 +387,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.7254647
+  m_TransitionDuration: 0.266632
   m_TransitionOffset: 0
   m_ExitTime: 0
   m_HasExitTime: 0
@@ -407,10 +407,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94d12e95b595ec546a8b469456098d8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startEventName: test
+  startEventName: 
+  startUpdateEventName: 
   triggerTime: 0.16
-  endEventName: test2
+  endUpdateEventName: 
   endTime: 0.26
+  exitEventName: 
 --- !u!1101 &4371505428644277648
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
