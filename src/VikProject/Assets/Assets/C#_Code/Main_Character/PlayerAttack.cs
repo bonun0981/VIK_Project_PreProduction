@@ -55,4 +55,14 @@ public class PlayerAttack : MonoBehaviour
     {
         hitBox.enabled = false;
     }
+
+
+    public void DebugTest()
+    {
+        Debug.Log("Animaiton event has triggers");
+    }
+    public void DebugTestend()
+    {
+        Debug.Log("second Animaiton event has triggers ");
+    }
 }
