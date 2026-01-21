@@ -37,7 +37,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void ResetAttack()
     {
-        attackAnimation.applyRootMotion = false;
+        //attackAnimation.applyRootMotion = false;
         attackAnimation.SetInteger("Combo", 0);
         attackAnimation.SetBool("CanAttack", false);
     }

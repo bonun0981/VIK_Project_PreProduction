@@ -7,11 +7,11 @@ public class PlayerDamage : MonoBehaviour
     [SerializeField] float DamageAmount = 40f;
     [SerializeField]BoxCollider hitBox;
     Vector3 hitBoxDirection;
-    GameObject player;
+    [SerializeField]GameObject player;
     private void Start()
     {
         hitBox=GetComponent<BoxCollider>();
-        player = GameObject.FindWithTag("Player");  
+       
     }
    
     private void OnTriggerEnter(Collider other)
