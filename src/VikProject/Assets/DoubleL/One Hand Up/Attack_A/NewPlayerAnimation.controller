@@ -162,7 +162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startEventName: 
   startUpdateEventName: third attack
-  triggerTime: 0
+  triggerTime: 0.19
   endUpdateEventName: reset attack
   endTime: 0.987
   exitEventName: 
@@ -549,7 +549,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startEventName: 
   startUpdateEventName: first attack
-  triggerTime: 0
+  triggerTime: 0.19
   endUpdateEventName: reset attack
   endTime: 0.986
   exitEventName: 
@@ -619,7 +619,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startEventName: 
   startUpdateEventName: second attack
-  triggerTime: 0
+  triggerTime: 0.22
   endUpdateEventName: reset attack
   endTime: 0.987
   exitEventName: 
