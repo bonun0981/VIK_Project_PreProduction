@@ -16,12 +16,13 @@ public class PlayerMovement : MonoBehaviour
     private float inputX;
     private float inputY;
 
+   
     private Vector3 velocity; // vertical velocity
-
+    PlayerAttack playerAttack;
     void Start()
     {
        
-
+        playerAttack = GetComponent<PlayerAttack>();
         characterController = GetComponent<CharacterController>();
     }
 
@@ -58,8 +59,12 @@ public class PlayerMovement : MonoBehaviour
         move.Normalize(); // consistent diagonal speed
 
         // Move character
-        characterController.Move(move * walkSpeed * Time.deltaTime);
-        playerController.SetFloat("Velocity",Mathf.Abs(move.magnitude));
+        if (!playerAttack.isAttacking)
+        {
+            characterController.Move(move * walkSpeed * Time.deltaTime);
+            playerController.SetFloat("Velocity", Mathf.Abs(move.magnitude));
+        }
+            
         // Gravity
         if (characterController.isGrounded && velocity.y < 0)
             velocity.y = -2f;
@@ -116,4 +121,7 @@ public class PlayerMovement : MonoBehaviour
 
 
     }
+
+    
+
 }
