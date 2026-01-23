@@ -21,6 +21,13 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float enemyPushStrength = 0.08f;
 
 
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip[] attackClips;
+
+    [SerializeField] private Vector2 pitchRange = new Vector2(0.9f, 1.1f);
+    [SerializeField] private Vector2 volumeRange = new Vector2(0.9f, 1f);
+
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -86,7 +93,7 @@ public class PlayerAttack : MonoBehaviour
             EnemyCheck();
             targetLocked = currentTarget != null;
         }
-
+        attackAnimation.deltaPosition.Set(0, 0, 0);
     }
 
     public void EnableHitBox()
@@ -205,5 +212,17 @@ public class PlayerAttack : MonoBehaviour
 
             pendingPush += horizontalNormal.normalized * enemyPushStrength;
         }
+    }
+
+    public void PlayAttackSFX()
+    {
+        if (attackClips.Length == 0) return;
+
+        AudioClip clip = attackClips[Random.Range(0, attackClips.Length)];
+
+        audioSource.pitch = Random.Range(pitchRange.x, pitchRange.y);
+        audioSource.volume = Random.Range(volumeRange.x, volumeRange.y);
+
+        audioSource.PlayOneShot(clip);
     }
 }
