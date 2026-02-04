@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enemy
   - patrol zone
+  - ShakeController
+  - enemysound
   layers:
   - Default
   - TransparentFX

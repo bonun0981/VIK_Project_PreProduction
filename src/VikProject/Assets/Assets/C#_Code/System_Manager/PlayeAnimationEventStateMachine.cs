@@ -4,11 +4,18 @@ public class PlayeAnimationEventStateMachine : StateMachineBehaviour
 {
     [Header("Start Event")]
     public string startEventName;
+
+    [Header("Start Update Event")]
+    public string startUpdateEventName;
     [Range(0f, 1f)] public float triggerTime;
 
-    [Header("End Event (optional)")]
-    public string endEventName;
-    [Range(0f, 1f)] public float endTime; 
+    [Header("End Update Event")]
+    public string endUpdateEventName;
+    [Range(0f, 1f)] public float endTime;
+
+    [Header("Exit Event")]
+    public string exitEventName;
+   
 
     private bool startTriggered;
     private bool endTriggered;
@@ -17,6 +24,12 @@ public class PlayeAnimationEventStateMachine : StateMachineBehaviour
     {
         startTriggered = false;
         endTriggered = false;
+        if (!string.IsNullOrEmpty(startEventName))
+        {
+            NotifyReceiver(animator, startEventName);
+        }
+            
+        
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -26,14 +39,14 @@ public class PlayeAnimationEventStateMachine : StateMachineBehaviour
        
         if (!startTriggered && currentTime >= triggerTime)
         {
-            NotifyReceiver(animator, startEventName);
+            NotifyReceiver(animator, startUpdateEventName);
             startTriggered = true;
         }
 
         
         if (endTime > 0f && startTriggered && !endTriggered && currentTime >= endTime)
         {
-            NotifyReceiver(animator, endEventName);
+            NotifyReceiver(animator, endUpdateEventName);
             endTriggered = true;
         }
     }
@@ -43,7 +56,11 @@ public class PlayeAnimationEventStateMachine : StateMachineBehaviour
        
         if (endTime > 0f && startTriggered && !endTriggered)
         {
-            NotifyReceiver(animator, endEventName);
+            if(!string.IsNullOrEmpty(exitEventName))
+            {
+                NotifyReceiver(animator, exitEventName);
+            }
+            
         }
     }
 
