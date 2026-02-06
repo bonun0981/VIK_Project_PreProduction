@@ -110,14 +110,14 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
-        if (characterController.isGrounded == false)
-        {
-            playerController.SetBool("isFalling", true);
-        }
-        else if (characterController.isGrounded == true)
-        {
-            playerController.SetBool("isFalling", false);
-        }
+        //if (characterController.isGrounded == false)
+        //{
+        //    playerController.SetBool("isFalling", true);
+        //}
+        //else if (characterController.isGrounded == true)
+        //{
+        //    playerController.SetBool("isFalling", false);
+        //}
 
 
     }
