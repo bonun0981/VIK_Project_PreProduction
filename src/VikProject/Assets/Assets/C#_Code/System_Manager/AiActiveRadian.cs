@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -24,23 +24,35 @@ public class AiActiveRadian : MonoBehaviour
     }
     public void ScanEnemy()
     {
-        Collider[] hit = Physics.OverlapSphere(transform.position, activeRadius, enemyLayer);
+        Collider[] hit = Physics.OverlapSphere(
+            transform.position,
+            activeRadius,
+            enemyLayer
+        );
+
         foreach (var e in hit)
         {
-           EnemyMotherClass enemy = e.GetComponent<EnemyMotherClass>();
-           if (enemy==null) continue;
-           if(enemy.aiActive) continue;
+            EnemyMotherClass enemy = e.GetComponent<EnemyMotherClass>();
+            if (enemy == null) continue;
 
-           enemy.aiActive = true;
+            if (enemy.aiActive) continue;
+
+            // 🔥 เช็คก่อนว่าเรามี slot ไหม
             if (EnemyStateManager.Instance.CanAddPassive())
             {
+                enemy.aiActive = true;
                 EnemyStateManager.Instance.AddToPassive(enemy);
             }
             else if (EnemyStateManager.Instance.CanAddActive())
             {
+                enemy.aiActive = true;
                 EnemyStateManager.Instance.AddToActive(enemy);
             }
-
+            else
+            {
+                // ไม่มี slotเลย → อย่า activate
+                continue;
+            }
         }
     }
 

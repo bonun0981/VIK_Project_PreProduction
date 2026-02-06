@@ -2131,7 +2131,7 @@ MonoBehaviour:
   comboResetTime: 1
   health: 100
   enemyRigidbody: {fileID: 0}
-  knockbackForce: 5
+  knockbackForce: 7
   audioSource: {fileID: 0}
   attackClips:
   - {fileID: 8300000, guid: 7cbd6cd765888ff418d01d98bd1ce9c2, type: 3}
@@ -2234,6 +2234,22 @@ MonoBehaviour:
         - m_Target: {fileID: 310758354428374115}
           m_TargetAssemblyTypeName: EnemyMotherClass, Assembly-CSharp
           m_MethodName: FinsihAttack
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventName: reset
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 310758354428374115}
+          m_TargetAssemblyTypeName: EnemyMotherClass, Assembly-CSharp
+          m_MethodName: ResetEnemyState
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

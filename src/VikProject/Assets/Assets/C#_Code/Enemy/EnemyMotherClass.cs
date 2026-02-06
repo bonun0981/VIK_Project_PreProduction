@@ -88,6 +88,7 @@ public class EnemyMotherClass : MonoBehaviour
 
     //color debug
     [SerializeField] bool debugStateColor = true;
+    Color attackColor = Color.magenta;
     Color passiveColor = Color.yellow;
     Color activeColor = Color.red;
     Color idleColor = Color.white;
@@ -316,6 +317,7 @@ public class EnemyMotherClass : MonoBehaviour
                 if (EnemyStateManager.Instance.RequestAttack(this))
                 {
                     isAttacking = true;
+                    
                     StartAttack();
                 }
             }
@@ -495,6 +497,33 @@ public class EnemyMotherClass : MonoBehaviour
 
     }
     //Variable methode
-    
+    public void ResetEnemyState()
+    {
+        if(!aiActive) return;
+        // stop attacking
+        isAttacking = false;
+        hasActiveTarget = false;
+
+        // stop recovery
+        recoveryInitialized = false;
+        recoveryTimer = 0f;
+
+        // stop thinking
+        isThinking = false;
+        thinkTimer = 0f;
+
+        // stop movement
+        currentVelocity = Vector3.zero;
+
+        // clear animator attack trigger just in case
+        if (animator != null)
+            animator.ResetTrigger("Attack");
+
+        // 🔥 release attack slot if holding one
+        EnemyStateManager.Instance.ReleaseAttack(this);
+
+        // ensure enemy is synced to passive safely
+        EnemyStateManager.Instance.RequestPassive(this);
+    }
 
 }
