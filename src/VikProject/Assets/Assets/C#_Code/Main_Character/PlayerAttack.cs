@@ -36,12 +36,12 @@ public class PlayerAttack : MonoBehaviour
             attackAnimation.SetTrigger("Attack");
             
         }
-        if (isAttacking && currentTarget != null)
-        {
-            RotateToEnemy(currentTarget);
-        }
+        //if (isAttacking && currentTarget != null)
+        //{
+        //    RotateToEnemy(currentTarget);
+        //}
 
-        HandleTargetGrace();
+        //HandleTargetGrace();
     }
 
     private void Awake()
