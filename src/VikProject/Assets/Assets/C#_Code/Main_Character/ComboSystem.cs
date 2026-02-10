@@ -36,8 +36,8 @@ public class ComboSystem : MonoBehaviour
             CancelInvoke("ResetCombo");
             if(Time.time - lastClickTime >= 0.2f)
             {
-                animator.runtimeAnimatorController=attackSequence[comboStep].animatorOverride;
-                animator.Play("Attack",0,0);
+                animator.runtimeAnimatorController = attackSequence[comboStep].animatorOverride;
+                animator.Play("Attack",0,0.5f);
                 playerDamage.DamageAmount= attackSequence[comboStep].damage;
                 comboStep++;
                 lastClickTime=Time.time;
@@ -62,22 +62,19 @@ public class ComboSystem : MonoBehaviour
 
         playerDamage.DamageAmount =
             attackSequence[comboStep].damage;
-
-        comboStep++;
-
-        if (comboStep >= attackSequence.Count)
-            comboStep = 0;
     }
     public void TryCombo()
     {
-        if (attackQueued)
+        if (attackQueued && comboStep < attackSequence.Count - 1)
         {
             attackQueued = false;
+            comboStep++;
             StartAttack();
         }
         else
         {
             isAttacking = false;
+            attackQueued = false;
             comboStep = 0;
         }
     }
