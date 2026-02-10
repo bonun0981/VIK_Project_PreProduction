@@ -10413,7 +10413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25c199e678964f845be6d7b5d699d933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxActiveEnemies: 3
+  maxActiveEnemies: 5
   maxPassiveEnemies: 10
   maxAttackingEnemies: 1
   activeEnemies: []
