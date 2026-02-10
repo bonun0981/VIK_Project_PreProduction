@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Windows;
 
-public class Rotation : MonoBehaviour
+public class PlayerRotation : MonoBehaviour
 {
     InputHandler input;
 

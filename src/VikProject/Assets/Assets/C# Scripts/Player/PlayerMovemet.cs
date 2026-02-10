@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Windows;
 
-public class Movement : MonoBehaviour
+public class PlayerMovemet : MonoBehaviour,IMovementState
 {
     
 
@@ -20,7 +20,13 @@ public class Movement : MonoBehaviour
     MovementChecker checker;
     InputHandler input;
     //interfaces
-    
+   
+
+    public bool IsRunning => input.isRun&&direction.sqrMagnitude>0.01f;
+
+    public bool IsWalking => !input.isRun && direction.sqrMagnitude > 0.01f;
+
+    public float GetSpeed => new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z).magnitude;
 
     private void Awake()
     {   currentSpeed = walkSpeed;
@@ -59,6 +65,6 @@ public class Movement : MonoBehaviour
         rb.AddForce(velocityChange, ForceMode.VelocityChange);
 
     }
-
+  
 
 }
