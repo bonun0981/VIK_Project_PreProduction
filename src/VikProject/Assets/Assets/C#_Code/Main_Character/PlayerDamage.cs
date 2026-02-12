@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerDamage : MonoBehaviour
 {
-    [SerializeField] float DamageAmount = 40f;
+    public float DamageAmount = 40f;
     [SerializeField]BoxCollider hitBox;
     Vector3 hitBoxDirection;
     [SerializeField]GameObject player;
