@@ -35,7 +35,11 @@ public class PlayerAttack : MonoBehaviour
             
         //    attackAnimation.SetTrigger("Attack");
             
+<<<<<<< HEAD
         //}
+=======
+        }
+>>>>>>> origin/Panu
         //if (isAttacking && currentTarget != null)
         //{
         //    RotateToEnemy(currentTarget);
