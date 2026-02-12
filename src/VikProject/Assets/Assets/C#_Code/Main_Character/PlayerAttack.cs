@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -30,19 +30,20 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            
-            attackAnimation.SetTrigger("Attack");
-            
-        }
-        if (isAttacking && currentTarget != null)
-        {
-            RotateToEnemy(currentTarget);
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
 
-        HandleTargetGrace();
-    }
+        //    attackAnimation.SetTrigger("Attack");
+        //}
+        
+
+            //if (isAttacking && currentTarget != null)
+            //{
+            //    RotateToEnemy(currentTarget);
+            //}
+
+            //HandleTargetGrace();
+        }
 
     private void Awake()
     {
