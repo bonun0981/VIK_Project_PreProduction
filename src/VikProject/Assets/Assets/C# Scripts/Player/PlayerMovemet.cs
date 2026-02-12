@@ -50,12 +50,12 @@ public class PlayerMovemet : MonoBehaviour,IMovementState
     }
     private void FixedUpdate()
     {
-        if(!checker.CanMove())
-        {
-            rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
-            return;
+        //if(!checker.CanMove())
+        //{
+        //    rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
+        //    return;
 
-        }
+        //}
         currentSpeed= input.isRun ? runSpeed : walkSpeed;
         Vector3 targetVelocity = direction * currentSpeed;
 

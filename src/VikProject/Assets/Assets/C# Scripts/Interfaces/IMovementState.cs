@@ -17,7 +17,7 @@ public interface IDirectionMovement
 }
 public interface ICombatState
 {
-    bool IsAttacked { get; }
+    string IsAttacked { get; }
     bool IsDead { get; }
     bool IsTakingDamage { get; }
 }
