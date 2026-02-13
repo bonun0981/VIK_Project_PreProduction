@@ -1170,7 +1170,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: False
+      m_SerializableObject: True
     m_Space: -1
   m_Property:
     name: _vfx_enabled
@@ -2050,7 +2050,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"r":0.9411765336990356,"g":5.992156505584717,"b":3.41341495513916,"a":1.0}'
+      m_SerializableObject: '{"r":0.9411765336990356,"g":5.992156505584717,"b":3.41341495513916,"a":20.0}'
     m_Space: -1
   m_Property:
     name: _Color
