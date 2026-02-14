@@ -30,6 +30,7 @@ MonoBehaviour:
     - model: {fileID: 8926484042661614662}
       id: 0
       isStickyNote: 0
+<<<<<<< HEAD
   - title: Base Loop
     position:
       serializedVersion: 2
@@ -47,14 +48,21 @@ MonoBehaviour:
     - model: {fileID: 8926484042661615079}
       id: 0
       isStickyNote: 0
+=======
+>>>>>>> origin/HumLek
   stickyNoteInfos: []
   categories: []
   uiBounds:
     serializedVersion: 2
     x: 222
     y: -1434
+<<<<<<< HEAD
     width: 2318
     height: 2110
+=======
+    width: 1653
+    height: 1562
+>>>>>>> origin/HumLek
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -80,6 +88,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615001}
   - {fileID: 8926484042661615037}
   - {fileID: 8926484042661615041}
+<<<<<<< HEAD
   - {fileID: 8926484042661615049}
   - {fileID: 8926484042661615055}
   - {fileID: 8926484042661615079}
@@ -89,6 +98,8 @@ MonoBehaviour:
   - {fileID: 8926484042661615110}
   - {fileID: 8926484042661615114}
   - {fileID: 8926484042661615118}
+=======
+>>>>>>> origin/HumLek
   m_UIPosition: {x: 0, y: 0}
   m_UICollapsed: 1
   m_UISuperCollapsed: 0
@@ -1551,7 +1562,11 @@ MonoBehaviour:
   - {fileID: 8926484042661615034}
   - {fileID: 8926484042661615035}
   m_OutputSlots: []
+<<<<<<< HEAD
   m_Label: Light EFX
+=======
+  m_Label: 
+>>>>>>> origin/HumLek
   m_Data: {fileID: 8926484042661614627}
   m_InputFlowSlot:
   - link:
@@ -1745,7 +1760,11 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children:
   - {fileID: 8926484042661615008}
+<<<<<<< HEAD
   m_UIPosition: {x: 514, y: 279}
+=======
+  m_UIPosition: {x: 1450, y: -269}
+>>>>>>> origin/HumLek
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -2076,7 +2095,11 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
+<<<<<<< HEAD
       m_SerializableObject: '{"r":0.470588356256485,"g":2.9960787296295168,"b":1.7067077159881592,"a":20.0}'
+=======
+      m_SerializableObject: '{"r":0.9411765336990356,"g":5.992156505584717,"b":3.41341495513916,"a":20.0}'
+>>>>>>> origin/HumLek
     m_Space: -1
   m_Property:
     name: _Color
@@ -2593,6 +2616,7 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
   m_Direction: 0
   m_LinkedSlots: []
+<<<<<<< HEAD
 --- !u!114 &8926484042661615049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4717,3 +4741,5 @@ MonoBehaviour:
   m_Direction: 1
   m_LinkedSlots:
   - {fileID: 8926484042661615116}
+=======
+>>>>>>> origin/HumLek
