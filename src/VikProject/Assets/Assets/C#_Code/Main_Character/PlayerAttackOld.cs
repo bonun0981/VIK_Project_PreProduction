@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerAttack : MonoBehaviour
+public class PlayerAttackOld : MonoBehaviour
 {
     [SerializeField]Animator attackAnimation;
     [SerializeField]BoxCollider hitBox;

@@ -4,20 +4,22 @@ using UnityEngine.Windows;
 public class PlayerAnimationControl : MonoBehaviour
 {
 
-    public event System.Action OnAttack;
+   
     Animator animator;
-    IMovementState state;
-    Attack attack;
+    
+    Rigidbody rb;
+    InputHandler input;
+
     static readonly int attackHash = Animator.StringToHash("Attack");
     static readonly int isRunningHash = Animator.StringToHash("isRunning");
-    static readonly int isWalkingHash = Animator.StringToHash("isWalking");
     static readonly int velocityHash = Animator.StringToHash("Velocity");
+
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        state = GetComponent<IMovementState>();
-        attack = GetComponent<Attack>();
-        attack.OnAttackStarted += PlayAttack; // subscribe
+        rb = GetComponent<Rigidbody>();
+        input = GetComponent<InputHandler>();
     }
     void PlayAttack()
     {
@@ -25,13 +27,19 @@ public class PlayerAnimationControl : MonoBehaviour
     }
     private void Update()
     {
-        if (attack.isAttacking)
+       
+       if(input.isAttack)
         {
-            OnAttack?.Invoke();
+            PlayAttack();
+            
         }
-        animator.SetBool(isRunningHash, state.IsRunning);
-        animator.SetBool(isWalkingHash, state.IsWalking);
-        animator.SetFloat(velocityHash, state.GetSpeed);
+        Vector3 horizontalVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+        float speed = horizontalVelocity.magnitude;
+
+        animator.SetFloat(velocityHash, speed);
+        animator.SetBool(isRunningHash, input.isRun);
+       
+        
     }
 
 

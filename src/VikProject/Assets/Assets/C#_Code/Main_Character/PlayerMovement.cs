@@ -59,11 +59,7 @@ public class PlayerMovement : MonoBehaviour
         move.Normalize(); // consistent diagonal speed
 
         // Move character
-        if (!playerAttack.isAttacking)
-        {
-            characterController.Move(move * walkSpeed * Time.deltaTime);
-            playerController.SetFloat("Velocity", Mathf.Abs(move.magnitude));
-        }
+        //
             
         // Gravity
         if (characterController.isGrounded && velocity.y < 0)
