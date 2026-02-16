@@ -13,6 +13,7 @@ public class ComboController : MonoBehaviour
     private bool isAttacking;
     private bool inputBuffered;
     private AttackInputType bufferedInput;
+    private bool comboWindowOpen;
 
     private void Start()
     {
@@ -97,31 +98,51 @@ public class ComboController : MonoBehaviour
 
     private void HandleComboWindow()
     {
+        if (currentNode == null)
+            return;
+
         AttackDataSO attack = currentNode.attack;
 
-        float elapsed = Time.time - lastAttackTime;
+        AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
 
-        // ถ้ามี input buffer และอยู่ใน combo window
-        if (inputBuffered && elapsed <= attack.comboWindow)
+        // 🔥 ป้องกันข้าม state ผิดตัว
+        if (!state.IsName(attack.stateName))
+            return;
+
+        float normalizedTime = state.normalizedTime;
+
+        bool isLeafNode =
+            currentNode.transitions == null ||
+            currentNode.transitions.Count == 0;
+
+        // 🔥 เปิด combo window ช่วงท้าย animation เท่านั้น
+        bool windowOpen =
+            normalizedTime >= attack.comboWindow &&
+            normalizedTime < 1f;
+
+        // ========= COMBO CONTINUE =========
+        if (inputBuffered && windowOpen)
         {
-            ComboNodeSO nextNode = currentNode.GetNextNode(bufferedInput);
+            ComboNodeSO nextNode =
+                currentNode.GetNextNode(bufferedInput);
 
             if (nextNode != null)
             {
                 PlayNode(nextNode, false);
                 return;
             }
+
+            // ถ้า input ไม่ถูก route → ignore แต่ไม่ reset
+            inputBuffered = false;
         }
 
-        // ถ้าเลย combo window
-        if (elapsed > attack.comboWindow + attack.earlyBufferTime)
+        // ========= ANIMATION FINISHED =========
+        if (normalizedTime >= 1f)
         {
-            if (attack.resetIfLate)
-            {
-                ResetCombo();
-            }
+            ResetCombo();
         }
     }
+
 
     #endregion
 
