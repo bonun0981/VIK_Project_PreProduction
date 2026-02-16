@@ -33,17 +33,17 @@ public class WeaponHitBox : MonoBehaviour
     public void DealDamage(IDamageable target)
     {
         float finalDamage =
-       weaponState.baseDamage * attackData.DamageMultiplier;
+       weaponState.baseDamage * attackData.damageMultiplier;
 
         float finalKnockback =
-            weaponState.baseKnockback * attackData.KnockbackMultiplier;
+            weaponState.baseKnockback * attackData.knockbackMultiplier;
 
         target.TakeDamage(finalDamage);
     }
     public void KnockBack(IKnockbackable target)
     {
         float finalKnockback =
-            weaponState.baseKnockback * attackData.KnockbackMultiplier;
+            weaponState.baseKnockback * attackData.knockbackMultiplier;
         target.Knockback(finalKnockback);
     }
     bool CanHitTarget(Collider other)

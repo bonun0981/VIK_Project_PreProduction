@@ -5,7 +5,8 @@ public class InputHandler : MonoBehaviour
     
     public Vector2 moveInput { get; private set; }
     public bool isRun { get; private set; }
-    public bool isAttack { get; private set; }
+    public bool isAttackA { get; private set; }
+    public bool isAttackB { get; private set; }
 
     private void Awake()
     {
@@ -18,6 +19,7 @@ public class InputHandler : MonoBehaviour
         
         isRun=Input.GetKey(KeyCode.LeftShift);
 
-        isAttack=Input.GetMouseButtonDown(0);
+        isAttackA=Input.GetMouseButtonDown(0);
+        isAttackB = Input.GetMouseButtonDown(1);
     }
 }
