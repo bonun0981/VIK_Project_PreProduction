@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Basic_1
   m_EditorClassIdentifier: 
   stateName: Attack1
-  startPercent: 0.555
+  startPercent: 0.134
   transitionDuration: 0.1
-  comboWindow: 0.3
-  comboDelayTime: 0.15
+  allowComboTime: 0.45
+  comboWindow: 1
+  comboDelayTime: 1
   earlyBufferTime: 0.2
   useStartPercent: 1
   resetIfLate: 1
