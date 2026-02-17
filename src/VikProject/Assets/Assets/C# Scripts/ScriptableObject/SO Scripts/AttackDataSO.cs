@@ -14,10 +14,18 @@ public class AttackDataSO : ScriptableObject
     public float startPercent = 0f;       // เล่น animation เริ่มที่ %
     public float transitionDuration = 0.1f;
 
+   
     [Header("Timing")]
-    public float comboWindow = 0.4f;      // เวลากดต่อได้
-    public float comboDelayTime = 0.15f;  // ถ้ากดเร็วมากจะใช้ startPercent
-    public float earlyBufferTime = 0.2f;  // กดก่อน animation จบได้กี่วิ
+    [Range(0f, 1f)]
+    public float allowComboTime = 0.3f;
+    public float comboWindow = 0.6f;      // chain ได้ถึง %
+
+    public float comboDelayTime = 0.15f;
+    public float earlyBufferTime = 0.2f;
+
+    // เริ่มรับ input ต่อได้เมื่อถึง %
+
+    
 
     [Header("Behavior")]
     public bool useStartPercent = true;   // ใช้ startPercent ไหม

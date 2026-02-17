@@ -14,7 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attack: {fileID: 11400000, guid: dac4fea240bf25646a37c93cb87ff590, type: 2}
   transitions:
-  - input: 0
-    nextNode: {fileID: 11400000}
   - input: 1
     nextNode: {fileID: 11400000, guid: b22909b6a2bfe0b4284fd883e12c6eda, type: 2}

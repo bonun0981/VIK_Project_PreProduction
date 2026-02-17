@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Basic_2
   m_EditorClassIdentifier: 
   stateName: Attack2
-  startPercent: 0
+  startPercent: 0.564
   transitionDuration: 0.1
   comboWindow: 0.3
   comboDelayTime: 0.15

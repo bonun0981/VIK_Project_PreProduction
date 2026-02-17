@@ -39,7 +39,18 @@ public class ComboController : MonoBehaviour
             return;
         }
 
-        // ถ้ากำลังโจมตีอยู่ -> buffer ไว้
+        AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
+
+        if (!state.IsName(currentNode.attack.stateName))
+            return;
+
+        float normalizedTime = state.normalizedTime;
+
+        // ❌ ยังไม่ถึง allow combo time → ignore เลย
+        if (normalizedTime < currentNode.attack.allowComboTime)
+            return;
+
+        // ✅ ถึงช่วงอนุญาตแล้ว → ค่อย buffer
         inputBuffered = true;
         bufferedInput = input;
     }
@@ -105,23 +116,18 @@ public class ComboController : MonoBehaviour
 
         AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
 
-        // 🔥 ป้องกันข้าม state ผิดตัว
         if (!state.IsName(attack.stateName))
             return;
 
         float normalizedTime = state.normalizedTime;
 
-        bool isLeafNode =
-            currentNode.transitions == null ||
-            currentNode.transitions.Count == 0;
+        // 🔥 ช่วงที่ "อนุญาตให้ใช้ buffer"
+        bool canProcessBufferedInput =
+            normalizedTime >= attack.allowComboTime &&
+            normalizedTime <= attack.comboWindow;
 
-        // 🔥 เปิด combo window ช่วงท้าย animation เท่านั้น
-        bool windowOpen =
-            normalizedTime >= attack.comboWindow &&
-            normalizedTime < 1f;
-
-        // ========= COMBO CONTINUE =========
-        if (inputBuffered && windowOpen)
+        // ========= PROCESS BUFFER =========
+        if (inputBuffered && canProcessBufferedInput)
         {
             ComboNodeSO nextNode =
                 currentNode.GetNextNode(bufferedInput);
@@ -132,7 +138,6 @@ public class ComboController : MonoBehaviour
                 return;
             }
 
-            // ถ้า input ไม่ถูก route → ignore แต่ไม่ reset
             inputBuffered = false;
         }
 
@@ -144,6 +149,8 @@ public class ComboController : MonoBehaviour
     }
 
 
+
+
     #endregion
 
     #region END ATTACK (Animation Event)
@@ -153,7 +160,7 @@ public class ComboController : MonoBehaviour
         isAttacking = false;
     }
 
-    private void ResetCombo()
+    public void ResetCombo()
     {
         currentNode = rootNode;
         isAttacking = false;
