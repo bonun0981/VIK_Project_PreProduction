@@ -6,6 +6,7 @@ public class ComboController : MonoBehaviour
     [Header("Setup")]
     [SerializeField] private Animator animator;
     [SerializeField] private ComboNodeSO rootNode;
+    [SerializeField] private WeaponHitBox weaponHitBox;
 
     private ComboNodeSO currentNode;
 
@@ -13,7 +14,7 @@ public class ComboController : MonoBehaviour
     private bool isAttacking;
     private bool inputBuffered;
     private AttackInputType bufferedInput;
-    private bool comboWindowOpen;
+    
 
     private void Start()
     {
@@ -38,6 +39,10 @@ public class ComboController : MonoBehaviour
             TryStartAttack(input);
             return;
         }
+
+        // 🔥 รับ input ได้ตลอด
+        inputBuffered = true;
+        bufferedInput = input;
 
         AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
 
@@ -98,11 +103,14 @@ public class ComboController : MonoBehaviour
             startTime
         );
 
+        // 🔥 ส่ง attackData ไป WeaponHitBox ทุกครั้งที่เปลี่ยนท่า
+        if (weaponHitBox != null)
+            weaponHitBox.SetAttackData(attack);
+
         lastAttackTime = Time.time;
         isAttacking = true;
         inputBuffered = false;
     }
-
     #endregion
 
     #region COMBO LOGIC
@@ -121,7 +129,7 @@ public class ComboController : MonoBehaviour
 
         float normalizedTime = state.normalizedTime;
 
-        // 🔥 ช่วงที่ "อนุญาตให้ใช้ buffer"
+        // 🔥 อนุญาตให้ประมวลผล input หลัง allowComboTime
         bool canProcessBufferedInput =
             normalizedTime >= attack.allowComboTime &&
             normalizedTime <= attack.comboWindow;
@@ -138,12 +146,14 @@ public class ComboController : MonoBehaviour
                 return;
             }
 
+            // ไม่มีทางไป → ไม่รีเซ็ต รอให้ animation จบ
             inputBuffered = false;
         }
 
         // ========= ANIMATION FINISHED =========
         if (normalizedTime >= 1f)
         {
+            // 🔥 เล่นจนจบเสมอ แล้วค่อย Reset
             ResetCombo();
         }
     }

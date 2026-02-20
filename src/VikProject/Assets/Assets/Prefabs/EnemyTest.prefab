@@ -2008,6 +2008,7 @@ GameObject:
   - component: {fileID: 6404063826434920781}
   - component: {fileID: 7774057473966471871}
   - component: {fileID: 5887442180237560186}
+  - component: {fileID: 2472736187713903272}
   m_Layer: 6
   m_Name: EnemyTest
   m_TagString: Enemy
@@ -2251,6 +2252,19 @@ MonoBehaviour:
     noiseType: 0
     amplitude: {x: 0, y: 9, z: 0}
     frequency: {x: 25, y: 25, z: 25}
+--- !u!114 &2472736187713903272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6943641662403046915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a0ac4673bf89d14f91de2476489ef2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
 --- !u!1 &7161421263805310365
 GameObject:
   m_ObjectHideFlags: 0

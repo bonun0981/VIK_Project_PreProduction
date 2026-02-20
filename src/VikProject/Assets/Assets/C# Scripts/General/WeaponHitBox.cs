@@ -10,8 +10,10 @@ public class WeaponHitBox : MonoBehaviour
     }
     [SerializeField]TargetType targetType;
     [SerializeField] WeaponStateSO weaponState;
-    [SerializeField] AttackDataSO attackData;
-
+    private AttackDataSO currentAttackData;
+    [SerializeField]Collider hitBoxCollider;
+    
+   
     private void OnTriggerEnter(Collider other)
     {
         if (!CanHitTarget(other)) return;
@@ -20,11 +22,13 @@ public class WeaponHitBox : MonoBehaviour
         IKnockbackable knockbackable = other.GetComponent<IKnockbackable>();
         if (damageable != null)
         {
+            
             DealDamage(damageable);
             
         }
         if(knockbackable != null)
         {
+            
             KnockBack(knockbackable);
         }
 
@@ -32,18 +36,20 @@ public class WeaponHitBox : MonoBehaviour
 
     public void DealDamage(IDamageable target)
     {
+        if (currentAttackData == null) return;
+
         float finalDamage =
-       weaponState.baseDamage * attackData.damageMultiplier;
-
-        float finalKnockback =
-            weaponState.baseKnockback * attackData.knockbackMultiplier;
-
+            weaponState.baseDamage * currentAttackData.damageMultiplier;
+        Debug.Log($"Dealing {finalDamage} damage to {target}");
         target.TakeDamage(finalDamage);
     }
     public void KnockBack(IKnockbackable target)
     {
+        if (currentAttackData == null) return;
+
         float finalKnockback =
-            weaponState.baseKnockback * attackData.knockbackMultiplier;
+            weaponState.baseKnockback * currentAttackData.knockbackMultiplier;
+        Debug.Log($"Applying {finalKnockback} knockback to {target}");
         target.Knockback(finalKnockback);
     }
     bool CanHitTarget(Collider other)
@@ -62,5 +68,17 @@ public class WeaponHitBox : MonoBehaviour
             default:
                 return false;
         }
+    }
+    public void SetAttackData(AttackDataSO attackData)
+    {
+        currentAttackData = attackData;
+    }
+    public void EnableHitbox()
+    {
+        hitBoxCollider.enabled = true;
+    }
+    public void DisableHitbox()
+    {
+        hitBoxCollider.enabled = false;
     }
 }
