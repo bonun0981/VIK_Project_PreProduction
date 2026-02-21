@@ -1,9 +1,11 @@
 using UnityEngine;
+using System;
 
 public interface IDamageable
 {
-    void TakeDamage(float damage);
+    event Action<float> OnDamaged;
     bool IsDead { get; }
+    void TakeDamage(float damage);
 }
 public interface IKnockbackable:IMovementInterrupt
 {

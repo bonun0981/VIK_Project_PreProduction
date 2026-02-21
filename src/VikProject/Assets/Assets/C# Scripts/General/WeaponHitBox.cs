@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class WeaponHitBox : MonoBehaviour
 {
@@ -12,23 +12,28 @@ public class WeaponHitBox : MonoBehaviour
     [SerializeField] WeaponStateSO weaponState;
     private AttackDataSO currentAttackData;
     [SerializeField]Collider hitBoxCollider;
-    
-   
+    private bool hasTriggeredHitStop;
+
     private void OnTriggerEnter(Collider other)
     {
         if (!CanHitTarget(other)) return;
 
         IDamageable damageable = other.GetComponent<IDamageable>();
         IKnockbackable knockbackable = other.GetComponent<IKnockbackable>();
+
         if (damageable != null)
         {
-            
             DealDamage(damageable);
-            
+
+            if (!hasTriggeredHitStop)
+            {
+                HitStopManager.Instance.DoHitStop(0.08f);
+                hasTriggeredHitStop = true;
+            }
         }
-        if(knockbackable != null)
+
+        if (knockbackable != null)
         {
-            
             KnockBack(knockbackable);
         }
 
@@ -76,6 +81,7 @@ public class WeaponHitBox : MonoBehaviour
     public void EnableHitbox()
     {
         hitBoxCollider.enabled = true;
+        hasTriggeredHitStop = false; // รีเซ็ตทุกครั้งที่เริ่มโจมตี
     }
     public void DisableHitbox()
     {

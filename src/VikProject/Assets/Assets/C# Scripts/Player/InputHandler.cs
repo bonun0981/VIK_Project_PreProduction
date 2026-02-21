@@ -7,6 +7,8 @@ public class InputHandler : MonoBehaviour
     public bool isRun { get; private set; }
     public bool isAttackA { get; private set; }
     public bool isAttackB { get; private set; }
+    public bool isSkill { get; private set; }
+    public bool isUltimate { get; private set; }
 
     private void Awake()
     {
@@ -21,5 +23,7 @@ public class InputHandler : MonoBehaviour
 
         isAttackA=Input.GetMouseButtonDown(0);
         isAttackB = Input.GetMouseButtonDown(1);
+        isSkill = Input.GetKeyDown(KeyCode.Q);
+        isUltimate = Input.GetKeyDown(KeyCode.E);
     }
 }

@@ -1,7 +1,10 @@
+
+using System;
 using UnityEngine;
 
 public class Health : MonoBehaviour,IDamageable
 {
+    public event Action<float> OnDamaged;
     [SerializeField] float maxHealth = 100f;
     [SerializeField]float currentHealth;
 
@@ -16,15 +19,18 @@ public class Health : MonoBehaviour,IDamageable
     {
         gameObject.SetActive(false);
     }
-
     public void TakeDamage(float damage)
     {
-       if(IsDead) return;
+        Debug.Log("Enemy took damage: " + damage);
+
+        OnDamaged?.Invoke(damage);
+        if (IsDead) return;
         currentHealth -= damage;
         if (IsDead)
         {
             Die();
         }
     }
+    
     
 }

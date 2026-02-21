@@ -18,3 +18,5 @@ MonoBehaviour:
     nextNode: {fileID: 11400000, guid: 6228a102af8b7d14f99658fc9d897557, type: 2}
   - input: 1
     nextNode: {fileID: 11400000, guid: b22909b6a2bfe0b4284fd883e12c6eda, type: 2}
+  - input: 2
+    nextNode: {fileID: 11400000, guid: 60bc381192b89964ebc1cf73d1222998, type: 2}

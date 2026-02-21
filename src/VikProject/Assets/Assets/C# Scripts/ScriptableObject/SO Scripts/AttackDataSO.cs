@@ -3,7 +3,9 @@
 public enum AttackInputType
 {
     A,
-    B
+    B,
+    Skill,
+    Ultimate
 }
 [CreateAssetMenu(fileName = "AttackDataSO", menuName = "Scriptable Objects/AttackDataSO")]
 public class AttackDataSO : ScriptableObject

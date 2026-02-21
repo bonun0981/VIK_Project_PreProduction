@@ -25,5 +25,14 @@ public class PlayerCombat : MonoBehaviour
         {
             comboController.ReceiveInput(AttackInputType.B);
         }
+        if(input.isSkill)
+        {
+            comboController.ReceiveInput(AttackInputType.Skill);
+        }
+        if(input.isUltimate)
+        {
+            comboController.ReceiveInput(AttackInputType.Ultimate);
+        }
+
     }
 }
