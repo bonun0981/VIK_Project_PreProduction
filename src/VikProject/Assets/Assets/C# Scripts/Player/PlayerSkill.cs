@@ -3,23 +3,56 @@
 public class PlayerSkill : MonoBehaviour
 {
     [SerializeField] private SkillDataSO abilityData;
-    [SerializeField] private Transform spawnPoint;
+
+    [Header("References")]
+    [SerializeField] private Transform weaponTransform;
+    [SerializeField] private Transform customSpawnPoint;
 
     public void Activate()
     {
         if (abilityData == null || abilityData.skillPrefab == null)
             return;
 
+        Transform spawnTransform = GetSpawnTransform();
+
         GameObject skillObj = Instantiate(
             abilityData.skillPrefab,
-            spawnPoint.position,
-            spawnPoint.rotation
+            spawnTransform.position,
+            spawnTransform.rotation
         );
 
-        AOESkillPrefab skill = skillObj.GetComponent<AOESkillPrefab>();
-        if (skill != null)
+        if (abilityData.spawnType == SkillSpawnType.AtWeapon)
         {
-            skill.Initialize(abilityData);
+            skillObj.transform.SetParent(weaponTransform);
+        }
+
+        // Initialize damage data
+        AOESkillPrefab aoe = skillObj.GetComponent<AOESkillPrefab>();
+        if (aoe != null)
+        {
+            aoe.Initialize(abilityData);
+        }
+
+        // Initialize projectile movement
+        ProjectileSkill projectile = skillObj.GetComponent<ProjectileSkill>();
+        if (projectile != null)
+        {
+            projectile.Initialize(abilityData);
+        }
+    }
+
+    private Transform GetSpawnTransform()
+    {
+        switch (abilityData.spawnType)
+        {
+            case SkillSpawnType.AtWeapon:
+                return weaponTransform;
+
+            case SkillSpawnType.CustomPoint:
+                return customSpawnPoint;
+
+            default:
+                return transform;
         }
     }
 }

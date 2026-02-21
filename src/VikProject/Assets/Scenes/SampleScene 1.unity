@@ -10678,8 +10678,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 316071e49f5148945a7dd8533d502e00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityData: {fileID: 11400000, guid: 4820feb398bd6b7438e8cc73c1061a39, type: 2}
-  spawnPoint: {fileID: 1069081017}
+  abilityData: {fileID: 11400000, guid: 348af46ac99b2e84586fc7d76ded17e8, type: 2}
+  weaponTransform: {fileID: 1069081017}
+  customSpawnPoint: {fileID: 1402682464}
 --- !u!1001 &1403073716
 PrefabInstance:
   m_ObjectHideFlags: 0
