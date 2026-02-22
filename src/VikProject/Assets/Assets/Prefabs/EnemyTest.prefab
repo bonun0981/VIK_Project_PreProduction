@@ -2093,8 +2093,7 @@ GameObject:
   - component: {fileID: 5373506037803199971}
   - component: {fileID: 6404063826434920781}
   - component: {fileID: 5887442180237560186}
-  - component: {fileID: 4239643678918154734}
-  - component: {fileID: 310758354428374115}
+  - component: {fileID: 2472736187713903272}
   m_Layer: 6
   m_Name: EnemyTest
   m_TagString: Enemy
@@ -2301,7 +2300,7 @@ MonoBehaviour:
     noiseType: 0
     amplitude: {x: 0, y: 9, z: 0}
     frequency: {x: 25, y: 25, z: 25}
---- !u!114 &4239643678918154734
+--- !u!114 &2472736187713903272
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2310,76 +2309,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6943641662403046915}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33cda53f0b9fe194f974dbf632d12836, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a0ac4673bf89d14f91de2476489ef2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationEvents:
-  - eventName: finish
-    OnAnimationEvent:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 310758354428374115}
-          m_TargetAssemblyTypeName: EnemyMotherClass, Assembly-CSharp
-          m_MethodName: FinsihAttack
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventName: reset
-    OnAnimationEvent:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 310758354428374115}
-          m_TargetAssemblyTypeName: EnemyMotherClass, Assembly-CSharp
-          m_MethodName: ResetEnemyState
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &310758354428374115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6943641662403046915}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b09519338355b254abf94eda31c628f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  state: 0
-  aiActive: 0
-  attackDelayTime: 0
-  thinkTime: 0
-  isAttacking: 0
-  circleDistanceMin: 1.5
-  circleDistanceMax: 3
-  circleDistanceAdjustSpeed: 1.5
-  passiveMoveSpeedMin: 0.3
-  passiveMoveSpeedMax: 1.4
-  acceleration: 4
-  deceleration: 6
-  thinkDuration: 0.4
-  attackRange: 0.5
-  activeMoveSpeed: 2.2
-  attackOffsetRadius: 1.5
-  recoveryDelayMin: 1
-  recoveryDelayMax: 1.8
-  attackCooldown: 5
-  playerPositon: {fileID: 0}
-  player: {fileID: 0}
-  debugStateColor: 1
+  maxHealth: 100
 --- !u!1 &7161421263805310365
 GameObject:
   m_ObjectHideFlags: 0
