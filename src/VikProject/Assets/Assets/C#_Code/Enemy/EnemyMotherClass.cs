@@ -411,7 +411,7 @@ public class EnemyMotherClass : MonoBehaviour
         // =========================================================
         // 2️⃣ อยู่ในระยะโจมตี → ขอสิทธิ์โจมตี
         // =========================================================
-        if (!isAttacking)
+        if (!isAttacking && attackCooldownTimer <= 0f)
         {
             bool granted =
                 EnemyStateManager.Instance.RequestAttack(this);
@@ -420,13 +420,13 @@ public class EnemyMotherClass : MonoBehaviour
             {
                 isAttacking = true;
 
-                // 🔥 ทุกตัวหลบให้
                 agent.avoidancePriority = 1;
                 agent.obstacleAvoidanceType =
                     ObstacleAvoidanceType.NoObstacleAvoidance;
 
-                agent.ResetPath();   // 🔥 สำคัญมาก
+                agent.ResetPath();
                 agent.isStopped = true;
+
                 LookAtPlayer();
                 StartAttack();
                 return;
@@ -618,6 +618,10 @@ public class EnemyMotherClass : MonoBehaviour
 
     public void FinsihAttack()
     {
+        // 🔥 เปิด Agent กลับมา
+        agent.updatePosition = true;
+        agent.updateRotation = false;   // เพราะคุณใช้ LookAtPlayer()
+
         agent.Warp(transform.position);
         agent.ResetPath();
 
@@ -682,8 +686,9 @@ public class EnemyMotherClass : MonoBehaviour
         isAttacking = false;
         hasActiveTarget = false;
 
-        EnemyStateManager.Instance
-            .RequestPassive(this);
+        EnemyStateManager.Instance.RequestPassive(this);
+
+        ChangeState(EnemyState.Passive);   // 🔥 สำคัญมาก
     }
 
     // =========================================================
