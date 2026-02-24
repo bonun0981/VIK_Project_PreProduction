@@ -10,7 +10,9 @@ public class EnemyMotherClass : MonoBehaviour
     // =========================================================
     // General
     // =========================================================
-
+    float postAttackDelay = 0.15f;
+    float postAttackTimer;
+    bool waitingAfterAttack;
     Vector3 lastDestination;
     [SerializeField] float repathThreshold = 0.3f;
 
@@ -361,6 +363,14 @@ public class EnemyMotherClass : MonoBehaviour
 
     void MoveToward()
     {
+        if (waitingAfterAttack)
+{
+    postAttackTimer -= Time.deltaTime;
+    if (postAttackTimer > 0f)
+        return;
+
+    waitingAfterAttack = false;
+}
         if (!agent.enabled || playerPositon == null) return;
 
         float distanceToPlayer =
@@ -394,7 +404,7 @@ public class EnemyMotherClass : MonoBehaviour
 
             if (!agent.hasPath || agent.remainingDistance > 0.2f)
                 SmartSetDestination(playerPositon.position + offset);
-
+            LookAtPlayer();
             return;
         }
 
@@ -417,7 +427,7 @@ public class EnemyMotherClass : MonoBehaviour
 
                 agent.ResetPath();   // 🔥 สำคัญมาก
                 agent.isStopped = true;
-
+                LookAtPlayer();
                 StartAttack();
                 return;
             }
@@ -445,6 +455,7 @@ public class EnemyMotherClass : MonoBehaviour
 
         if (!agent.hasPath || agent.remainingDistance < 0.2f)
             SmartSetDestination(orbitPos);
+        LookAtPlayer();
     }
 
     // =========================================================
@@ -586,22 +597,30 @@ public class EnemyMotherClass : MonoBehaviour
 
     public void StartAttack()
     {
-        // 🔥 ทุกตัวหลบให้
+        // ทุกตัวหลบให้
         agent.avoidancePriority = 1;
         agent.obstacleAvoidanceType =
             ObstacleAvoidanceType.NoObstacleAvoidance;
 
-        // 🔥 หยุดทันที ไม่ไถล
+        // 🔥 ปิด Agent ชั่วคราว
+        agent.isStopped = true;
         agent.ResetPath();
         agent.velocity = Vector3.zero;
-        agent.isStopped = true;
+
+        // 🔥 ปิดการอัปเดตตำแหน่งจาก Agent
+        agent.updatePosition = false;
+
+        // 🔥 ปิด Root Motion ถ้าไม่ต้องการให้พุ่ง
+        animator.applyRootMotion = false;
 
         animator.SetTrigger("Attack");
     }
 
     public void FinsihAttack()
     {
-        // 🔥 กลับมาเป็น active ปกติ
+        agent.Warp(transform.position);
+        agent.ResetPath();
+
         agent.avoidancePriority = 50;
         agent.obstacleAvoidanceType =
             ObstacleAvoidanceType.HighQualityObstacleAvoidance;
@@ -619,6 +638,9 @@ public class EnemyMotherClass : MonoBehaviour
             Random.Range(recoveryDelayMin, recoveryDelayMax);
 
         recoveryInitialized = true;
+
+        postAttackTimer = 0.15f;
+        waitingAfterAttack = true;
 
         ChangeState(EnemyState.Recover);
     }
