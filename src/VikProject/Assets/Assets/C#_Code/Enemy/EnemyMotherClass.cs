@@ -358,17 +358,38 @@ public class EnemyMotherClass : MonoBehaviour
             Vector3.Distance(transform.position, playerPositon.position);
 
         float desiredAttackDistance =
-            attackRange + agent.radius + 0.1f;
+            attackRange + agent.radius + 0.15f;
 
-        // 1️⃣ ยังไกล → เดินเข้าหา
-        if (distanceToPlayer > desiredAttackDistance + 0.5f)
+        agent.acceleration = 8f;
+        agent.angularSpeed = 300f;
+        agent.stoppingDistance = 0.05f;
+
+        // =========================================================
+        // 1️⃣ ยังไกล → เดินเข้าหาแบบมีการชะลอ
+        // =========================================================
+        if (distanceToPlayer > desiredAttackDistance + 0.6f)
         {
+            float slowRange = 3f;
+
+            float t = Mathf.InverseLerp(
+                desiredAttackDistance,
+                slowRange,
+                distanceToPlayer);
+
+            float dynamicSpeed = Mathf.Lerp(1.2f, activeMoveSpeed, t);
+
+            agent.speed = dynamicSpeed;
             agent.isStopped = false;
-            SmartSetDestination(playerPositon.position);
+
+            if (!agent.hasPath || agent.remainingDistance > 0.2f)
+                SmartSetDestination(playerPositon.position);
+
             return;
         }
 
-        // 2️⃣ อยู่ในระยะโจมตี
+        // =========================================================
+        // 2️⃣ อยู่ในระยะโจมตี → ขอสิทธิ์โจมตี
+        // =========================================================
         if (!isAttacking)
         {
             bool granted =
@@ -383,20 +404,28 @@ public class EnemyMotherClass : MonoBehaviour
             }
         }
 
-        // 3️⃣ ไม่ได้สิทธิ์ → เดินวนกดดัน
+        // =========================================================
+        // 3️⃣ ไม่ได้สิทธิ์ → เดินวนกดดัน (Orbit)
+        // =========================================================
+
         Vector3 dir =
             (transform.position - playerPositon.position).normalized;
 
         Vector3 perpendicular =
             new Vector3(-dir.z, 0, dir.x);
 
+        float orbitDistance = desiredCircleDistance + 0.5f; // 🔥 ขยับห่างขึ้น
+
         Vector3 orbitPos =
             playerPositon.position +
-            (dir + perpendicular * personalOrbitSide * 0.7f)
-            .normalized * desiredCircleDistance;
+            (dir + perpendicular * personalOrbitSide * 0.8f)
+            .normalized * orbitDistance;
 
+        agent.speed = 1.6f;
         agent.isStopped = false;
-        SmartSetDestination(orbitPos);
+
+        if (!agent.hasPath || agent.remainingDistance < 0.2f)
+            SmartSetDestination(orbitPos);
     }
 
     // =========================================================
