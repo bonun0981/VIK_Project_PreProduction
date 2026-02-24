@@ -10,6 +10,8 @@ public class EnemyMotherClass : MonoBehaviour
     // =========================================================
     // General
     // =========================================================
+    [SerializeField] float combatRingDistance = 2.8f;
+    [SerializeField] float combatRingTolerance = 0.4f;
     float postAttackDelay = 0.15f;
     float postAttackTimer;
     bool waitingAfterAttack;
@@ -436,25 +438,57 @@ public class EnemyMotherClass : MonoBehaviour
         // =========================================================
         // 3️⃣ ไม่ได้สิทธิ์ → เดินวนกดดัน (Orbit)
         // =========================================================
+        Vector3 toPlayer =
+            transform.position - playerPositon.position;
 
-        Vector3 dir =
-            (transform.position - playerPositon.position).normalized;
+        toPlayer.y = 0;
 
+        float currentDistance = toPlayer.magnitude;
+        Vector3 dir = toPlayer.normalized;
+
+        // 🔥 ถ้าใกล้เกิน → ถอยออกก่อน
+        if (currentDistance < combatRingDistance - combatRingTolerance)
+        {
+            Vector3 retreatPos =
+                playerPositon.position +
+                dir * combatRingDistance;
+
+            agent.speed = 2f;
+            agent.isStopped = false;
+
+            SmartSetDestination(retreatPos);
+            LookAtPlayer();
+            return;
+        }
+
+        // 🔥 ถ้าไกลเกิน → ขยับเข้าเล็กน้อย
+        if (currentDistance > combatRingDistance + combatRingTolerance)
+        {
+            Vector3 approachPos =
+                playerPositon.position +
+                dir * combatRingDistance;
+
+            agent.speed = 1.8f;
+            agent.isStopped = false;
+
+            SmartSetDestination(approachPos);
+            LookAtPlayer();
+            return;
+        }
+
+        // 🔥 อยู่ในระยะพอดี → เดินวน
         Vector3 perpendicular =
             new Vector3(-dir.z, 0, dir.x);
 
-        float orbitDistance = desiredCircleDistance + 0.5f; // 🔥 ขยับห่างขึ้น
-
         Vector3 orbitPos =
             playerPositon.position +
-            (dir + perpendicular * personalOrbitSide * 0.8f)
-            .normalized * orbitDistance;
+            (dir + perpendicular * personalOrbitSide * 0.7f)
+            .normalized * combatRingDistance;
 
-        agent.speed = 1.6f;
+        agent.speed = 1.5f;
         agent.isStopped = false;
 
-        if (!agent.hasPath || agent.remainingDistance < 0.2f)
-            SmartSetDestination(orbitPos);
+        SmartSetDestination(orbitPos);
         LookAtPlayer();
     }
 
@@ -645,7 +679,14 @@ public class EnemyMotherClass : MonoBehaviour
 
         postAttackTimer = 0.15f;
         waitingAfterAttack = true;
+        Vector3 awayDir =
+    (transform.position - playerPositon.position).normalized;
 
+        Vector3 retreat =
+            playerPositon.position +
+            awayDir * combatRingDistance;
+
+        SmartSetDestination(retreat);
         ChangeState(EnemyState.Recover);
     }
 
