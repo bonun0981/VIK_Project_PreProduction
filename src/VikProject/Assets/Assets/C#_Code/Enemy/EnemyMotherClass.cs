@@ -206,8 +206,17 @@ public class EnemyMotherClass : MonoBehaviour
                 break;
 
             case EnemyState.Active:
-                agent.obstacleAvoidanceType = ObstacleAvoidanceType.LowQualityObstacleAvoidance;
-                agent.avoidancePriority = 50;
+
+                // 🔥 เปิดหลบกันเอง
+                agent.obstacleAvoidanceType =
+                    ObstacleAvoidanceType.HighQualityObstacleAvoidance;
+
+                // ถ้ายังไม่ได้สิทธิ์ตี → priority ปกติ
+                if (!isAttacking)
+                    agent.avoidancePriority = 50;
+                else
+                    agent.avoidancePriority = 1; // ตัวตี = ทุกตัวหลบ
+
                 break;
 
             case EnemyState.Recover:
@@ -377,12 +386,14 @@ public class EnemyMotherClass : MonoBehaviour
                 distanceToPlayer);
 
             float dynamicSpeed = Mathf.Lerp(1.2f, activeMoveSpeed, t);
-
+            Vector3 offset =
+    (transform.position - playerPositon.position).normalized
+    * 0.5f;
             agent.speed = dynamicSpeed;
             agent.isStopped = false;
 
             if (!agent.hasPath || agent.remainingDistance > 0.2f)
-                SmartSetDestination(playerPositon.position);
+                SmartSetDestination(playerPositon.position + offset);
 
             return;
         }
@@ -398,7 +409,15 @@ public class EnemyMotherClass : MonoBehaviour
             if (granted)
             {
                 isAttacking = true;
+
+                // 🔥 ทุกตัวหลบให้
+                agent.avoidancePriority = 1;
+                agent.obstacleAvoidanceType =
+                    ObstacleAvoidanceType.NoObstacleAvoidance;
+
+                agent.ResetPath();   // 🔥 สำคัญมาก
                 agent.isStopped = true;
+
                 StartAttack();
                 return;
             }
@@ -567,16 +586,27 @@ public class EnemyMotherClass : MonoBehaviour
 
     public void StartAttack()
     {
-        agent.avoidancePriority = 5;
+        // 🔥 ทุกตัวหลบให้
+        agent.avoidancePriority = 1;
         agent.obstacleAvoidanceType =
             ObstacleAvoidanceType.NoObstacleAvoidance;
+
+        // 🔥 หยุดทันที ไม่ไถล
+        agent.ResetPath();
+        agent.velocity = Vector3.zero;
+        agent.isStopped = true;
 
         animator.SetTrigger("Attack");
     }
 
     public void FinsihAttack()
     {
+        // 🔥 กลับมาเป็น active ปกติ
         agent.avoidancePriority = 50;
+        agent.obstacleAvoidanceType =
+            ObstacleAvoidanceType.HighQualityObstacleAvoidance;
+
+        agent.isStopped = false;
 
         EnemyStateManager.Instance.ReleaseAttack(this);
 
