@@ -217,8 +217,9 @@ public class EnemyMotherClass : MonoBehaviour
         switch (state)
         {
             case EnemyState.Passive:
-                agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
-                agent.avoidancePriority = 80;
+                // ให้หลบกันเองคุณภาพสูง จะช่วยไม่ให้ชนผู้เล่นหรือกันเองมากเกินไป
+                agent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
+                agent.avoidancePriority = 80; // ค่าสูง = ให้คนอื่นทะลุก่อน (yield)
                 break;
 
             case EnemyState.Active:
