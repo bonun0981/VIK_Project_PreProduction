@@ -395,13 +395,17 @@ public class EnemyMotherClass : MonoBehaviour
 
         float distanceToPlayer =
             Vector3.Distance(transform.position, playerPositon.position);
+        CapsuleCollider playerCol =
+    playerPositon.GetComponent<CapsuleCollider>();
+
+        float playerRadius = playerCol.radius;
 
         float desiredAttackDistance =
-            attackRange + agent.radius + 0.15f;
+            attackRange + playerRadius;
 
         agent.acceleration = 8f;
         agent.angularSpeed = 300f;
-        agent.stoppingDistance = 0.05f;
+        agent.stoppingDistance = 0f;
 
         // =========================================================
         // 1️⃣ ยังไกล → เดินเข้าหา
@@ -448,7 +452,7 @@ public class EnemyMotherClass : MonoBehaviour
 
                 agent.avoidancePriority = 1;
                 agent.obstacleAvoidanceType =
-                    ObstacleAvoidanceType.NoObstacleAvoidance;
+                    ObstacleAvoidanceType.MedQualityObstacleAvoidance;
 
                 agent.ResetPath();
                 agent.isStopped = true;
