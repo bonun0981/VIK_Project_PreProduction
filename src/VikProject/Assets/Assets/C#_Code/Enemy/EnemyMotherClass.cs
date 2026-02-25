@@ -10,8 +10,16 @@ public class EnemyMotherClass : MonoBehaviour
     // =========================================================
     // General
     // =========================================================
+
+    // 🔥 กันตีซ้ำทันทีหลัง Recover
+    [SerializeField] float reengageDelay = 0.4f;
+    float reengageTimer;
+
+    // 🔥 Combat Ring
     [SerializeField] float combatRingDistance = 2.8f;
     [SerializeField] float combatRingTolerance = 0.4f;
+
+   
     float postAttackDelay = 0.15f;
     float postAttackTimer;
     bool waitingAfterAttack;
@@ -157,6 +165,10 @@ public class EnemyMotherClass : MonoBehaviour
 
     private void Update()
     {
+        if (isAttacking)
+        {
+            agent.velocity = Vector3.zero;
+        }
         if (!aiActive) return;
 
         if (attackCooldownTimer > 0f)
@@ -365,14 +377,20 @@ public class EnemyMotherClass : MonoBehaviour
 
     void MoveToward()
     {
+        // 🔥 รอหลังโจมตี
         if (waitingAfterAttack)
-{
-    postAttackTimer -= Time.deltaTime;
-    if (postAttackTimer > 0f)
-        return;
+        {
+            postAttackTimer -= Time.deltaTime;
+            if (postAttackTimer > 0f)
+                return;
 
-    waitingAfterAttack = false;
-}
+            waitingAfterAttack = false;
+        }
+
+        // 🔥 ลด reengage timer
+        if (reengageTimer > 0f)
+            reengageTimer -= Time.deltaTime;
+
         if (!agent.enabled || playerPositon == null) return;
 
         float distanceToPlayer =
@@ -386,7 +404,7 @@ public class EnemyMotherClass : MonoBehaviour
         agent.stoppingDistance = 0.05f;
 
         // =========================================================
-        // 1️⃣ ยังไกล → เดินเข้าหาแบบมีการชะลอ
+        // 1️⃣ ยังไกล → เดินเข้าหา
         // =========================================================
         if (distanceToPlayer > desiredAttackDistance + 0.6f)
         {
@@ -397,23 +415,29 @@ public class EnemyMotherClass : MonoBehaviour
                 slowRange,
                 distanceToPlayer);
 
-            float dynamicSpeed = Mathf.Lerp(1.2f, activeMoveSpeed, t);
+            float dynamicSpeed =
+                Mathf.Lerp(1.2f, activeMoveSpeed, t);
+
             Vector3 offset =
-    (transform.position - playerPositon.position).normalized
-    * 0.5f;
+                (transform.position - playerPositon.position).normalized
+                * 0.5f;
+
             agent.speed = dynamicSpeed;
             agent.isStopped = false;
 
             if (!agent.hasPath || agent.remainingDistance > 0.2f)
                 SmartSetDestination(playerPositon.position + offset);
+
             LookAtPlayer();
             return;
         }
 
         // =========================================================
-        // 2️⃣ อยู่ในระยะโจมตี → ขอสิทธิ์โจมตี
+        // 2️⃣ อยู่ในระยะโจมตี → ขอสิทธิ์
         // =========================================================
-        if (!isAttacking && attackCooldownTimer <= 0f)
+        if (!isAttacking &&
+            attackCooldownTimer <= 0f &&
+            reengageTimer <= 0f)
         {
             bool granted =
                 EnemyStateManager.Instance.RequestAttack(this);
@@ -436,8 +460,9 @@ public class EnemyMotherClass : MonoBehaviour
         }
 
         // =========================================================
-        // 3️⃣ ไม่ได้สิทธิ์ → เดินวนกดดัน (Orbit)
+        // 3️⃣ ไม่ได้สิทธิ์ → รักษา Combat Ring
         // =========================================================
+
         Vector3 toPlayer =
             transform.position - playerPositon.position;
 
@@ -446,8 +471,9 @@ public class EnemyMotherClass : MonoBehaviour
         float currentDistance = toPlayer.magnitude;
         Vector3 dir = toPlayer.normalized;
 
-        // 🔥 ถ้าใกล้เกิน → ถอยออกก่อน
-        if (currentDistance < combatRingDistance - combatRingTolerance)
+        // ถ้าใกล้เกิน → ถอย
+        if (currentDistance <
+            combatRingDistance - combatRingTolerance)
         {
             Vector3 retreatPos =
                 playerPositon.position +
@@ -461,8 +487,9 @@ public class EnemyMotherClass : MonoBehaviour
             return;
         }
 
-        // 🔥 ถ้าไกลเกิน → ขยับเข้าเล็กน้อย
-        if (currentDistance > combatRingDistance + combatRingTolerance)
+        // ถ้าไกลเกิน → ขยับเข้า
+        if (currentDistance >
+            combatRingDistance + combatRingTolerance)
         {
             Vector3 approachPos =
                 playerPositon.position +
@@ -476,13 +503,14 @@ public class EnemyMotherClass : MonoBehaviour
             return;
         }
 
-        // 🔥 อยู่ในระยะพอดี → เดินวน
+        // อยู่ในระยะ → orbit
         Vector3 perpendicular =
             new Vector3(-dir.z, 0, dir.x);
 
         Vector3 orbitPos =
             playerPositon.position +
-            (dir + perpendicular * personalOrbitSide * 0.7f)
+            (dir + perpendicular *
+             personalOrbitSide * 0.7f)
             .normalized * combatRingDistance;
 
         agent.speed = 1.5f;
@@ -491,7 +519,6 @@ public class EnemyMotherClass : MonoBehaviour
         SmartSetDestination(orbitPos);
         LookAtPlayer();
     }
-
     // =========================================================
     // Passive Movement
     // =========================================================
@@ -631,39 +658,33 @@ public class EnemyMotherClass : MonoBehaviour
 
     public void StartAttack()
     {
-        // ทุกตัวหลบให้
-        agent.avoidancePriority = 1;
-        agent.obstacleAvoidanceType =
-            ObstacleAvoidanceType.NoObstacleAvoidance;
-
-        // 🔥 ปิด Agent ชั่วคราว
         agent.isStopped = true;
         agent.ResetPath();
+
         agent.velocity = Vector3.zero;
 
-        // 🔥 ปิดการอัปเดตตำแหน่งจาก Agent
-        agent.updatePosition = false;
+        // 🔥 สำคัญ: ลดแรงดันจาก RVO
+        agent.avoidancePriority = 25;
+        agent.obstacleAvoidanceType =
+            ObstacleAvoidanceType.LowQualityObstacleAvoidance;
 
-        // 🔥 ปิด Root Motion ถ้าไม่ต้องการให้พุ่ง
-        animator.applyRootMotion = false;
+        // 🔥 ไม่ต้องปิด updatePosition
+        // 🔥 ไม่ต้องแตะ nextPosition
 
         animator.SetTrigger("Attack");
     }
 
     public void FinsihAttack()
     {
-        // 🔥 เปิด Agent กลับมา
-        agent.updatePosition = true;
-        agent.updateRotation = false;   // เพราะคุณใช้ LookAtPlayer()
-
-        agent.Warp(transform.position);
-        agent.ResetPath();
-
-        agent.avoidancePriority = 50;
-        agent.obstacleAvoidanceType =
-            ObstacleAvoidanceType.HighQualityObstacleAvoidance;
+        // 🔥 คืนค่าการเคลื่อนที่
+        agent.speed = activeMoveSpeed;
+        agent.acceleration = 5f;
+        agent.stoppingDistance = 0.05f;
 
         agent.isStopped = false;
+        agent.ResetPath();
+
+        agent.avoidancePriority = 40;
 
         EnemyStateManager.Instance.ReleaseAttack(this);
 
@@ -677,19 +698,8 @@ public class EnemyMotherClass : MonoBehaviour
 
         recoveryInitialized = true;
 
-        postAttackTimer = 0.15f;
-        waitingAfterAttack = true;
-        Vector3 awayDir =
-    (transform.position - playerPositon.position).normalized;
-
-        Vector3 retreat =
-            playerPositon.position +
-            awayDir * combatRingDistance;
-
-        SmartSetDestination(retreat);
         ChangeState(EnemyState.Recover);
     }
-
     public void Recovery()
     {
         if (!recoveryInitialized) return;
