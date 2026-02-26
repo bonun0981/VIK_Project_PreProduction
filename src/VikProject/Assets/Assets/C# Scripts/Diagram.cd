@@ -11,7 +11,7 @@
   <Class Name="Health">
     <Position X="2.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAIAAAAAAAgAAAAEAAAAAAEAAAAAAAAgAAAAEA=</HashCode>
+      <HashCode>AAAAAAAIAAAAAAAgAAAAEAAAAAAEAAAAAAAAiAAAAEA=</HashCode>
       <FileName>Assets\Assets\C# Scripts\General\Health.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -25,7 +25,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Run" BaseTypeListCollapsed="true">
-    <Position X="4" Y="3.25" Width="1.5" />
+    <Position X="4" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAEAAACAAAAAAAAAAAEAAAAAAA=</HashCode>
       <FileName>Assets\Assets\C# Scripts\Interfaces\IMovementMode.cs</FileName>
@@ -43,7 +43,7 @@
   <Interface Name="IDamageable" Collapsed="true">
     <Position X="2.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAiAAAAAA=</HashCode>
       <FileName>Assets\Assets\C# Scripts\Interfaces\IDamageable.cs</FileName>
     </TypeIdentifier>
   </Interface>

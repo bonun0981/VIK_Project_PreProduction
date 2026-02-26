@@ -218,15 +218,15 @@ public class EnemyMotherClass : MonoBehaviour
         {
             case EnemyState.Passive:
                 // ให้หลบกันเองคุณภาพสูง จะช่วยไม่ให้ชนผู้เล่นหรือกันเองมากเกินไป
-                agent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
-                agent.avoidancePriority = 80; // ค่าสูง = ให้คนอื่นทะลุก่อน (yield)
+                agent.obstacleAvoidanceType = ObstacleAvoidanceType.MedQualityObstacleAvoidance;
+                agent.avoidancePriority = 75; // ค่าสูง = ให้คนอื่นทะลุก่อน (yield)
                 break;
 
             case EnemyState.Active:
 
                 // 🔥 เปิดหลบกันเอง
                 agent.obstacleAvoidanceType =
-                    ObstacleAvoidanceType.HighQualityObstacleAvoidance;
+                    ObstacleAvoidanceType.MedQualityObstacleAvoidance;
 
                 // ถ้ายังไม่ได้สิทธิ์ตี → priority ปกติ
                 if (!isAttacking)

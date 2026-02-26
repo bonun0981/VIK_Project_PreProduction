@@ -1747,9 +1747,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5346945421085428358}
   serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 100
+  m_Drag: 3
+  m_AngularDrag: 10
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -1972,10 +1972,10 @@ NavMeshAgent:
   m_GameObject: {fileID: 5346945421085428358}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1.25
+  m_Radius: 0.52
   m_Speed: 8
   m_Acceleration: 40
-  avoidancePriority: 70
+  avoidancePriority: 60
   m_AngularSpeed: 720
   m_StoppingDistance: 0.2
   m_AutoTraverseOffMeshLink: 1
