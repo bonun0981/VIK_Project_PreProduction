@@ -1,70 +1,66 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Windows;
 
-public class PlayerMovemet : MonoBehaviour,IMovementState
+public class PlayerMovemet : IMovement
 {
-    
+    private readonly Rigidbody rb;
+    private readonly IMovementInterrupt interrupt;
+    private IMovementMode currentMode;
+    private Vector3 moveDirection;
 
-    [Header("Adjust Speed")]
-    [SerializeField] float walkSpeed = 2f;
-    [SerializeField] float runSpeed = 5f;
-    [SerializeField] float currentSpeed ;
-
-
-    //velocity movment
-    private Vector3 direction;
-    //component
-    [SerializeField] Transform cameraTransform;
-    Rigidbody rb;
-    MovementChecker checker;
-    InputHandler input;
-    //interfaces
-   
-
-    public bool IsRunning => input.isRun&&direction.sqrMagnitude>0.01f;
-
-    public bool IsWalking => !input.isRun && direction.sqrMagnitude > 0.01f;
-
-    public float GetSpeed => new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z).magnitude;
-
-    private void Awake()
-    {   currentSpeed = walkSpeed;
-        rb = GetComponent<Rigidbody>();
-        checker = GetComponent<MovementChecker>();
-        input = GetComponent<InputHandler>();
-        cameraTransform= Camera.main.transform;
-
-    }
-    private void Update()
+    public PlayerMovemet(
+        Rigidbody rb,
+        IMovementMode defaultMode,
+        IMovementInterrupt interrupt)
     {
-        Vector3 camFoward=cameraTransform.forward;
-        Vector3 camRight=cameraTransform.right;
-        camFoward.y = 0;
-        camRight.y = 0;
-        camFoward.Normalize();
-        camRight.Normalize();
-        direction= camFoward * input.moveInput.y + camRight * input.moveInput.x;
-        direction.Normalize();
-
+        this.rb = rb;
+        this.currentMode = defaultMode;
+        this.interrupt = interrupt;
     }
-    private void FixedUpdate()
+
+    public void SetDirection(Vector3 direction)
     {
-        //if(!checker.CanMove())
-        //{
-        //    rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
-        //    return;
-
-        //}
-        currentSpeed= input.isRun ? runSpeed : walkSpeed;
-        Vector3 targetVelocity = direction * currentSpeed;
-
-        Vector3 velocityChange = targetVelocity - rb.linearVelocity;
-        velocityChange.y = 0;
-
-        rb.AddForce(velocityChange, ForceMode.VelocityChange);
-
+        moveDirection = direction;
     }
-  
+    public void SetMode(IMovementMode mode)
+    {
+        currentMode = mode;
+    }
+    public void Move()
+    {
+        if (interrupt.IsMovementInterrupt)
+        {
+            
+            return;
+        }
 
+        Vector3 horizontalVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+
+        Vector3 targetVelocity = moveDirection * currentMode.MaxSpeed;
+
+        if (moveDirection.sqrMagnitude > 0.01f)
+        {
+            horizontalVelocity = Vector3.Lerp(
+                horizontalVelocity,
+                targetVelocity,
+                currentMode.Acceleration * Time.fixedDeltaTime
+            );
+        }
+        else
+        {
+            horizontalVelocity = Vector3.Lerp(
+                horizontalVelocity,
+                Vector3.zero,
+                currentMode.Deceleration * Time.fixedDeltaTime
+            );
+        }
+
+        // ⭐ ใส่กลับเข้า Rigidbody (อย่าลืมแกน Y)
+        rb.linearVelocity = new Vector3(
+            horizontalVelocity.x,
+            rb.linearVelocity.y,
+            horizontalVelocity.z
+        );
+    }
 }
