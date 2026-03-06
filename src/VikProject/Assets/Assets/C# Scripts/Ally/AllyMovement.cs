@@ -4,56 +4,45 @@ using UnityEngine.AI;
 public class AllyMovement : MonoBehaviour
 {
     public NavMeshAgent agent;
-    public float followRadius = 2.5f;
+    public AllyFormationController formation;
 
-    public float repathInterval = 0.25f;
-    float repathTimer;
+    public float repathInterval = 0.3f;
+    float timer;
 
-    Vector3 slotOffset;      // ล็อกตำแหน่งรอบ player
     Vector3 currentTarget;
 
-    private void Start()
+    void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-
-        // 🔒 สุ่มครั้งเดียว
-        float angle = Random.Range(0f, 360f);
-        slotOffset = new Vector3(
-            Mathf.Cos(angle * Mathf.Deg2Rad),
-            0,
-            Mathf.Sin(angle * Mathf.Deg2Rad)
-        ) * followRadius;
-
-        // ค่าแนะนำสำหรับ Musou
-        agent.acceleration = 40f;
-        agent.angularSpeed = 720f;
-        agent.stoppingDistance = 1.5f;
-        agent.autoBraking = true;
+        formation.Register(this);
+        //agent.avoidancePriority = Random.Range(20, 60);
+        agent.acceleration = 40;
+        agent.angularSpeed = 720;
+        //agent.stoppingDistance = 1.5f;
+        //agent.obstacleAvoidanceType = ObstacleAvoidanceType.LowQualityObstacleAvoidance;
     }
 
     void Update()
     {
-        repathTimer += Time.deltaTime;
+        timer += Time.deltaTime;
 
-        if (repathTimer >= repathInterval)
+        if (timer > repathInterval)
         {
-            repathTimer = 0f;
+            timer = 0;
             agent.SetDestination(currentTarget);
         }
     }
 
-    public void FollowAroundPlayer(Transform player)
+    public void FollowPlayer(Transform player)
     {
-        Vector3 targetPos = player.position + slotOffset;
-        currentTarget = targetPos;
-
         agent.isStopped = false;
+        agent.SetDestination(player.position);
     }
 
     public void MoveTo(Vector3 position)
     {
-        currentTarget = position;
         agent.isStopped = false;
+        agent.SetDestination(position);
     }
 
     public bool IsInRange(Vector3 target, float range)

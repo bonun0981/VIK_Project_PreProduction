@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class AllyBrain : MonoBehaviour
 {
-
     public enum AllyState
     {
         FollowPlayer,
         MoveToEnemy,
         AttackEnemy
     }
-    public bool isActive = false;
+
+    public bool isActive = true;
     public AllyState currentState;
 
     public Transform player;
@@ -17,18 +17,18 @@ public class AllyBrain : MonoBehaviour
     public AllyTargeting targeting;
     public AllyCombat combat;
 
-    private void Start()
+    void Start()
     {
-        AllyMovement movement = GetComponent<AllyMovement>();
-        AllyTargeting targeting = GetComponent<AllyTargeting>();
-        AllyCombat combat = GetComponent<AllyCombat>();
+        movement = GetComponent<AllyMovement>();
+        targeting = GetComponent<AllyTargeting>();
+        combat = GetComponent<AllyCombat>();
+
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
-   
 
     void Update()
     {
-        if (!isActive) { return; }
+        if (!isActive) return;
 
         switch (currentState)
         {
@@ -48,7 +48,7 @@ public class AllyBrain : MonoBehaviour
 
     void HandleFollow()
     {
-        movement.FollowAroundPlayer(player);
+        movement.FollowPlayer(player);
 
         if (targeting.HasTarget())
             currentState = AllyState.MoveToEnemy;

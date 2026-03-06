@@ -1,66 +1,72 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class AllyTargeting : MonoBehaviour
 {
-    public float detectRange = 7f;
+    public float detectRange = 8f;
     public LayerMask enemyLayer;
 
-    public Transform CurrentTarget { get; private set; }
+    public Transform currentTarget;
+
+    static Dictionary<Transform, int> enemyAttackCount =
+        new Dictionary<Transform, int>();
+
+    public int maxAttackersPerEnemy = 2;
+    public Transform CurrentTarget;
 
     public bool HasTarget()
     {
-        if (CurrentTarget == null) return false;
-
-        if (Vector3.Distance(transform.position, CurrentTarget.position) > detectRange)
-        {
-            CurrentTarget = null;
-            return false;
-        }
-
-        return true;
+        return CurrentTarget != null;
     }
-
     void Update()
     {
-        if (CurrentTarget != null) return;
+        if (currentTarget == null)
+            FindTarget();
+    }
 
-        Collider[] hits = Physics.OverlapSphere(transform.position, detectRange, enemyLayer);
+    void FindTarget()
+    {
+        Collider[] hits =
+            Physics.OverlapSphere(transform.position, detectRange, enemyLayer);
 
         float closest = Mathf.Infinity;
-        Transform nearest = null;
+        Transform best = null;
 
-        foreach (var hit in hits)
+        foreach (var h in hits)
         {
-            float dist = Vector3.Distance(transform.position, hit.transform.position);
-            if (dist < closest)
+            Transform enemy = h.transform;
+
+            int count = 0;
+            enemyAttackCount.TryGetValue(enemy, out count);
+
+            if (count >= maxAttackersPerEnemy)
+                continue;
+
+            float d = Vector3.Distance(transform.position, enemy.position);
+
+            if (d < closest)
             {
-                closest = dist;
-                nearest = hit.transform;
+                closest = d;
+                best = enemy;
             }
         }
 
-        CurrentTarget = nearest;
-    }
-
-    // =========================
-    // 🧪 GIZMO DEBUG SECTION
-    // =========================
-    private void OnDrawGizmosSelected()
-    {
-        // วาดวงกลมระยะตรวจจับ
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, detectRange);
-
-        // ถ้ามี Target ให้วาดเส้นไปหา
-        if (CurrentTarget != null)
+        if (best != null)
         {
-            Gizmos.color = Color.red;
-            Gizmos.DrawLine(transform.position, CurrentTarget.position);
+            currentTarget = best;
 
-            Gizmos.DrawWireSphere(CurrentTarget.position, 0.4f);
+            if (!enemyAttackCount.ContainsKey(best))
+                enemyAttackCount[best] = 0;
+
+            enemyAttackCount[best]++;
         }
     }
 
+    public void ClearTarget()
+    {
+        if (currentTarget == null) return;
 
-
+        enemyAttackCount[currentTarget]--;
+        currentTarget = null;
+    }
 }
