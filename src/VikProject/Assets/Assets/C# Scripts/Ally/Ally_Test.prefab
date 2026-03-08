@@ -136,6 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isActive: 1
   currentState: 0
+  engageRange: 5
   player: {fileID: 0}
   movement: {fileID: 7542492787088249554}
   targeting: {fileID: 5690782660368850438}
@@ -227,7 +228,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 7117069378078442914}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1.16
+  m_Radius: 0.82
   m_Speed: 8
   m_Acceleration: 8
   avoidancePriority: 40

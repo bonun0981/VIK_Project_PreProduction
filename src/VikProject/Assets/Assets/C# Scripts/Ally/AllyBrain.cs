@@ -33,7 +33,12 @@ public class AllyBrain : MonoBehaviour
             
             return;
         }
-           
+        if (!targeting.HasTarget())
+        {
+            targeting.ClearTarget();
+            currentState = AllyState.FollowPlayer;
+            return;
+        }
 
         switch (currentState)
         {
@@ -71,8 +76,10 @@ public class AllyBrain : MonoBehaviour
 
         movement.MoveToEnemy(enemyTarget);
 
-        // ⭐ ส่ง signal ให้ enemy engage ally
-        if (movement.IsInRange(enemyTarget.position, engageRange))
+        // ⭐ ส่ง signal ให้ enemy สู้กับ ally
+        float dist = Vector3.Distance(transform.position, enemyTarget.position);
+
+        if (dist < 3f)
         {
             EnemyNormal enemy = enemyTarget.GetComponent<EnemyNormal>();
 

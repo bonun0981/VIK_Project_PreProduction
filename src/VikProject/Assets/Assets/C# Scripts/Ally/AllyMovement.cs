@@ -16,11 +16,13 @@ public class AllyMovement : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         formation.Register(this);
-        //agent.avoidancePriority = Random.Range(20, 60);
+       
         agent.acceleration = 40;
         agent.angularSpeed = 720;
-        //agent.stoppingDistance = 1.5f;
-        //agent.obstacleAvoidanceType = ObstacleAvoidanceType.LowQualityObstacleAvoidance;
+        //agent.autoBraking = false;
+        agent.avoidancePriority = Random.Range(30, 70);
+       
+        agent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
     }
 
     void Update()

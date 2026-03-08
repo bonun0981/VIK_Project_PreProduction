@@ -7,7 +7,10 @@ public class AllyFormationController : MonoBehaviour
     public float radius = 3f;
 
     List<AllyMovement> allies = new List<AllyMovement>();
-
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+    }
     public void Register(AllyMovement ally)
     {
         if (!allies.Contains(ally))

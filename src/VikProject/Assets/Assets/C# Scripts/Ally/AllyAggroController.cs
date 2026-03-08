@@ -5,6 +5,7 @@ public class AllyAggroController : MonoBehaviour
     public Transform player;
     public AllyMovement movement;
     public AllyTargeting targeting;
+    public AllyBrain brain;
 
     public float combatRange = 8f;
     public float leashDistance = 12f;
@@ -13,6 +14,7 @@ public class AllyAggroController : MonoBehaviour
     {
         movement = GetComponent<AllyMovement>();
         targeting = GetComponent<AllyTargeting>();
+        brain = GetComponent<AllyBrain>();
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
@@ -22,22 +24,22 @@ public class AllyAggroController : MonoBehaviour
         float playerDistance =
             Vector3.Distance(transform.position, player.position);
 
-        // 🔴 Player หนีไกลเกิน → ยกเลิก combat
         if (playerDistance > leashDistance)
         {
             targeting.ClearTarget();
+
+            brain.currentState = AllyBrain.AllyState.FollowPlayer;
+
             movement.FollowPlayer(player);
+
             return;
         }
 
-        // 🟡 มี target
         if (targeting.CurrentTarget != null)
         {
-            
             return;
         }
 
-        // 🟢 ไม่มี target
         movement.FollowPlayer(player);
     }
 }
