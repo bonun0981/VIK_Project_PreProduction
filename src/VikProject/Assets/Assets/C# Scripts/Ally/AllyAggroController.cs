@@ -13,7 +13,6 @@ public class AllyAggroController : MonoBehaviour
     {
         movement = GetComponent<AllyMovement>();
         targeting = GetComponent<AllyTargeting>();
-       
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
@@ -31,14 +30,14 @@ public class AllyAggroController : MonoBehaviour
             return;
         }
 
-        // 🟡 มี target และ player ยังอยู่ใกล้
-        if (targeting.currentTarget != null)
+        // 🟡 มี target
+        if (targeting.CurrentTarget != null)
         {
-            movement.MoveTo(targeting.currentTarget.position);
+            
             return;
         }
 
-        // 🟢 ไม่มี target → follow player
+        // 🟢 ไม่มี target
         movement.FollowPlayer(player);
     }
 }

@@ -6,21 +6,21 @@ public class AllyTargeting : MonoBehaviour
     public float detectRange = 8f;
     public LayerMask enemyLayer;
 
-    public Transform currentTarget;
+    public Transform CurrentTarget;
 
     static Dictionary<Transform, int> enemyAttackCount =
         new Dictionary<Transform, int>();
 
     public int maxAttackersPerEnemy = 2;
-    public Transform CurrentTarget;
 
     public bool HasTarget()
     {
         return CurrentTarget != null;
     }
+
     void Update()
     {
-        if (currentTarget == null)
+        if (CurrentTarget == null)
             FindTarget();
     }
 
@@ -42,7 +42,7 @@ public class AllyTargeting : MonoBehaviour
             if (count >= maxAttackersPerEnemy)
                 continue;
 
-            float d = Vector3.Distance(transform.position, enemy.position);
+            float d = (transform.position - enemy.position).sqrMagnitude;
 
             if (d < closest)
             {
@@ -53,7 +53,7 @@ public class AllyTargeting : MonoBehaviour
 
         if (best != null)
         {
-            currentTarget = best;
+            CurrentTarget = best;
 
             if (!enemyAttackCount.ContainsKey(best))
                 enemyAttackCount[best] = 0;
@@ -64,9 +64,10 @@ public class AllyTargeting : MonoBehaviour
 
     public void ClearTarget()
     {
-        if (currentTarget == null) return;
+        if (CurrentTarget == null) return;
 
-        enemyAttackCount[currentTarget]--;
-        currentTarget = null;
+        enemyAttackCount[CurrentTarget] =
+    Mathf.Max(0, enemyAttackCount[CurrentTarget] - 1);
+        CurrentTarget = null;
     }
 }

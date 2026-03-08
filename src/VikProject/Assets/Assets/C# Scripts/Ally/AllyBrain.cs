@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AllyBrain : MonoBehaviour
 {
@@ -11,7 +11,7 @@ public class AllyBrain : MonoBehaviour
 
     public bool isActive = true;
     public AllyState currentState;
-
+    public float engageRange = 5f;
     public Transform player;
     public AllyMovement movement;
     public AllyTargeting targeting;
@@ -28,7 +28,12 @@ public class AllyBrain : MonoBehaviour
 
     void Update()
     {
-        if (!isActive) return;
+        if (!isActive)
+        {
+            
+            return;
+        }
+           
 
         switch (currentState)
         {
@@ -62,9 +67,22 @@ public class AllyBrain : MonoBehaviour
             return;
         }
 
-        movement.MoveTo(targeting.CurrentTarget.position);
+        Transform enemyTarget = targeting.CurrentTarget;
 
-        if (movement.IsInRange(targeting.CurrentTarget.position, combat.attackRange))
+        movement.MoveToEnemy(enemyTarget);
+
+        // ⭐ ส่ง signal ให้ enemy engage ally
+        if (movement.IsInRange(enemyTarget.position, engageRange))
+        {
+            EnemyNormal enemy = enemyTarget.GetComponent<EnemyNormal>();
+
+            if (enemy != null)
+            {
+                enemy.EngageAlly(transform);
+            }
+        }
+
+        if (movement.IsInRange(enemyTarget.position, combat.attackRange))
             currentState = AllyState.AttackEnemy;
     }
 

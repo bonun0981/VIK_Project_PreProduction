@@ -18,6 +18,8 @@ enum CircleMove
 }
 public class EnemyNormal : MonoBehaviour
 {
+    public float sleepDistance = 30f;
+    public Transform allyTarget;
     [Header("Avoidance Priority")]
     public int attackPriority = 5;
     public int innerPriority = 20;
@@ -74,6 +76,7 @@ public class EnemyNormal : MonoBehaviour
         agent.avoidancePriority = Random.Range(30, 70);
         circleOffset = Random.Range(0f, 360f);
         UpdateDebugColor();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
     void UpdateDebugColor()
     {
@@ -144,7 +147,11 @@ public class EnemyNormal : MonoBehaviour
     void Update()
     {
         if (!aiActive) return;
-
+        if (Vector3.Distance(transform.position, player.position) > sleepDistance)
+        {
+            aiActive = false;
+            SetState(EnemyState.Idle);
+        }
         switch (currentState)
         {
             case EnemyState.InnerRing:
@@ -166,6 +173,10 @@ public class EnemyNormal : MonoBehaviour
                     agent.ResetPath();
 
                 AttackPlayer();
+                break;
+
+            case EnemyState.FightingAlly:
+                FightAlly();
                 break;
         }
     }
@@ -282,5 +293,79 @@ public class EnemyNormal : MonoBehaviour
             Time.deltaTime * 10f
         );
     }
+    public void ActivateAI()
+    {
+        if (aiActive) return;
 
+        aiActive = true;
+
+        EnemyCombatDirector.Instance.RegisterEnemy(this);
+    }
+    public void EngageAlly(Transform ally)
+    {
+        ActivateAI();
+
+        if (currentState == EnemyState.FightingAlly)
+            return;
+
+        allyTarget = ally;
+
+        SetState(EnemyState.FightingAlly);
+    }
+    void FightAlly()
+    {
+        if (allyTarget == null)
+        {
+            SetState(EnemyState.InnerRing);
+            return;
+        }
+
+        float dist =
+            (transform.position - allyTarget.position).sqrMagnitude;
+
+        float attackDist = attackRange * attackRange;
+
+        if (dist > attackDist)
+        {
+            agent.SetDestination(allyTarget.position);
+        }
+        else
+        {
+            agent.ResetPath();
+            AttackAlly();
+        }
+
+        LookAtAlly();
+    }
+    void AttackAlly()
+    {
+        if (Time.time < lastAttack + attackCooldown)
+            return;
+
+        lastAttack = Time.time;
+
+        Debug.Log("Enemy Attack Ally");
+
+        var damageable = allyTarget.GetComponent<IDamageable>();
+
+        if (damageable != null)
+            damageable.TakeDamage(10);
+    }
+    void LookAtAlly()
+    {
+        if (allyTarget == null) return;
+
+        Vector3 dir = allyTarget.position - transform.position;
+        dir.y = 0;
+
+        if (dir.sqrMagnitude < 0.01f) return;
+
+        Quaternion rot = Quaternion.LookRotation(dir);
+
+        transform.rotation = Quaternion.Slerp(
+            transform.rotation,
+            rot,
+            Time.deltaTime * 10f
+        );
+    }
 }
