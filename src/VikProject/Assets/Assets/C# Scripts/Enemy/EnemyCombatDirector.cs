@@ -11,7 +11,8 @@ public class EnemyCombatDirector : MonoBehaviour
     [Header("Limits")]
     public int maxInnerEnemies = 4;
     public int maxOuterEnemies = 8;
-    public int maxAttackers = 2;
+    public int maxPlayerAttackers = 2;
+    public int maxAllyAttackers = 1;
 
     public float innerRingRadius = 3f;
     public float outerRingRadius = 6f;
@@ -27,12 +28,13 @@ public class EnemyCombatDirector : MonoBehaviour
     public float innerRadius = 2.5f;
     public float outerRadius = 4.5f;
 
-   
+    
 
     List<EnemyNormal> innerRing = new();
     List<EnemyNormal> outerRing = new();
-    List<EnemyNormal> attackers = new();
-
+    List<EnemyNormal> playerAttackers = new();
+    
+    Dictionary<Transform, EnemyNormal> allyFighters = new();
     void Awake()
     {
         Instance = this;
@@ -111,59 +113,103 @@ public class EnemyCombatDirector : MonoBehaviour
         return innerRingRadius;
     }
 
-    public bool RequestAttackTurn(EnemyNormal enemy)
+    public bool RequestPlayerAttack(EnemyNormal enemy)
     {
-        if (attackers.Count >= maxAttackers)
+        if (playerAttackers.Count >= maxPlayerAttackers)
             return false;
 
-        if (attackers.Contains(enemy))
+        if (playerAttackers.Contains(enemy))
             return false;
 
-        attackers.Add(enemy);
+        playerAttackers.Add(enemy);
         enemy.SetState(EnemyState.AttackTurn);
 
         return true;
     }
 
-    public void FinishAttack(EnemyNormal enemy)
+    public void FinishPlayerAttack(EnemyNormal enemy)
     {
-        if (!attackers.Contains(enemy))
+        if (!playerAttackers.Contains(enemy))
             return;
 
-        // สุ่มว่าจะตีต่อไหม
         if (Random.value < keepAttackChance)
-        {
-            // ตีต่อ
             return;
-        }
 
-        // ไม่ตีต่อ → คืน state
-        attackers.Remove(enemy);
+        playerAttackers.Remove(enemy);
 
         if (innerRing.Contains(enemy))
             enemy.SetState(EnemyState.InnerRing);
 
-        // ให้ตัวอื่นมีโอกาสได้เทิร์น
         GiveAttackToAnother();
+    }
+    public bool RequestAllyFight(EnemyNormal enemy, Transform ally)
+    {
+        if (ally == null)
+            return false;
+
+        // ally นี้มี enemy สู้แล้ว
+        if (allyFighters.ContainsKey(ally))
+            return false;
+
+        allyFighters[ally] = enemy;
+
+        return true;
+    }
+    public void FinishAllyFight(EnemyNormal enemy, Transform ally)
+    {
+        if (ally == null)
+            return;
+
+        if (allyFighters.ContainsKey(ally) && allyFighters[ally] == enemy)
+            allyFighters.Remove(ally);
     }
 
     void GiveAttackToAnother()
     {
-        if (attackers.Count >= maxAttackers)
+        if (playerAttackers.Count >= maxPlayerAttackers)
             return;
 
-        // หา enemy ที่อยู่ inner ring และยังไม่โจมตี
+        // หา enemy ใน inner ring ที่ยังไม่ได้ตี player
         var candidates = innerRing
-            .Where(e => !attackers.Contains(e))
+            .Where(e =>
+                !playerAttackers.Contains(e) &&
+                e.currentState != EnemyState.FightingAlly)
             .ToList();
 
         if (candidates.Count == 0)
             return;
 
-        EnemyNormal next = candidates[Random.Range(0, candidates.Count)];
+        EnemyNormal next =
+            candidates[Random.Range(0, candidates.Count)];
 
-        RequestAttackTurn(next);
+        RequestPlayerAttack(next);
     }
+    public void RemoveFromPlayerAttackers(EnemyNormal enemy)
+    {
+        playerAttackers.Remove(enemy);
+    }
+    public void UnregisterEnemy(EnemyNormal enemy)
+    {
+        // remove from rings
+        innerRing.Remove(enemy);
+        outerRing.Remove(enemy);
 
-   
+        // remove from player attackers
+        playerAttackers.Remove(enemy);
+
+        // remove from ally fighters
+        Transform removeKey = null;
+
+        foreach (var pair in allyFighters)
+        {
+            if (pair.Value == enemy)
+            {
+                removeKey = pair.Key;
+                break;
+            }
+        }
+
+        if (removeKey != null)
+            allyFighters.Remove(removeKey);
+    }
 }

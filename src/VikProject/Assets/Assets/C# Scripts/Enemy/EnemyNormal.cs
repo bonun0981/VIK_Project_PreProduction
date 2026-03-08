@@ -146,12 +146,22 @@ public class EnemyNormal : MonoBehaviour
     }
     void Update()
     {
-        if (!aiActive) return;
-        if (Vector3.Distance(transform.position, player.position) > sleepDistance)
+        float distToPlayer =
+            Vector3.Distance(transform.position, player.position);
+
+        if (aiActive && distToPlayer > sleepDistance)
         {
-            aiActive = false;
-            SetState(EnemyState.Idle);
+            SleepEnemy();
+            return;
         }
+
+        if (!aiActive && distToPlayer < sleepDistance * 0.8f)
+        {
+            ActivateAI();
+        }
+
+        if (!aiActive) return;
+
         switch (currentState)
         {
             case EnemyState.InnerRing:
@@ -165,7 +175,8 @@ public class EnemyNormal : MonoBehaviour
 
             case EnemyState.AttackTurn:
 
-                float dist = Vector3.Distance(transform.position, player.position);
+                float dist =
+                    Vector3.Distance(transform.position, player.position);
 
                 if (dist > minAttackDistance)
                     agent.SetDestination(player.position);
@@ -183,7 +194,7 @@ public class EnemyNormal : MonoBehaviour
 
 
 
-   
+
 
     void TryAttack()
     {
@@ -191,7 +202,7 @@ public class EnemyNormal : MonoBehaviour
 
         if (dist < attackRange)
         {
-            EnemyCombatDirector.Instance.RequestAttackTurn(this);
+            EnemyCombatDirector.Instance.RequestPlayerAttack(this);
         }
     }
 
@@ -204,9 +215,8 @@ public class EnemyNormal : MonoBehaviour
 
         Debug.Log("Enemy Attack");
 
-        EnemyCombatDirector.Instance.FinishAttack(this);
+        EnemyCombatDirector.Instance.FinishPlayerAttack(this);
     }
-
 
 
     public void SetPlayer(Transform p)
@@ -305,8 +315,10 @@ public class EnemyNormal : MonoBehaviour
     {
         ActivateAI();
 
-        if (currentState == EnemyState.FightingAlly)
+        if (!EnemyCombatDirector.Instance.RequestAllyFight(this, ally))
             return;
+
+        EnemyCombatDirector.Instance.RemoveFromPlayerAttackers(this);
 
         allyTarget = ally;
 
@@ -316,6 +328,8 @@ public class EnemyNormal : MonoBehaviour
     {
         if (allyTarget == null)
         {
+            EnemyCombatDirector.Instance.FinishAllyFight(this, allyTarget);
+
             SetState(EnemyState.InnerRing);
             return;
         }
@@ -367,5 +381,18 @@ public class EnemyNormal : MonoBehaviour
             rot,
             Time.deltaTime * 10f
         );
+    }
+
+    void SleepEnemy()
+    {
+        aiActive = false;
+
+        EnemyCombatDirector.Instance.UnregisterEnemy(this);
+
+        allyTarget = null;
+
+        agent.ResetPath();
+
+        SetState(EnemyState.Idle);
     }
 }
