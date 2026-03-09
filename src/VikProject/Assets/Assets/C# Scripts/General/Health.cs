@@ -6,7 +6,7 @@ public class Health : MonoBehaviour,IDamageable
 {
     public event Action<float> OnDamaged;
     [SerializeField] float maxHealth = 100f;
-    [SerializeField]float currentHealth;
+    [SerializeField]float currentHealth=100f;
 
     public bool IsDead => currentHealth<=0;
 

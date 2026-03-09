@@ -217,6 +217,7 @@ MonoBehaviour:
   player: {fileID: 0}
   movement: {fileID: 0}
   targeting: {fileID: 0}
+  brain: {fileID: 0}
   combatRange: 8
   leashDistance: 12
 --- !u!195 &3332937426679211382

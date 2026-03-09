@@ -18,6 +18,9 @@ enum CircleMove
 }
 public class EnemyNormal : MonoBehaviour
 {
+    float repathTimer;
+    public float repathInterval = 0.2f;
+    EnemyAnimationController anim;
     public float sleepDistance = 30f;
     public Transform allyTarget;
     [Header("Avoidance Priority")]
@@ -63,6 +66,7 @@ public class EnemyNormal : MonoBehaviour
     void Start()
     {
         //rend = GetComponentInChildren<Renderer>();
+        anim = GetComponent<EnemyAnimationController>();
         PickCircleMove();
         agent = GetComponent<NavMeshAgent>();
         agent.autoBraking = false;
@@ -72,6 +76,7 @@ public class EnemyNormal : MonoBehaviour
         agent.angularSpeed = 720;
         agent.speed = 3.5f;
         agent.radius = 1f;
+        agent.updateRotation = false;
         agent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
         agent.avoidancePriority = Random.Range(30, 70);
         circleOffset = Random.Range(0f, 360f);
@@ -161,7 +166,7 @@ public class EnemyNormal : MonoBehaviour
         }
 
         if (!aiActive) return;
-
+        LookAtPlayer();
         switch (currentState)
         {
             case EnemyState.InnerRing:
@@ -213,11 +218,18 @@ public class EnemyNormal : MonoBehaviour
 
         lastAttack = Time.time;
 
+        anim.PlayAttack();
+
         Debug.Log("Enemy Attack");
+
+        
+    }
+    public void FinishAttack()
+    {
+        Debug.Log("Enemy Attack Finish");
 
         EnemyCombatDirector.Instance.FinishPlayerAttack(this);
     }
-
 
     public void SetPlayer(Transform p)
     {
@@ -285,22 +297,31 @@ public class EnemyNormal : MonoBehaviour
 
         if (NavMesh.SamplePosition(target, out hit, 2f, NavMesh.AllAreas))
         {
-            agent.SetDestination(hit.position);
+            repathTimer += Time.deltaTime;
+
+            if (repathTimer > repathInterval)
+            {
+                repathTimer = 0f;
+                agent.SetDestination(hit.position);
+            }
         }
-        LookAtPlayer();
+        
     }
     void LookAtPlayer()
     {
+        if (player == null) return;
+
         Vector3 dir = player.position - transform.position;
         dir.y = 0;
 
-        if (dir.sqrMagnitude < 0.01f) return;
+        if (dir.sqrMagnitude < 0.001f) return;
 
-        Quaternion rot = Quaternion.LookRotation(dir);
+        Quaternion targetRot = Quaternion.LookRotation(dir);
+
         transform.rotation = Quaternion.Slerp(
             transform.rotation,
-            rot,
-            Time.deltaTime * 10f
+            targetRot,
+            Time.deltaTime * 8f
         );
     }
     public void ActivateAI()
@@ -358,12 +379,11 @@ public class EnemyNormal : MonoBehaviour
 
         lastAttack = Time.time;
 
+        anim.PlayAttack();
+
         Debug.Log("Enemy Attack Ally");
 
-        var damageable = allyTarget.GetComponent<IDamageable>();
-
-        if (damageable != null)
-            damageable.TakeDamage(10);
+       
     }
     void LookAtAlly()
     {
