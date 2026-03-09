@@ -5,7 +5,19 @@ EditorUserSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 4
   m_ConfigSettings:
+    GraphicsSettingsInspector_UserSettings:
+      value: 18134705175a055722080a3115371d4a0d55006876786860616b0471b8b07a68ffab74f9ee2a3a30300cea1a11320d0beb1a0c25f7060f494b4cc80018eb09361fc211cb1f862d19c51d19dcc413d6ade0d8ddfcddf9f4d9d29195fcfde6ebeae6f0a9c9afa6f8c5b89ff7a1aacececac4eba4d7c9d28bda
+      flags: 0
     RecentlyUsedSceneGuid-0:
+      value: 01520c5406060c585c58592343265944414e497f7d7073352c704967e7e5616b
+      flags: 0
+    RecentlyUsedSceneGuid-1:
+      value: 50520d0207060a58580f5c7442225944154f19787c2d27357a7c1f31e7e23168
+      flags: 0
+    RecentlyUsedSceneGuid-2:
+      value: 545702560756510f5a585f7a48710f44174f4b7a7d2a20317c79486ab0b6653d
+      flags: 0
+    RecentlyUsedSceneGuid-3:
       value: 01500302510c0d0e0808092616720b44454f4f7a75707e33292c1e30b0b0326f
       flags: 0
     UnityEditor.ShaderGraph.Blackboard:
