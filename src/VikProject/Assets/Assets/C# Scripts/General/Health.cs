@@ -15,9 +15,18 @@ public class Health : MonoBehaviour,IDamageable
         animator=GetComponent<Animator>();
         currentHealth = maxHealth;
     }
-   
+
     public void Die()
     {
+        EnemyNormal enemy = GetComponent<EnemyNormal>();
+
+        if (enemy != null)
+        {
+            enemy.aiActive = false;
+            EnemyCombatDirector.Instance.UnregisterEnemy(enemy);
+            
+        }
+
         gameObject.SetActive(false);
     }
     public void TakeDamage(float damage)

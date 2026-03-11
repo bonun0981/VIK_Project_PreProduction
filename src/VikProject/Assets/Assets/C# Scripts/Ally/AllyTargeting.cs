@@ -20,6 +20,17 @@ public class AllyTargeting : MonoBehaviour
 
     void Update()
     {
+        // target ตาย หรือ inactive
+        if (CurrentTarget != null)
+        {
+            EnemyNormal enemy = CurrentTarget.GetComponent<EnemyNormal>();
+
+            if (enemy == null || !enemy.aiActive)
+            {
+                ClearTarget();
+            }
+        }
+
         if (CurrentTarget == null)
             FindTarget();
     }
@@ -59,6 +70,13 @@ public class AllyTargeting : MonoBehaviour
                 enemyAttackCount[best] = 0;
 
             enemyAttackCount[best]++;
+
+            EnemyNormal enemy = best.GetComponent<EnemyNormal>();
+
+            if (enemy != null)
+            {
+                enemy.EngageAlly(transform);
+            }
         }
     }
 
@@ -66,8 +84,19 @@ public class AllyTargeting : MonoBehaviour
     {
         if (CurrentTarget == null) return;
 
-        enemyAttackCount[CurrentTarget] =
-    Mathf.Max(0, enemyAttackCount[CurrentTarget] - 1);
+        EnemyNormal enemy = CurrentTarget.GetComponent<EnemyNormal>();
+
+        if (enemy != null)
+        {
+            EnemyCombatDirector.Instance.FinishAllyFight(enemy, transform);
+        }
+
+        if (enemyAttackCount.ContainsKey(CurrentTarget))
+        {
+            enemyAttackCount[CurrentTarget] =
+                Mathf.Max(0, enemyAttackCount[CurrentTarget] - 1);
+        }
+
         CurrentTarget = null;
     }
 }

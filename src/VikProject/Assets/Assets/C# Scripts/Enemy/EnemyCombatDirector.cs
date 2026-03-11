@@ -141,6 +141,7 @@ public class EnemyCombatDirector : MonoBehaviour
             enemy.SetState(EnemyState.InnerRing);
 
         GiveAttackToAnother();
+        FillInnerRing();
     }
     public bool RequestAllyFight(EnemyNormal enemy, Transform ally)
     {
@@ -195,14 +196,10 @@ public class EnemyCombatDirector : MonoBehaviour
     }
     public void UnregisterEnemy(EnemyNormal enemy)
     {
-        // remove from rings
         innerRing.Remove(enemy);
         outerRing.Remove(enemy);
-
-        // remove from player attackers
         playerAttackers.Remove(enemy);
 
-        // remove from ally fighters
         Transform removeKey = null;
 
         foreach (var pair in allyFighters)
@@ -216,5 +213,22 @@ public class EnemyCombatDirector : MonoBehaviour
 
         if (removeKey != null)
             allyFighters.Remove(removeKey);
+
+        FillInnerRing();
     }
+
+    void FillInnerRing()
+    {
+        while (innerRing.Count < maxInnerEnemies && outerRing.Count > 0)
+        {
+            EnemyNormal e = outerRing[0];
+
+            outerRing.RemoveAt(0);
+            innerRing.Add(e);
+
+            e.SetState(EnemyState.InnerRing);
+        }
+    }
+
+
 }

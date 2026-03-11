@@ -5,7 +5,7 @@ public class AllyMovement : MonoBehaviour
 {
     public NavMeshAgent agent;
     public AllyFormationController formation;
-
+    public float followDistance = 2.5f;
     public float repathInterval = 0.3f;
     float timer;
 
@@ -39,8 +39,21 @@ public class AllyMovement : MonoBehaviour
 
     public void FollowPlayer(Transform player)
     {
+        if (player == null) return;
+
         agent.isStopped = false;
-        agent.SetDestination(player.position);
+
+        Vector3 dir = transform.position - player.position;
+        dir.y = 0;
+
+        if (dir.sqrMagnitude < 0.01f)
+            dir = Random.insideUnitSphere;
+
+        dir = dir.normalized;
+
+        Vector3 target = player.position + dir * followDistance;
+
+        currentTarget = target;
     }
 
     public void MoveTo(Vector3 position)

@@ -2310,7 +2310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  radius: 3
+  radius: 10
 --- !u!114 &5088134543533716689
 MonoBehaviour:
   m_ObjectHideFlags: 0
