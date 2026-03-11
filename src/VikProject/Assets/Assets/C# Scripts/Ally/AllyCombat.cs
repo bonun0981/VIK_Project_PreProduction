@@ -21,8 +21,8 @@ public class AllyCombat : MonoBehaviour
 
         Debug.Log("Ally Attack!");
 
-        var damageable = target.GetComponent<IDamageable>();
-        if (damageable != null)
-            damageable.TakeDamage(10);
+        //var damageable = target.GetComponent<IDamageable>();
+        //if (damageable != null)
+        //    damageable.TakeDamage(10);
     }
 }

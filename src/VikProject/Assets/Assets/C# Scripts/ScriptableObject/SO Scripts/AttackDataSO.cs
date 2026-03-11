@@ -1,5 +1,12 @@
 ﻿using UnityEngine;
 
+public enum AttackStatusEffect
+{
+    None,
+    Stun,
+    Knockback,
+    KnockUp
+}
 public enum AttackInputType
 {
     A,
@@ -25,9 +32,11 @@ public class AttackDataSO : ScriptableObject
     public float comboDelayTime = 0.15f;
     public float earlyBufferTime = 0.2f;
 
-    // เริ่มรับ input ต่อได้เมื่อถึง %
+    public GameObject hitEffect;
+    public float hitstopTime;// เอฟเฟกต์ตอน chain สำเร็จ
+                                                    // เริ่มรับ input ต่อได้เมื่อถึง %
 
-    
+
 
     [Header("Behavior")]
     public bool useStartPercent = true;   // ใช้ startPercent ไหม
@@ -35,5 +44,6 @@ public class AttackDataSO : ScriptableObject
 
     [Header("Damage")]
     public float damageMultiplier = 1f;
-    public float knockbackMultiplier = 1f;
+    public float statusPower = 1f;
+    public AttackStatusEffect statusEffect;
 }

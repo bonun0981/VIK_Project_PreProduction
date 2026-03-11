@@ -18,6 +18,7 @@ enum CircleMove
 }
 public class EnemyNormal : MonoBehaviour
 {
+    
     float repathTimer;
     public float repathInterval = 0.2f;
     EnemyAnimationController anim;
@@ -199,16 +200,27 @@ public class EnemyNormal : MonoBehaviour
 
 
 
-
-
     void TryAttack()
     {
         float dist = Vector3.Distance(transform.position, player.position);
 
+        // ถ้าเข้า range → ขอ attack turn
         if (dist < attackRange)
         {
             EnemyCombatDirector.Instance.RequestPlayerAttack(this);
+            return;
         }
+
+        // ถ้าไม่มีสิทธิ์โจมตี → อย่าเดินเข้า
+        if (!EnemyCombatDirector.Instance.HasPlayerAttackSlot())
+            return;
+
+        // ดันเข้า player เฉพาะตอนมี slot ว่าง
+        Vector3 dir = (player.position - transform.position).normalized;
+
+        Vector3 target = player.position - dir * minAttackDistance;
+
+        agent.SetDestination(target);
     }
 
     void AttackPlayer()

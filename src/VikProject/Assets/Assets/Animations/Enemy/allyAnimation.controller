@@ -878,8 +878,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startEventName: 
-  startUpdateEventName: 
-  triggerTime: 0
-  endUpdateEventName: Reset Attack
-  endTime: 0.861
+  startUpdateEventName: StartAttack
+  triggerTime: 0.202
+  endUpdateEventName: EndAttack
+  endTime: 0.31
   exitEventName: Reset Attack

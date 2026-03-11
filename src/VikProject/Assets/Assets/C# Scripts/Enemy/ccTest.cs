@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ccTest : MonoBehaviour,IKnockbackable
+public class ccTest : MonoBehaviour,IKnockbackable,IMovementInterrupt
 {
     [Header("Knockback Settings")]
     [SerializeField] private float knockbackDuration = 0.25f;

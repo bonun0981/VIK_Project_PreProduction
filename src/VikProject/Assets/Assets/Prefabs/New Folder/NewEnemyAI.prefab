@@ -2010,6 +2010,8 @@ GameObject:
   - component: {fileID: 7762729303619282141}
   - component: {fileID: 7991536096689928709}
   - component: {fileID: 3995531286695863363}
+  - component: {fileID: 6973693380898499629}
+  - component: {fileID: 6762530921857273086}
   m_Layer: 6
   m_Name: NewEnemyAI
   m_TagString: Enemy
@@ -2282,6 +2284,48 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &6973693380898499629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6943641662403046915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a0ac4673bf89d14f91de2476489ef2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 100
+  animator: {fileID: 0}
+--- !u!114 &6762530921857273086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6943641662403046915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aca2df6987b0d1142ac1802460459f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalMat: {fileID: 0}
+  damageMat: {fileID: 0}
+  render: {fileID: 0}
+  flashTime: 0.1
+  flashAmount: 0
+  hitParticles:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  comboResetTime: 1.5
+  audioSource: {fileID: 0}
+  attackClips: []
+  pitchRange: {x: 0.9, y: 1.1}
+  volumeRange: {x: 0.9, y: 1}
+  shake: {fileID: 0}
 --- !u!1 &7161421263805310365
 GameObject:
   m_ObjectHideFlags: 0

@@ -6195,6 +6195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
+  animator: {fileID: 0}
 --- !u!114 &1402682467 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8537098020970654137, guid: 45e6ff431419d07438bb3c62dc0d8e38, type: 3}
@@ -6218,8 +6219,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7515fb4425b16e44b11890b7987a389, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetType: 1
+  targetType: 0
   weaponState: {fileID: 11400000, guid: 3b58261315ed168499e5226eac347919, type: 2}
+  currentAttackData: {fileID: 0}
   hitBoxCollider: {fileID: 716734305}
 --- !u!114 &1402682487
 MonoBehaviour:

@@ -188,6 +188,11 @@ public class EnemyCombatDirector : MonoBehaviour
     {
         playerAttackers.Remove(enemy);
     }
+
+    public bool HasPlayerAttackSlot()
+    {
+        return playerAttackers.Count < maxPlayerAttackers;
+    }
     public void UnregisterEnemy(EnemyNormal enemy)
     {
         // remove from rings

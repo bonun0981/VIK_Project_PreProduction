@@ -652,6 +652,7 @@ GameObject:
   - component: {fileID: 2835457851511496300}
   - component: {fileID: 3418252207294924590}
   - component: {fileID: 8340441572105985870}
+  - component: {fileID: 4318206756499725875}
   m_Layer: 0
   m_Name: SM_Wep_Sword_03
   m_TagString: Untagged
@@ -727,6 +728,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4318206756499725875
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2585727568055997840}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 0.3443911, y: 1.8534195, z: 0.6673663}
+  m_Center: {x: -0.005282876, y: 0.567771, z: -0.010238745}
 --- !u!1 &2615197815701215465
 GameObject:
   m_ObjectHideFlags: 0
@@ -2015,6 +2037,8 @@ GameObject:
   - component: {fileID: 5088134543533716689}
   - component: {fileID: 614921789486220170}
   - component: {fileID: 4464837118718920740}
+  - component: {fileID: -2019309419564862744}
+  - component: {fileID: -4653714833182481952}
   m_Layer: 0
   m_Name: NewAllyAi
   m_TagString: Ally
@@ -2332,6 +2356,83 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d6d004a03ff38446b7b2a1bfe4bedbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-2019309419564862744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6943641662403046915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33cda53f0b9fe194f974dbf632d12836, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationEvents:
+  - eventName: StartAttack
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: -4653714833182481952}
+          m_TargetAssemblyTypeName: WeaponHitBox, Assembly-CSharp
+          m_MethodName: EnableHitbox
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventName: EndAttack
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: -4653714833182481952}
+          m_TargetAssemblyTypeName: WeaponHitBox, Assembly-CSharp
+          m_MethodName: DisableHitbox
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventName: ResetAttack
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: -4653714833182481952}
+          m_TargetAssemblyTypeName: WeaponHitBox, Assembly-CSharp
+          m_MethodName: DisableHitbox
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &-4653714833182481952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6943641662403046915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7515fb4425b16e44b11890b7987a389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetType: 0
+  weaponState: {fileID: 11400000, guid: acf102cb29c62f34ab023005f7a02aa4, type: 2}
+  currentAttackData: {fileID: 11400000, guid: dac4fea240bf25646a37c93cb87ff590, type: 2}
+  hitBoxCollider: {fileID: 4318206756499725875}
 --- !u!1 &7161421263805310365
 GameObject:
   m_ObjectHideFlags: 0
