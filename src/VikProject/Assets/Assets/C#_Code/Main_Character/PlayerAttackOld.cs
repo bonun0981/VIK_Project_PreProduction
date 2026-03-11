@@ -30,12 +30,23 @@ public class PlayerAttackOld : MonoBehaviour
 
     private void Update()
     {
+<<<<<<< HEAD:src/VikProject/Assets/Assets/C#_Code/Main_Character/PlayerAttackOld.cs
         //if (Input.GetMouseButtonDown(0))
         //{
             
         //    attackAnimation.SetTrigger("Attack");
             
         //}
+=======
+        if (Input.GetMouseButtonDown(0))
+        {
+
+            attackAnimation.SetTrigger("Attack");
+            Debug.Log("Attack button pressed");
+        }
+
+
+>>>>>>> origin/HumLek:src/VikProject/Assets/Assets/C#_Code/Main_Character/PlayerAttack.cs
         //if (isAttacking && currentTarget != null)
         //{
         //    RotateToEnemy(currentTarget);
