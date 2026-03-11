@@ -2039,6 +2039,7 @@ GameObject:
   - component: {fileID: 4464837118718920740}
   - component: {fileID: -2019309419564862744}
   - component: {fileID: -4653714833182481952}
+  - component: {fileID: 4207351909102736528}
   m_Layer: 0
   m_Name: NewAllyAi
   m_TagString: Ally
@@ -2325,6 +2326,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: -5039957108563170503}
   formation: {fileID: -6326047750468887577}
+  followDistance: 2.5
   repathInterval: 0.3
 --- !u!114 &614921789486220170
 MonoBehaviour:
@@ -2433,6 +2435,21 @@ MonoBehaviour:
   weaponState: {fileID: 11400000, guid: acf102cb29c62f34ab023005f7a02aa4, type: 2}
   currentAttackData: {fileID: 11400000, guid: dac4fea240bf25646a37c93cb87ff590, type: 2}
   hitBoxCollider: {fileID: 4318206756499725875}
+--- !u!114 &4207351909102736528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6943641662403046915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a0ac4673bf89d14f91de2476489ef2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 100
+  animator: {fileID: 8579552182600866647}
 --- !u!1 &7161421263805310365
 GameObject:
   m_ObjectHideFlags: 0

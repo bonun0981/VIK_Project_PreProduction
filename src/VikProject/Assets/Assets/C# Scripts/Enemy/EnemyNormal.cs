@@ -359,9 +359,11 @@ public class EnemyNormal : MonoBehaviour
     }
     void FightAlly()
     {
-        if (allyTarget == null)
+        if (allyTarget == null || !allyTarget.gameObject.activeInHierarchy)
         {
             EnemyCombatDirector.Instance.FinishAllyFight(this, allyTarget);
+
+            allyTarget = null;
 
             SetState(EnemyState.InnerRing);
             return;

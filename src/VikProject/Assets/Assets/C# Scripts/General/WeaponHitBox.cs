@@ -5,9 +5,10 @@ public class WeaponHitBox : MonoBehaviour
 {
      enum TargetType
     {
-        Enemy,
-        Player,
-        Both
+        EnemySide,
+        PlayerSide,
+        
+        
     }
     [SerializeField]TargetType targetType;
     [SerializeField] WeaponStateSO weaponState;
@@ -99,14 +100,13 @@ public class WeaponHitBox : MonoBehaviour
     {
         switch (targetType)
         {
-            case TargetType.Enemy:
+            case TargetType.EnemySide:
                 return other.CompareTag("Enemy");
 
-            case TargetType.Player:
-                return other.CompareTag("Player");
+            case TargetType.PlayerSide:
+                return other.CompareTag("Player") || other.CompareTag("Ally");
 
-            case TargetType.Both:
-                return other.CompareTag("Enemy") || other.CompareTag("Player");
+            
 
             default:
                 return false;
