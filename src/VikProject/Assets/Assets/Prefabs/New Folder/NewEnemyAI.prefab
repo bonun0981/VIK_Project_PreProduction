@@ -2089,7 +2089,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6943641662403046915}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 100
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2217,10 +2217,13 @@ MonoBehaviour:
   player: {fileID: 0}
   agent: {fileID: 0}
   aiActive: 0
-  attackRange: 2
+  attackRange: 1.5
   minAttackDistance: 2.3
   attackCooldown: 2
+  minAttackCooldown: 2
+  maxAttackCooldown: 2
   circleSpeed: 1.5
+  lastAttack: 0
 --- !u!195 &-5039957108563170503
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2230,12 +2233,12 @@ NavMeshAgent:
   m_GameObject: {fileID: 6943641662403046915}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.88
+  m_Radius: 0.93
   m_Speed: 3.5
   m_Acceleration: 360
   avoidancePriority: 50
   m_AngularSpeed: 20
-  m_StoppingDistance: 2.3
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
@@ -2371,7 +2374,39 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - eventName: OnHurt
+  - eventName: StartMove
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5689622722817725898}
+          m_TargetAssemblyTypeName: EnemyNormal, Assembly-CSharp
+          m_MethodName: OnHurt
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventName: StopMove
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5689622722817725898}
+          m_TargetAssemblyTypeName: EnemyNormal, Assembly-CSharp
+          m_MethodName: LockMovement
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventName: StartMove
     OnAnimationEvent:
       m_PersistentCalls:
         m_Calls:

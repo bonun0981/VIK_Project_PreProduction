@@ -3,6 +3,8 @@ using UnityEngine.AI;
 
 public class AllyMovement : MonoBehaviour
 {
+    public float combatAvoidanceDistance = 3f;
+    bool movementLocked;
     public NavMeshAgent agent;
     public AllyFormationController formation;
     public float followDistance = 2.5f;
@@ -24,10 +26,42 @@ public class AllyMovement : MonoBehaviour
        
         agent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
     }
+    void UpdateAvoidance()
+    {
+        if (agent == null) return;
 
+        if (currentEnemy == null)
+        {
+            agent.obstacleAvoidanceType =
+                ObstacleAvoidanceType.LowQualityObstacleAvoidance;
+            return;
+        }
+
+        float dist =
+            (transform.position - currentEnemy.position).sqrMagnitude;
+
+        if (dist < combatAvoidanceDistance * combatAvoidanceDistance)
+        {
+            // เข้า melee → ปิด avoidance
+            agent.obstacleAvoidanceType =
+                ObstacleAvoidanceType.NoObstacleAvoidance;
+        }
+        else
+        {
+            // เดินทาง → ใช้ avoidance
+            agent.obstacleAvoidanceType =
+                ObstacleAvoidanceType.LowQualityObstacleAvoidance;
+        }
+    }
     void Update()
     {
+        if (movementLocked)
+            return;
+
         TryActivateEnemy();
+
+        UpdateAvoidance(); // ⭐ เพิ่มตรงนี้
+
         timer += Time.deltaTime;
 
         if (timer > repathInterval)
@@ -36,7 +70,6 @@ public class AllyMovement : MonoBehaviour
             agent.SetDestination(currentTarget);
         }
     }
-
     public void FollowPlayer(Transform player)
     {
         if (player == null) return;
@@ -92,4 +125,25 @@ public class AllyMovement : MonoBehaviour
             }
         }
     }
+
+    public void OnHurt()
+    {
+        movementLocked = true;
+
+        if (agent != null)
+        {
+            agent.isStopped = true;
+            agent.ResetPath();
+        }
+    }
+    public void RecoverFromHurt()
+    {
+        movementLocked = false;
+
+        if (agent != null)
+        {
+            agent.isStopped = false;
+        }
+    }
+
 }

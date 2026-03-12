@@ -61,13 +61,16 @@ public class EnemyNormal : MonoBehaviour
     public float maxAttackCooldown = 2f;
     public float circleSpeed = 1.5f;
 
-    float lastAttack;
+    public float lastAttack;
 
     float circleOffset;
-
+    void RollAttackCooldown()
+    {
+        attackCooldown = Random.Range(minAttackCooldown, maxAttackCooldown);
+    }
     void Start()
     {
-        attackCooldown= Random.Range(minAttackDistance, maxAttackCooldown);
+        attackCooldown= Random.Range(minAttackCooldown, maxAttackCooldown);
         //rend = GetComponentInChildren<Renderer>();
         anim = GetComponent<EnemyAnimationController>();
         PickCircleMove();
@@ -121,22 +124,27 @@ public class EnemyNormal : MonoBehaviour
         {
             case EnemyState.AttackTurn:
                 agent.avoidancePriority = attackPriority;
-                break;
-
-            case EnemyState.InnerRing:
-                agent.avoidancePriority = innerPriority;
-                break;
-
-            case EnemyState.OuterRing:
-                agent.avoidancePriority = outerPriority;
+                agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
                 break;
 
             case EnemyState.FightingAlly:
                 agent.avoidancePriority = allyFightPriority;
+                agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
+                break;
+
+            case EnemyState.InnerRing:
+                agent.avoidancePriority = innerPriority;
+                agent.obstacleAvoidanceType = ObstacleAvoidanceType.LowQualityObstacleAvoidance;
+                break;
+
+            case EnemyState.OuterRing:
+                agent.avoidancePriority = outerPriority;
+                agent.obstacleAvoidanceType = ObstacleAvoidanceType.LowQualityObstacleAvoidance;
                 break;
 
             case EnemyState.Idle:
                 agent.avoidancePriority = idlePriority;
+                agent.obstacleAvoidanceType = ObstacleAvoidanceType.LowQualityObstacleAvoidance;
                 break;
         }
     }
@@ -237,17 +245,16 @@ public class EnemyNormal : MonoBehaviour
         if (Time.time < lastAttack + attackCooldown)
             return;
 
-        lastAttack = Time.time;
-
         anim.PlayAttack();
 
         Debug.Log("Enemy Attack");
-
-        
     }
     public void FinishAttack()
     {
         Debug.Log("Enemy Attack Finish");
+
+        lastAttack = Time.time;      // เริ่ม cooldown
+        RollAttackCooldown();        // สุ่ม cooldown ใหม่
 
         EnemyCombatDirector.Instance.FinishPlayerAttack(this);
     }
@@ -468,7 +475,7 @@ public class EnemyNormal : MonoBehaviour
     {
         UnlockMovement();
         FinishAttack();
-        Debug.Log("endattack");
+        Debug.Log("Enemy End Attacking");
     }
     public void OnHurt()
     {

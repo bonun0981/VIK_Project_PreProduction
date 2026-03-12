@@ -2117,7 +2117,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6943641662403046915}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 100
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2221,7 +2221,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 6943641662403046915}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.63
+  m_Radius: 0.89
   m_Speed: 8
   m_Acceleration: 8
   avoidancePriority: 40
@@ -2311,7 +2311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  radius: 10
+  radius: 15
 --- !u!114 &5088134543533716689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2324,6 +2324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3edd95b1d3c6bf4da7abfe0a09d84eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  combatAvoidanceDistance: 3
   agent: {fileID: -5039957108563170503}
   formation: {fileID: -6326047750468887577}
   followDistance: 2.5
@@ -2410,6 +2411,38 @@ MonoBehaviour:
         - m_Target: {fileID: -4653714833182481952}
           m_TargetAssemblyTypeName: WeaponHitBox, Assembly-CSharp
           m_MethodName: DisableHitbox
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventName: StopMove
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5088134543533716689}
+          m_TargetAssemblyTypeName: AllyMovement, Assembly-CSharp
+          m_MethodName: OnHurt
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventName: StartMove
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5088134543533716689}
+          m_TargetAssemblyTypeName: AllyMovement, Assembly-CSharp
+          m_MethodName: RecoverFromHurt
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
