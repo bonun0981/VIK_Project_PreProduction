@@ -304,7 +304,7 @@ GameObject:
   - component: {fileID: 2887213013801114627}
   - component: {fileID: 8965202852787056384}
   - component: {fileID: 7622686431714526868}
-  - component: {fileID: 831699509654404100}
+  - component: {fileID: 5021072602265480047}
   m_Layer: 7
   m_Name: newPlayer
   m_TagString: Player
@@ -565,7 +565,7 @@ MonoBehaviour:
     OnAnimationEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 2887213013801114627}
+        - m_Target: {fileID: 7622686431714526868}
           m_TargetAssemblyTypeName: PlayerSkill, Assembly-CSharp
           m_MethodName: Activate
           m_Mode: 1
@@ -578,6 +578,10 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - eventName: OnHurt
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - eventName: Ultimate Active
     OnAnimationEvent:
       m_PersistentCalls:
         m_Calls:
@@ -634,7 +638,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a0ac4673bf89d14f91de2476489ef2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1000
+  maxHealth: 130
   currentHealth: 0
   animator: {fileID: 0}
 --- !u!114 &2977269949633886554
@@ -665,10 +669,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 316071e49f5148945a7dd8533d502e00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Ultimate tornado
+  skillName: ultimate
   abilityData: {fileID: 11400000, guid: 348af46ac99b2e84586fc7d76ded17e8, type: 2}
+  isUltimateSkill: 1
   weaponTransform: {fileID: 6528284628597149315}
   customSpawnPoint: {fileID: 7248761253364297352}
+  playerResource: {fileID: 5021072602265480047}
 --- !u!114 &8965202852787056384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -698,11 +704,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 316071e49f5148945a7dd8533d502e00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: skill GroundSlam
-  abilityData: {fileID: 0}
-  weaponTransform: {fileID: 0}
-  customSpawnPoint: {fileID: 0}
---- !u!114 &831699509654404100
+  skillName: skill
+  abilityData: {fileID: 11400000, guid: 4820feb398bd6b7438e8cc73c1061a39, type: 2}
+  isUltimateSkill: 0
+  weaponTransform: {fileID: 6528284628597149315}
+  customSpawnPoint: {fileID: 7248761253364297352}
+  playerResource: {fileID: 5021072602265480047}
+--- !u!114 &5021072602265480047
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -711,13 +719,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 981143665259986926}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 316071e49f5148945a7dd8533d502e00, type: 3}
+  m_Script: {fileID: 11500000, guid: b881510c328c93847be3c024ddd9208f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: skill GroundSlam
-  abilityData: {fileID: 0}
-  weaponTransform: {fileID: 0}
-  customSpawnPoint: {fileID: 0}
+  maxResource: 100
+  currentResource: 0
 --- !u!1 &982368102022854982
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ public enum SkillSpawnType
 public class SkillDataSO : ScriptableObject
 {
     public SkillSpawnType spawnType;
-
+    public float cooldown;
     public float radius;
     public float damage;
     public float knockback;

@@ -2,17 +2,42 @@
 
 public class PlayerSkill : MonoBehaviour
 {
-    [SerializeField] private string name;
+    [SerializeField] private string skillName;
     [SerializeField] private SkillDataSO abilityData;
+
+    [Header("Skill Type")]
+    [SerializeField] private bool isUltimateSkill;
 
     [Header("References")]
     [SerializeField] private Transform weaponTransform;
     [SerializeField] private Transform customSpawnPoint;
+    [SerializeField] private PlayerResource playerResource;
+
+    [SerializeField]private float cooldownTimer;
+
+    private void Update()
+    {
+        if (cooldownTimer > 0)
+            cooldownTimer -= Time.deltaTime;
+    }
 
     public void Activate()
     {
         if (abilityData == null || abilityData.skillPrefab == null)
             return;
+
+        // cooldown check
+        if (cooldownTimer > 0)
+            return;
+
+        // ultimate resource check
+        if (isUltimateSkill)
+        {
+            if (!playerResource.IsFull())
+                return;
+
+            playerResource.ConsumeAll();
+        }
 
         Transform spawnTransform = GetSpawnTransform();
 
@@ -27,19 +52,15 @@ public class PlayerSkill : MonoBehaviour
             skillObj.transform.SetParent(weaponTransform);
         }
 
-        // Initialize damage data
         AOESkillPrefab aoe = skillObj.GetComponent<AOESkillPrefab>();
         if (aoe != null)
-        {
             aoe.Initialize(abilityData);
-        }
 
-        // Initialize projectile movement
         ProjectileSkill projectile = skillObj.GetComponent<ProjectileSkill>();
         if (projectile != null)
-        {
             projectile.Initialize(abilityData);
-        }
+
+        cooldownTimer = abilityData.cooldown;
     }
 
     private Transform GetSpawnTransform()
@@ -55,5 +76,20 @@ public class PlayerSkill : MonoBehaviour
             default:
                 return transform;
         }
+    }
+
+    public float CooldownRemaining()
+    {
+        return cooldownTimer;
+    }
+
+    public float CooldownMax()
+    {
+        return abilityData.cooldown;
+    }
+
+    public bool IsUltimate()
+    {
+        return isUltimateSkill;
     }
 }

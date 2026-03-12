@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb0557315fe21d47b2bbcbf495df50c, type: 3}
-  m_Name: Basic_1 1
+  m_Name: Basic_ultimate
   m_EditorClassIdentifier: 
   stateName: Skill
   startPercent: 0
@@ -19,7 +19,10 @@ MonoBehaviour:
   comboWindow: 1
   comboDelayTime: 1
   earlyBufferTime: 0.2
+  hitEffect: {fileID: 0}
+  hitstopTime: 0
   useStartPercent: 0
   resetIfLate: 0
   damageMultiplier: 1
-  knockbackMultiplier: 20
+  statusPower: 1
+  statusEffect: 0
