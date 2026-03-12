@@ -2,6 +2,7 @@
 
 public class PlayerSkill : MonoBehaviour
 {
+    [SerializeField] private string name;
     [SerializeField] private SkillDataSO abilityData;
 
     [Header("References")]

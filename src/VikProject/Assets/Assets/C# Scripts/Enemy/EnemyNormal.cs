@@ -18,7 +18,7 @@ enum CircleMove
 }
 public class EnemyNormal : MonoBehaviour
 {
-    
+    bool movementLocked;
     float repathTimer;
     public float repathInterval = 0.2f;
     EnemyAnimationController anim;
@@ -56,8 +56,9 @@ public class EnemyNormal : MonoBehaviour
 
     public float attackRange = 2f;
     public float minAttackDistance = 1.6f;
-    public float attackCooldown = 2f;
-
+    public float attackCooldown;
+    public float minAttackCooldown = 2f;
+    public float maxAttackCooldown = 2f;
     public float circleSpeed = 1.5f;
 
     float lastAttack;
@@ -66,6 +67,7 @@ public class EnemyNormal : MonoBehaviour
 
     void Start()
     {
+        attackCooldown= Random.Range(minAttackDistance, maxAttackCooldown);
         //rend = GetComponentInChildren<Renderer>();
         anim = GetComponent<EnemyAnimationController>();
         PickCircleMove();
@@ -153,7 +155,7 @@ public class EnemyNormal : MonoBehaviour
     void Update()
     {
         float distToPlayer =
-            Vector3.Distance(transform.position, player.position);
+         Vector3.Distance(transform.position, player.position);
 
         if (aiActive && distToPlayer > sleepDistance)
         {
@@ -167,6 +169,9 @@ public class EnemyNormal : MonoBehaviour
         }
 
         if (!aiActive) return;
+
+        if (movementLocked) return;
+
         LookAtPlayer();
         switch (currentState)
         {
@@ -185,11 +190,15 @@ public class EnemyNormal : MonoBehaviour
                     Vector3.Distance(transform.position, player.position);
 
                 if (dist > minAttackDistance)
+                {
                     agent.SetDestination(player.position);
+                }
                 else
+                {
                     agent.ResetPath();
+                    AttackPlayer();
+                }
 
-                AttackPlayer();
                 break;
 
             case EnemyState.FightingAlly:
@@ -205,10 +214,10 @@ public class EnemyNormal : MonoBehaviour
         float dist = Vector3.Distance(transform.position, player.position);
 
         // ถ้าเข้า range → ขอ attack turn
-        if (dist < attackRange)
+        if (dist < minAttackDistance)
         {
             EnemyCombatDirector.Instance.RequestPlayerAttack(this);
-            return;
+            return; 
         }
 
         // ถ้าไม่มีสิทธิ์โจมตี → อย่าเดินเข้า
@@ -428,5 +437,56 @@ public class EnemyNormal : MonoBehaviour
         agent.ResetPath();
 
         SetState(EnemyState.Idle);
+    }
+
+    public void LockMovement()
+    {
+        movementLocked = true;
+
+        if (agent != null)
+        {
+            agent.isStopped = true;
+            agent.ResetPath();
+        }
+    }
+
+    public void UnlockMovement()
+    {
+        movementLocked = false;
+
+        if (agent != null)
+        {
+            agent.isStopped = false;
+        }
+    }
+    public void AnimStartAttack()
+    {
+        LockMovement();
+    }
+
+    public void AnimEndAttack()
+    {
+        UnlockMovement();
+        FinishAttack();
+        Debug.Log("endattack");
+    }
+    public void OnHurt()
+    {
+        // ยกเลิกการเคลื่อนที่ชั่วคราว
+        UnlockMovement();
+        agent.ResetPath();
+
+        // ถ้ากำลังโจมตี player อยู่
+        if (currentState == EnemyState.AttackTurn)
+        {
+            // แค่หยุด attack แต่ยังเก็บ slot
+            lastAttack = Time.time; // reset cooldown
+        }
+
+        // ถ้ากำลังสู้ ally
+        if (currentState == EnemyState.FightingAlly)
+        {
+            agent.ResetPath();
+        }
     }
 }

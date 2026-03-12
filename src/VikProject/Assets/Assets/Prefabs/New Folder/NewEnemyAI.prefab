@@ -2050,7 +2050,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6943641662403046915}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0005606153, y: -0.99776113, z: 0.0024458554, w: 0.066831894}
+  m_LocalRotation: {x: -0.0005622911, y: -0.9977613, z: 0.002442878, w: 0.06682927}
   m_LocalPosition: {x: 564.221, y: 0.808, z: 595.442}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 0
@@ -2217,8 +2217,8 @@ MonoBehaviour:
   player: {fileID: 0}
   agent: {fileID: 0}
   aiActive: 0
-  attackRange: 2.5
-  minAttackDistance: 1.6
+  attackRange: 2
+  minAttackDistance: 2.3
   attackCooldown: 2
   circleSpeed: 1.5
 --- !u!195 &-5039957108563170503
@@ -2230,7 +2230,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 6943641662403046915}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.84
+  m_Radius: 0.88
   m_Speed: 3.5
   m_Acceleration: 360
   avoidancePriority: 50
@@ -2330,6 +2330,54 @@ MonoBehaviour:
         - m_Target: {fileID: 5798668902957728706}
           m_TargetAssemblyTypeName: WeaponHitBox, Assembly-CSharp
           m_MethodName: DisableHitbox
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventName: StartAttack
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5689622722817725898}
+          m_TargetAssemblyTypeName: EnemyNormal, Assembly-CSharp
+          m_MethodName: AnimStartAttack
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventName: EndAttack
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5689622722817725898}
+          m_TargetAssemblyTypeName: EnemyNormal, Assembly-CSharp
+          m_MethodName: AnimEndAttack
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventName: OnHurt
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5689622722817725898}
+          m_TargetAssemblyTypeName: EnemyNormal, Assembly-CSharp
+          m_MethodName: OnHurt
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
