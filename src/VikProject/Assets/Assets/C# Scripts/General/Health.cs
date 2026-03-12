@@ -5,8 +5,8 @@ using UnityEngine;
 public class Health : MonoBehaviour,IDamageable
 {
     public event Action<float> OnDamaged;
-    [SerializeField] float maxHealth = 100f;
-    [SerializeField]float currentHealth=100f;
+    public float maxHealth = 100f;
+    public float currentHealth=100f;
     [SerializeField] Animator animator;
     public bool IsDead => currentHealth<=0;
     
