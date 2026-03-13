@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &518115991395821567
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6944243326570281269}
+  - component: {fileID: 7500453288789496676}
+  - component: {fileID: 8879027542947523138}
+  - component: {fileID: 555795481756621034}
+  - component: {fileID: 9186341571738639531}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6944243326570281269
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518115991395821567}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 570.9809, y: 3.02, z: 588.8158}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7500453288789496676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518115991395821567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a819b718202f6a4a85db5c7526bafac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8879027542947523138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518115991395821567}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25c199e678964f845be6d7b5d699d933, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxActiveEnemies: 5
+  maxPassiveEnemies: 8
+  maxAttackingEnemies: 1
+  activeEnemies: []
+  passiveEnemies: []
+  currentGroup: []
+  globalAttackDelay: 1
+--- !u!114 &555795481756621034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518115991395821567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1573e25bcd2bfe944a187d2cb717d55b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keepAttackChance: 0.35
+  maxInnerEnemies: 10
+  maxOuterEnemies: 15
+  maxPlayerAttackers: 2
+  maxAllyAttackers: 1
+  innerRingRadius: 5
+  outerRingRadius: 8
+  innerRingSlots: 4
+  outerRingSlots: 8
+  player: {fileID: 0}
+  innerRadius: 2.5
+  outerRadius: 4.5
+--- !u!114 &9186341571738639531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518115991395821567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19e16c1ad790375438908ebe37363301, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  hpSlider: {fileID: 0}
+  easeHpSlider: {fileID: 0}
+  lerpSpeed: 2
+  snapThreshold: 0.005
+  resourceSlider: {fileID: 0}
+  skillCooldownOverlay: {fileID: 0}
+  normalSkill: {fileID: 0}
+  ultimateSkill: {fileID: 0}

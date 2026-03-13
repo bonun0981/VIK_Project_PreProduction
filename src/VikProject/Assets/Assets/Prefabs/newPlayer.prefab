@@ -341,7 +341,7 @@ Animator:
   m_GameObject: {fileID: 981143665259986926}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 97ada40f57d401540b8eafeeba1f0e9c, type: 3}
-  m_Controller: {fileID: 9100000, guid: df39407d590059f4ca2a08225d361f08, type: 2}
+  m_Controller: {fileID: 9100000, guid: 576625c8631f41a48acd3af52fa619e1, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -675,6 +675,7 @@ MonoBehaviour:
   weaponTransform: {fileID: 6528284628597149315}
   customSpawnPoint: {fileID: 7248761253364297352}
   playerResource: {fileID: 5021072602265480047}
+  cooldownTimer: 0
 --- !u!114 &8965202852787056384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -710,6 +711,7 @@ MonoBehaviour:
   weaponTransform: {fileID: 6528284628597149315}
   customSpawnPoint: {fileID: 7248761253364297352}
   playerResource: {fileID: 5021072602265480047}
+  cooldownTimer: 0
 --- !u!114 &5021072602265480047
 MonoBehaviour:
   m_ObjectHideFlags: 0
