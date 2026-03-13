@@ -1,0 +1,112 @@
+﻿using UnityEngine;
+
+public class AllyBrain : MonoBehaviour
+{
+    public enum AllyState
+    {
+        FollowPlayer,
+        MoveToEnemy,
+        AttackEnemy
+    }
+
+    public bool isActive = true;
+    public AllyState currentState;
+    public float engageRange = 5f;
+    public Transform player;
+    public AllyMovement movement;
+    public AllyTargeting targeting;
+    public AllyCombat combat;
+
+    void Start()
+    {
+        movement = GetComponent<AllyMovement>();
+        targeting = GetComponent<AllyTargeting>();
+        combat = GetComponent<AllyCombat>();
+
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
+    void Update()
+    {
+        if (!isActive)
+        {
+            
+            return;
+        }
+        if (!targeting.HasTarget())
+        {
+            targeting.ClearTarget();
+            currentState = AllyState.FollowPlayer;
+            return;
+        }
+
+        switch (currentState)
+        {
+            case AllyState.FollowPlayer:
+                HandleFollow();
+                break;
+
+            case AllyState.MoveToEnemy:
+                HandleMoveToEnemy();
+                break;
+
+            case AllyState.AttackEnemy:
+                HandleAttack();
+                break;
+        }
+    }
+
+    void HandleFollow()
+    {
+        movement.FollowPlayer(player);
+
+        if (targeting.HasTarget())
+            currentState = AllyState.MoveToEnemy;
+    }
+
+    void HandleMoveToEnemy()
+    {
+        if (!targeting.HasTarget())
+        {
+            currentState = AllyState.FollowPlayer;
+            return;
+        }
+
+        Transform enemyTarget = targeting.CurrentTarget;
+
+        movement.MoveToEnemy(enemyTarget);
+
+        // ⭐ ส่ง signal ให้ enemy สู้กับ ally
+        float dist = Vector3.Distance(transform.position, enemyTarget.position);
+
+        if (dist < 3f)
+        {
+            EnemyNormal enemy = enemyTarget.GetComponent<EnemyNormal>();
+
+            if (enemy != null)
+            {
+                enemy.EngageAlly(transform);
+            }
+        }
+
+        if (movement.IsInRange(enemyTarget.position, combat.attackRange))
+            currentState = AllyState.AttackEnemy;
+    }
+
+    void HandleAttack()
+    {
+        if (!targeting.HasTarget())
+        {
+            currentState = AllyState.FollowPlayer;
+            return;
+        }
+
+        if (!movement.IsInRange(targeting.CurrentTarget.position, combat.attackRange))
+        {
+            currentState = AllyState.MoveToEnemy;
+            return;
+        }
+
+        combat.Attack(targeting.CurrentTarget);
+    }
+}

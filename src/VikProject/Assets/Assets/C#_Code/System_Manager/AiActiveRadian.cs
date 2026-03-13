@@ -6,23 +6,26 @@ public class AiActiveRadian : MonoBehaviour
 {
     public float activeRadius = 30f;
     public LayerMask enemyLayer;
-    [SerializeField]private float flequency = 0.4f;
+
+    [SerializeField] private float frequency = 0.4f;
+
     void Start()
     {
         StartCoroutine(ScanLoop());
     }
 
-    //Scan for enemies in range
     IEnumerator ScanLoop()
     {
-        WaitForSeconds wait = new WaitForSeconds(flequency);
+        WaitForSeconds wait = new WaitForSeconds(frequency);
+
         while (true)
         {
             ScanEnemy();
             yield return wait;
         }
     }
-    public void ScanEnemy()
+
+    void ScanEnemy()
     {
         Collider[] hit = Physics.OverlapSphere(
             transform.position,
@@ -30,32 +33,29 @@ public class AiActiveRadian : MonoBehaviour
             enemyLayer
         );
 
-        foreach (var e in hit)
+        foreach (var col in hit)
         {
-            EnemyMotherClass enemy = e.GetComponent<EnemyMotherClass>();
+            EnemyNormal enemy = col.GetComponent<EnemyNormal>();
             if (enemy == null) continue;
 
+            // ถ้า AI เปิดแล้ว ข้าม
             if (enemy.aiActive) continue;
 
-            // 🔥 เช็คก่อนว่าเรามี slot ไหม
-            if (EnemyStateManager.Instance.CanAddPassive())
-            {
-                enemy.aiActive = true;
-                EnemyStateManager.Instance.AddToPassive(enemy);
-            }
-            else if (EnemyStateManager.Instance.CanAddActive())
-            {
-                enemy.aiActive = true;
-                EnemyStateManager.Instance.AddToActive(enemy);
-            }
-            else
-            {
-                // ไม่มี slotเลย → อย่า activate
-                continue;
-            }
+            ActivateEnemy(enemy);
         }
     }
 
+    void ActivateEnemy(EnemyNormal enemy)
+    {
+        if (!EnemyCombatDirector.Instance.HasSlot())
+            return;
+
+        enemy.aiActive = true;
+
+        enemy.SetPlayer(transform);
+
+        EnemyCombatDirector.Instance.RegisterEnemy(enemy);
+    }
 
     private void OnDrawGizmosSelected()
     {

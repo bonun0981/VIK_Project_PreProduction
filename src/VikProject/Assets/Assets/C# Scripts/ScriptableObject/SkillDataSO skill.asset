@@ -10,15 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c20abf1a8fb8d3e44aa583b167eda879, type: 3}
-  m_Name: SkillDataSO
+  m_Name: SkillDataSO skill
   m_EditorClassIdentifier: 
   spawnType: 2
+  cooldown: 5
   radius: 10
   damage: 1
   knockback: 1
   hitStopDuration: 0.1
   duration: 2
+  moveDuration: 2
+  stayDuration: 4
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
-  skillPrefab: {fileID: 6645615484817814995, guid: 302469ae48ba76b4c96a80f3aa4930ec, type: 3}
+  skillPrefab: {fileID: 1246312912861077831, guid: b6bd99bc3b9aa3d49bd27be33ea61d7a, type: 3}
