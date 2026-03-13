@@ -19,7 +19,7 @@ MonoBehaviour:
   comboWindow: 1
   comboDelayTime: 1
   earlyBufferTime: 0.2
-  hitEffect: {fileID: 8782009059513614302, guid: 171dda363e9efd94ca9bc63e38ca9658, type: 3}
+  hitEffect: {fileID: 2052625631830062335, guid: 1648570bc5a4940458e5f5e8433eb7df, type: 3}
   hitstopTime: 0
   useStartPercent: 1
   resetIfLate: 1

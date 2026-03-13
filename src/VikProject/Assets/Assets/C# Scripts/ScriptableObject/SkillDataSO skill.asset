@@ -20,8 +20,8 @@ MonoBehaviour:
   hitStopDuration: 0.1
   duration: 2
   moveDuration: 2
-  stayDuration: 2
+  stayDuration: 4
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
-  skillPrefab: {fileID: 6645615484817814995, guid: 302469ae48ba76b4c96a80f3aa4930ec, type: 3}
+  skillPrefab: {fileID: 1246312912861077831, guid: b6bd99bc3b9aa3d49bd27be33ea61d7a, type: 3}

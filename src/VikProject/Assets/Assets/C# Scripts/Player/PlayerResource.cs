@@ -7,7 +7,7 @@ public class PlayerResource : MonoBehaviour
 
     private void Start()
     {
-        currentResource = 0;
+        currentResource = 1000;
     }
 
     public void AddResource(float amount)
