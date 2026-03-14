@@ -7378,14 +7378,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -5531990659044968915, guid: 45e6ff431419d07438bb3c62dc0d8e38, type: 3}
-      propertyPath: m_Constraints
-      value: 116
-      objectReference: {fileID: 0}
-    - target: {fileID: -5531990659044968915, guid: 45e6ff431419d07438bb3c62dc0d8e38, type: 3}
-      propertyPath: m_Interpolate
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 981143665259986926, guid: 45e6ff431419d07438bb3c62dc0d8e38, type: 3}
       propertyPath: m_Name
       value: newPlayer
@@ -7430,16 +7422,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7248761253364297352, guid: 45e6ff431419d07438bb3c62dc0d8e38, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.181
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 4162311194989209581, guid: 45e6ff431419d07438bb3c62dc0d8e38, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1351899161}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45e6ff431419d07438bb3c62dc0d8e38, type: 3}
 --- !u!4 &159429651 stripped
@@ -60286,37 +60271,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1715262883}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1351899160
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1351899161}
-  m_Layer: 0
-  m_Name: PlayrCam
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1351899161
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1351899160}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.17069708, y: 0.53, z: 1.04}
-  m_LocalScale: {x: 0.7637086, y: 0.7637086, z: 0.7637086}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 159429651}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1353855990
 GameObject:
   m_ObjectHideFlags: 0
@@ -105372,6 +105326,8 @@ MonoBehaviour:
   weaponState: {fileID: 11400000, guid: 3b58261315ed168499e5226eac347919, type: 2}
   currentAttackData: {fileID: 11400000, guid: dac4fea240bf25646a37c93cb87ff590, type: 2}
   hitBoxCollider: {fileID: 8203357928714463192}
+  isPlayerWeapon: 0
+  cameraShakeManager: {fileID: 0}
 --- !u!4 &5829053849042796816
 Transform:
   m_ObjectHideFlags: 0
@@ -106346,6 +106302,7 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 100
   animator: {fileID: 0}
+  cameraShakeManager: {fileID: 0}
 --- !u!4 &7008536810102641467
 Transform:
   m_ObjectHideFlags: 0

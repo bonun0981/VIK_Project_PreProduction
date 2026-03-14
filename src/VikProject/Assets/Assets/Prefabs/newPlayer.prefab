@@ -329,6 +329,7 @@ Transform:
   - {fileID: 2464671424176878213}
   - {fileID: 2920120482905069292}
   - {fileID: 7248761253364297352}
+  - {fileID: 5314604532540526299}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &9028853745228260268
@@ -377,7 +378,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!136 &-7825433896707924104
@@ -580,7 +581,19 @@ MonoBehaviour:
   - eventName: OnHurt
     OnAnimationEvent:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 6140989510744303343}
+          m_TargetAssemblyTypeName: Health, Assembly-CSharp
+          m_MethodName: CameraShakeOnTakeDamage
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventName: Ultimate Active
     OnAnimationEvent:
       m_PersistentCalls:
@@ -641,6 +654,7 @@ MonoBehaviour:
   maxHealth: 130
   currentHealth: 0
   animator: {fileID: 0}
+  cameraShakeManager: {fileID: 0}
 --- !u!114 &2977269949633886554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -657,6 +671,8 @@ MonoBehaviour:
   weaponState: {fileID: 11400000, guid: 3b58261315ed168499e5226eac347919, type: 2}
   currentAttackData: {fileID: 0}
   hitBoxCollider: {fileID: 7227411764394458129}
+  isPlayerWeapon: 0
+  cameraShakeManager: {fileID: 0}
 --- !u!114 &2887213013801114627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -941,7 +957,7 @@ Transform:
   m_GameObject: {fileID: 1154504212105390449}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.76}
+  m_LocalPosition: {x: 0, y: 0.181, z: 0.76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1791,6 +1807,37 @@ Transform:
   m_Children:
   - {fileID: 2208271456646574031}
   m_Father: {fileID: 1289291080726049605}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4125068653440006861
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5314604532540526299}
+  m_Layer: 0
+  m_Name: PlayrCam
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5314604532540526299
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4125068653440006861}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.17069708, y: 0.53, z: 1.04}
+  m_LocalScale: {x: 0.7637086, y: 0.7637086, z: 0.7637086}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4162311194989209581}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4421163795495895361
 GameObject:
