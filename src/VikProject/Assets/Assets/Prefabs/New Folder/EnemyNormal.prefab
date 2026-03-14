@@ -352,13 +352,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 657138257979552271}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.68380225, y: 0.6636335, z: -0.30290806, w: 0.01586731}
-  m_LocalPosition: {x: 0.608, y: -0.048, z: 0.198}
+  m_LocalRotation: {x: -0.66349775, y: 0.2594394, z: 0.47665054, w: -0.51504}
+  m_LocalPosition: {x: 0.011, y: 0.067, z: -0.082}
   m_LocalScale: {x: 0.6369556, y: 1.5975484, z: 0.6369554}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1367918426377339997}
-  m_LocalEulerAnglesHint: {x: -202.355, y: -28.07898, z: 82.627}
+  m_LocalEulerAnglesHint: {x: -205.857, y: 89.04, z: 68.155}
 --- !u!33 &4353438189065402815
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -429,7 +429,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.061517097, y: 1.6541241, z: 0.29967687}
   m_Center: {x: -0.000027632288, y: 0.65851957, z: -0.000029310653}
@@ -898,9 +898,9 @@ Transform:
   m_GameObject: {fileID: 1153369642687529573}
   serializedVersion: 2
   m_LocalRotation: {x: -0.0005622911, y: -0.9977613, z: 0.002442878, w: 0.06682927}
-  m_LocalPosition: {x: 51.86, y: -32.75, z: -159.09}
-  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3000001}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 51.836, y: -32.51, z: -159.05}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1980872405358921534}
   - {fileID: 1329109313117864191}
@@ -1285,6 +1285,7 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 100
   animator: {fileID: 0}
+  cameraShakeManager: {fileID: 0}
 --- !u!114 &3845868182348086849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1327,7 +1328,9 @@ MonoBehaviour:
   targetType: 1
   weaponState: {fileID: 11400000, guid: 3b58261315ed168499e5226eac347919, type: 2}
   currentAttackData: {fileID: 11400000, guid: dac4fea240bf25646a37c93cb87ff590, type: 2}
-  hitBoxCollider: {fileID: 0}
+  hitBoxCollider: {fileID: 1563934695763752025}
+  isPlayerWeapon: 0
+  cameraShakeManager: {fileID: 0}
 --- !u!1 &1199498098642302697
 GameObject:
   m_ObjectHideFlags: 0

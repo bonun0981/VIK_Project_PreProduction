@@ -64,7 +64,7 @@ public class ProjectileSkill : MonoBehaviour
             if (knockbackable != null)
                 knockbackable.Knockback(data.knockback);
 
-            HitStopManager.Instance.DoHitStop(data.hitStopDuration);
+            //HitStopManager.Instance.DoHitStop(data.hitStopDuration);
         }
     }
 }
