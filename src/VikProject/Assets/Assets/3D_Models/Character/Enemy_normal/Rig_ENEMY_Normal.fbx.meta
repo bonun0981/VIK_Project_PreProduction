@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7f08c84ed3f13e34ea489e415797f45c
+guid: e41330a98eb57ad4e8ee9d430928cb45
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -52,7 +52,7 @@ ModelImporter:
     weldVertices: 1
     bakeAxisConversion: 0
     preserveHierarchy: 0
-    skinWeightsMode: 0
+    skinWeightsMode: 1
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
     optimizeBones: 1
@@ -90,8 +90,8 @@ ModelImporter:
     feetSpacing: 0
     globalScale: 1
     rootMotionBoneName: 
-    hasTranslationDoF: 0
-    hasExtraRoot: 1
+    hasTranslationDoF: 1
+    hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
