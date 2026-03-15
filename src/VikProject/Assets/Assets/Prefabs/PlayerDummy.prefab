@@ -292,9 +292,9 @@ GameObject:
   - component: {fileID: 9028853745228260268}
   - component: {fileID: 6329719462047425160}
   - component: {fileID: 7283826949225267529}
-  - component: {fileID: 3725269678262195988}
   - component: {fileID: 3913829566079324107}
   - component: {fileID: 3600459438001317460}
+  - component: {fileID: 6899983750120234745}
   m_Layer: 7
   m_Name: PlayerDummy
   m_TagString: Player
@@ -388,19 +388,6 @@ MonoBehaviour:
   turnSpeed: 10
   gravity: -9.81
   jumpHeight: 1.5
---- !u!114 &3725269678262195988
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 981143665259986926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e671aab41014c734a8dd4690e07c3029, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackAnimation: {fileID: 9028853745228260268}
 --- !u!114 &3913829566079324107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -476,6 +463,21 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &6899983750120234745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981143665259986926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbaba00d1c86d7d4e96e43fcc30ac50a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackSequence: []
+  animator: {fileID: 0}
+  playerDamage: {fileID: 0}
 --- !u!1 &982368102022854982
 GameObject:
   m_ObjectHideFlags: 0

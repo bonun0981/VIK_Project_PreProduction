@@ -30,16 +30,18 @@ public class PlayerAttackOld : MonoBehaviour
 
     private void Update()
     {
+        //if (Input.GetMouseButtonDown(0))
+        //{
+            
+        //    attackAnimation.SetTrigger("Attack");
+            
+        //}
+        //if (isAttacking && currentTarget != null)
+        //{
+        //    RotateToEnemy(currentTarget);
+        //}
 
-        if (Input.GetMouseButtonDown(0))
-        {
-
-            attackAnimation.SetTrigger("Attack");
-            Debug.Log("Attack button pressed");
-        }
-
-
-
+        //HandleTargetGrace();
     }
 
     private void Awake()

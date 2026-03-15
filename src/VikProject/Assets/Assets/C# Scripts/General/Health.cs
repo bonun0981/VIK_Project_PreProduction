@@ -9,7 +9,7 @@ public class Health : MonoBehaviour,IDamageable
     public float currentHealth=100f;
     [SerializeField] Animator animator;
     public bool IsDead => currentHealth<=0;
-    
+    [SerializeField] private CameraShakeManager cameraShakeManager;
     private void Awake()
     {
         animator=GetComponent<Animator>();
@@ -46,6 +46,9 @@ public class Health : MonoBehaviour,IDamageable
             Die();
         }
     }
-    
+    public void CameraShakeOnTakeDamage()
+    {
+        cameraShakeManager.TakeDamageShake();
+    }
     
 }
