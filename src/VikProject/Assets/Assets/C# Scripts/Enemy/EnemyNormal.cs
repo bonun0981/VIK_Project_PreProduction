@@ -18,6 +18,7 @@ enum CircleMove
 }
 public class EnemyNormal : MonoBehaviour
 {
+    bool isKnockedBack;
     bool movementLocked;
     float repathTimer;
     public float repathInterval = 0.2f;
@@ -162,8 +163,12 @@ public class EnemyNormal : MonoBehaviour
     }
     void Update()
     {
+        
+        if (isKnockedBack)
+            return;
+
         float distToPlayer =
-         Vector3.Distance(transform.position, player.position);
+            Vector3.Distance(transform.position, player.position);
 
         if (aiActive && distToPlayer > sleepDistance)
         {
@@ -448,9 +453,11 @@ public class EnemyNormal : MonoBehaviour
 
     public void LockMovement()
     {
+        if (isKnockedBack) return;
+
         movementLocked = true;
 
-        if (agent != null)
+        if (agent != null && agent.enabled)
         {
             agent.isStopped = true;
             agent.ResetPath();
@@ -479,21 +486,35 @@ public class EnemyNormal : MonoBehaviour
     }
     public void OnHurt()
     {
-        // ยกเลิกการเคลื่อนที่ชั่วคราว
         UnlockMovement();
-        agent.ResetPath();
 
-        // ถ้ากำลังโจมตี player อยู่
+        if (agent.enabled)
+            agent.ResetPath();
+
         if (currentState == EnemyState.AttackTurn)
         {
-            // แค่หยุด attack แต่ยังเก็บ slot
-            lastAttack = Time.time; // reset cooldown
+            lastAttack = Time.time;
         }
 
-        // ถ้ากำลังสู้ ally
         if (currentState == EnemyState.FightingAlly)
         {
             agent.ResetPath();
         }
+    }
+
+    public void StartKnockback()
+    {
+        isKnockedBack = true;
+
+        if (agent != null)
+            agent.enabled = false;
+    }
+
+    public void EndKnockback()
+    {
+        isKnockedBack = false;
+
+        if (agent != null)
+            agent.enabled = true;
     }
 }

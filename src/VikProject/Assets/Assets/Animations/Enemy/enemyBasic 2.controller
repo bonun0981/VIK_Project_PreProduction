@@ -369,9 +369,9 @@ MonoBehaviour:
   startEventName: StopMove
   startUpdateEventName: StopMove
   triggerTime: 0
-  endUpdateEventName: StartMove
+  endUpdateEventName: 
   endTime: 0.556
-  exitEventName: StartMove
+  exitEventName: Onhurt
 --- !u!1101 &-4238838801209821607
 AnimatorStateTransition:
   m_ObjectHideFlags: 1

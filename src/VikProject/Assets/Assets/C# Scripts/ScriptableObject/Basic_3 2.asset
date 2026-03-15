@@ -12,8 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb0557315fe21d47b2bbcbf495df50c, type: 3}
   m_Name: Basic_3 2
   m_EditorClassIdentifier: 
-  inputType: 0
-  clip: {fileID: 0}
-  damageMultiplier: 1
-  knockbackMultiplier: 0
+  stateName: 
+  startPercent: 0
+  transitionDuration: 0.1
+  allowComboTime: 0.3
   comboWindow: 0.3
+  comboDelayTime: 0.15
+  earlyBufferTime: 0.2
+  hitEffect: {fileID: 0}
+  hitstopTime: 0
+  useStartPercent: 1
+  resetIfLate: 1
+  damageMultiplier: 1
+  statusPower: 1
+  statusEffect: 2

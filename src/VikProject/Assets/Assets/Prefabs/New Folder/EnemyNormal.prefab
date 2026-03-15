@@ -882,6 +882,7 @@ GameObject:
   - component: {fileID: 2971721304468496199}
   - component: {fileID: 3845868182348086849}
   - component: {fileID: 669348456381973142}
+  - component: {fileID: 3518916707500085198}
   m_Layer: 6
   m_Name: EnemyNormal
   m_TagString: Enemy
@@ -897,8 +898,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1153369642687529573}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0005622911, y: -0.9977613, z: 0.002442878, w: 0.06682927}
-  m_LocalPosition: {x: 51.836, y: -32.51, z: -159.05}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -906,7 +907,7 @@ Transform:
   - {fileID: 1329109313117864191}
   - {fileID: 4451670901134169734}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0.275, y: -172.336, z: 0.083}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &5570022401542233402
 Animator:
   serializedVersion: 7
@@ -937,7 +938,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1153369642687529573}
   serializedVersion: 4
-  m_Mass: 100
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -952,7 +953,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
@@ -1114,9 +1115,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 2.3390188
+  m_Height: 2.4783306
   m_Direction: 1
-  m_Center: {x: -8.035694e-11, y: 0.66950816, z: 3.919475e-10}
+  m_Center: {x: 0, y: 1.2329984, z: 0}
 --- !u!114 &8220406082863659088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1254,7 +1255,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - eventName: StartMove
+  - eventName: Onhurt
     OnAnimationEvent:
       m_PersistentCalls:
         m_Calls:
@@ -1331,6 +1332,19 @@ MonoBehaviour:
   hitBoxCollider: {fileID: 1563934695763752025}
   isPlayerWeapon: 0
   cameraShakeManager: {fileID: 0}
+--- !u!114 &3518916707500085198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1153369642687529573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 847c8c5b8f2bf574aa48a137edebb9ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockbackDuration: 5
 --- !u!1 &1199498098642302697
 GameObject:
   m_ObjectHideFlags: 0
@@ -2709,7 +2723,7 @@ Transform:
   m_GameObject: {fileID: 2463259254713799823}
   serializedVersion: 2
   m_LocalRotation: {x: 0.0024033568, y: 0.004896965, z: 0.0007125295, w: -0.99998486}
-  m_LocalPosition: {x: 0.212, y: -0.003, z: -0.31}
+  m_LocalPosition: {x: 0.009562209, y: -0.0015162954, z: -0.061974317}
   m_LocalScale: {x: 1.3505006, y: 1.3505011, z: 1.3505006}
   m_ConstrainProportionsScale: 0
   m_Children:

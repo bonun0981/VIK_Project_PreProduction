@@ -2040,6 +2040,7 @@ GameObject:
   - component: {fileID: -2019309419564862744}
   - component: {fileID: -4653714833182481952}
   - component: {fileID: 4207351909102736528}
+  - component: {fileID: 2452492791081682442}
   m_Layer: 0
   m_Name: NewAllyAi
   m_TagString: Ally
@@ -2055,15 +2056,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6943641662403046915}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0005606153, y: -0.99776113, z: 0.0024458554, w: 0.066831894}
-  m_LocalPosition: {x: 564.221, y: 0.808, z: 595.442}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6141652323853313595}
   - {fileID: 5190258653015844288}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0.275, y: -172.336, z: 0.083}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &8579552182600866647
 Animator:
   serializedVersion: 7
@@ -2486,6 +2487,19 @@ MonoBehaviour:
   currentHealth: 500
   animator: {fileID: 8579552182600866647}
   cameraShakeManager: {fileID: 0}
+--- !u!114 &2452492791081682442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6943641662403046915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 847c8c5b8f2bf574aa48a137edebb9ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockbackDuration: 0.2
 --- !u!1 &7161421263805310365
 GameObject:
   m_ObjectHideFlags: 0

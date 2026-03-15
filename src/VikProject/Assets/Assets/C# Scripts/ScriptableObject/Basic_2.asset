@@ -19,7 +19,10 @@ MonoBehaviour:
   comboWindow: 1
   comboDelayTime: 1
   earlyBufferTime: 0.2
+  hitEffect: {fileID: 0}
+  hitstopTime: 0
   useStartPercent: 1
   resetIfLate: 1
   damageMultiplier: 2
-  knockbackMultiplier: 3
+  statusPower: 1
+  statusEffect: 2
