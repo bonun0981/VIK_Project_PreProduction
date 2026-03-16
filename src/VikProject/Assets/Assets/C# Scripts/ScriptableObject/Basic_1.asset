@@ -20,7 +20,7 @@ MonoBehaviour:
   comboDelayTime: 1
   earlyBufferTime: 0.2
   hitEffect: {fileID: 2052625631830062335, guid: 1648570bc5a4940458e5f5e8433eb7df, type: 3}
-  hitstopTime: 0
+  hitstopTime: 0.05
   useStartPercent: 1
   resetIfLate: 1
   damageMultiplier: 1

@@ -77904,6 +77904,7 @@ MonoBehaviour:
   currentHealth: 100
   animator: {fileID: 0}
   cameraShakeManager: {fileID: 0}
+  iframeDuration: 0.3
 --- !u!54 &1707548580
 Rigidbody:
   m_ObjectHideFlags: 0
