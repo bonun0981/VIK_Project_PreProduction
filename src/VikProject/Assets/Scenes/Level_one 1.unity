@@ -6604,6 +6604,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: newPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 2721510486107747700, guid: 45e6ff431419d07438bb3c62dc0d8e38, type: 3}
+      propertyPath: skill
+      value: 
+      objectReference: {fileID: 1668789721}
+    - target: {fileID: 2721510486107747700, guid: 45e6ff431419d07438bb3c62dc0d8e38, type: 3}
+      propertyPath: ultimate
+      value: 
+      objectReference: {fileID: 1668789723}
+    - target: {fileID: 2887213013801114627, guid: 45e6ff431419d07438bb3c62dc0d8e38, type: 3}
+      propertyPath: cooldownTimer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2977269949633886554, guid: 45e6ff431419d07438bb3c62dc0d8e38, type: 3}
       propertyPath: isPlayerWeapon
       value: 1
@@ -6656,6 +6668,42 @@ PrefabInstance:
       propertyPath: cameraShakeManager
       value: 
       objectReference: {fileID: 2080121513}
+    - target: {fileID: 7402067742201638034, guid: 45e6ff431419d07438bb3c62dc0d8e38, type: 3}
+      propertyPath: animationEvents.Array.data[7].OnAnimationEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7402067742201638034, guid: 45e6ff431419d07438bb3c62dc0d8e38, type: 3}
+      propertyPath: animationEvents.Array.data[7].OnAnimationEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7402067742201638034, guid: 45e6ff431419d07438bb3c62dc0d8e38, type: 3}
+      propertyPath: animationEvents.Array.data[7].OnAnimationEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1668789725}
+    - target: {fileID: 7402067742201638034, guid: 45e6ff431419d07438bb3c62dc0d8e38, type: 3}
+      propertyPath: animationEvents.Array.data[7].OnAnimationEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7402067742201638034, guid: 45e6ff431419d07438bb3c62dc0d8e38, type: 3}
+      propertyPath: animationEvents.Array.data[7].OnAnimationEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CameraShakeOnTakeDamage
+      objectReference: {fileID: 0}
+    - target: {fileID: 7402067742201638034, guid: 45e6ff431419d07438bb3c62dc0d8e38, type: 3}
+      propertyPath: animationEvents.Array.data[7].OnAnimationEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Health, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7402067742201638034, guid: 45e6ff431419d07438bb3c62dc0d8e38, type: 3}
+      propertyPath: animationEvents.Array.data[7].OnAnimationEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7622686431714526868, guid: 45e6ff431419d07438bb3c62dc0d8e38, type: 3}
+      propertyPath: skillName
+      value: Skill
+      objectReference: {fileID: 0}
+    - target: {fileID: 7622686431714526868, guid: 45e6ff431419d07438bb3c62dc0d8e38, type: 3}
+      propertyPath: cooldownTimer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -28973,6 +29021,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 709201255}
   m_Mesh: {fileID: -2495432268419892225, guid: fe42c418f60aed44e9a8577f45dab93d, type: 3}
+--- !u!1 &709782563 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1180236814583124198, guid: 2f27561cdcf5018499cd4cf9f7d8fc9a, type: 3}
+  m_PrefabInstance: {fileID: 5190037676974316863}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &712277784 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8920468684227503244, guid: 83f97114b85da054db66101db7ba1074, type: 3}
@@ -55590,6 +55643,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37db13b6813d0b845919b6232f38fcf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  oneShotSource: {fileID: 0}
+  movementSource: {fileID: 0}
+  playerAttackSound: []
+  playerHurtSound: []
+  playerWalkSound: []
+  playerRunSound: []
+  pitchRange: {x: 0.9, y: 1.1}
+  volumeRange: {x: 0.8, y: 1}
 --- !u!4 &1335468824
 Transform:
   m_ObjectHideFlags: 0
@@ -70920,6 +70981,39 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 981143665259986926, guid: 45e6ff431419d07438bb3c62dc0d8e38, type: 3}
   m_PrefabInstance: {fileID: 159429650}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1668789721 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7622686431714526868, guid: 45e6ff431419d07438bb3c62dc0d8e38, type: 3}
+  m_PrefabInstance: {fileID: 159429650}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668789718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 316071e49f5148945a7dd8533d502e00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1668789723 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2887213013801114627, guid: 45e6ff431419d07438bb3c62dc0d8e38, type: 3}
+  m_PrefabInstance: {fileID: 159429650}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668789718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 316071e49f5148945a7dd8533d502e00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1668789725 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6140989510744303343, guid: 45e6ff431419d07438bb3c62dc0d8e38, type: 3}
+  m_PrefabInstance: {fileID: 159429650}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668789718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a0ac4673bf89d14f91de2476489ef2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1673058917
 GameObject:
   m_ObjectHideFlags: 0
@@ -72552,8 +72646,6 @@ GameObject:
   - component: {fileID: 1707548582}
   - component: {fileID: 1707548581}
   - component: {fileID: 1707548580}
-  - component: {fileID: 1707548579}
-  - component: {fileID: 1707548578}
   - component: {fileID: 1707548585}
   m_Layer: 6
   m_Name: Cube
@@ -72562,36 +72654,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1707548578
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1707548577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 847c8c5b8f2bf574aa48a137edebb9ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  knockbackDuration: 2
---- !u!114 &1707548579
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1707548577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a0ac4673bf89d14f91de2476489ef2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 100
-  animator: {fileID: 0}
-  cameraShakeManager: {fileID: 0}
-  iframeDuration: 0.3
 --- !u!54 &1707548580
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -72702,8 +72764,8 @@ Transform:
   m_GameObject: {fileID: 1707548577}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 650.5096, y: 32.3, z: 492.35733}
-  m_LocalScale: {x: 3.0682, y: 3.0682, z: 3.0682}
+  m_LocalPosition: {x: 658.67, y: 33.09, z: 510.29}
+  m_LocalScale: {x: 10.27172, y: 8.289663, z: 3.0682}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -72717,37 +72779,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1707548577}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97bd947d2c586ec4191b08a84566322f, type: 3}
+  m_Script: {fileID: 11500000, guid: a34fa04eb5e4d734d927f41aa3455eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  repathInterval: 0.2
-  sleepDistance: 30
-  allyTarget: {fileID: 0}
-  attackPriority: 5
-  innerPriority: 20
-  outerPriority: 40
-  allyFightPriority: 15
-  idlePriority: 70
-  rend: {fileID: 0}
-  idleColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  outerRingColor: {r: 0, g: 1, b: 1, a: 1}
-  innerRingColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  attackColor: {r: 1, g: 0, b: 0, a: 1}
-  allyFightColor: {r: 1, g: 0, b: 1, a: 1}
-  currentState: 0
-  strafeSpeed: 2
-  stepDistance: 1.2
-  pauseChance: 0.15
-  player: {fileID: 0}
-  agent: {fileID: 0}
-  aiActive: 0
-  attackRange: 2
-  minAttackDistance: 1.6
-  attackCooldown: 0
-  minAttackCooldown: 2
-  maxAttackCooldown: 2
-  circleSpeed: 1.5
-  lastAttack: 0
+  targets:
+  - {fileID: 709782563}
 --- !u!1 &1708702880
 GameObject:
   m_ObjectHideFlags: 0

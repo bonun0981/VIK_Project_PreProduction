@@ -453,6 +453,7 @@ public class EnemyNormal : MonoBehaviour
 
     public void LockMovement()
     {
+        
         if (isKnockedBack) return;
 
         movementLocked = true;
@@ -466,6 +467,7 @@ public class EnemyNormal : MonoBehaviour
 
     public void UnlockMovement()
     {
+
         movementLocked = false;
 
         if (agent != null)
@@ -486,6 +488,7 @@ public class EnemyNormal : MonoBehaviour
     }
     public void OnHurt()
     {
+        
         UnlockMovement();
 
         if (agent.enabled)

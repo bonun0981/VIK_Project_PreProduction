@@ -23,7 +23,7 @@ public class PlayerResource : MonoBehaviour
 
     public void ConsumeAll()
     {
-        currentResource = 0;
+        currentResource -= 0;
     }
 
     public float NormalizedValue()
