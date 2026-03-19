@@ -8,6 +8,7 @@ TagManager:
   - patrol zone
   - ShakeController
   - enemysound
+  - Ally
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Weapon
   - patrol zone
   - minimap
-  - Colliders
+  - Ally
   - 
   - 
   - 

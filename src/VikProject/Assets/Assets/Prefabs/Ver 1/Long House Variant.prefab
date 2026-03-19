@@ -966,8 +966,13 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
+<<<<<<< HEAD
   m_Size: {x: 0.040007323, y: 0.08422364, z: 0.0081418}
   m_Center: {x: 0.000000076837004, y: 0.03249073, z: -0.013012488}
+=======
+  m_Size: {x: 0.040007323, y: 0.07929269, z: 0.008141799}
+  m_Center: {x: 0.000000079248856, y: -0.029150596, z: -0.013012479}
+>>>>>>> Middle-Branches
 --- !u!1 &2304941481834704957
 GameObject:
   m_ObjectHideFlags: 0
