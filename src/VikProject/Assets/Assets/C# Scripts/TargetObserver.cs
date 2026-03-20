@@ -1,16 +1,16 @@
 using UnityEngine;
+using System.Collections.Generic; // ต้องมีบรรทัดนี้เพื่อใช้ List
 
 public class TargetObserver : MonoBehaviour
 {
     [Header("Settings")]
-    [Tooltip("ลาก Boss ใน Hierarchy มาใส่ที่นี่")]
-    public GameObject targetToWatch;
+    [Tooltip("ลาก Boss ทุกตัวในฉากมาใส่ในรายการนี้")]
+    public List<GameObject> targetsToWatch = new List<GameObject>();
 
     [Tooltip("ลากม่านหมอก (FogWall_System) มาใส่ที่นี่")]
     public GameObject objectToRemove;
 
     [Header("Audio Settings")]
-    [Tooltip("ลากไฟล์เสียงที่ต้องการให้เล่นตอนม่านสลายมาใส่ที่นี่")]
     public AudioClip victorySound;
     [Range(0f, 1f)]
     public float volume = 1f;
@@ -23,7 +23,6 @@ public class TargetObserver : MonoBehaviour
 
     void Awake()
     {
-        // สร้าง AudioSource อัตโนมัติเพื่อใช้เล่นเสียง
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.playOnAwake = false;
         audioSource.clip = victorySound;
@@ -32,25 +31,39 @@ public class TargetObserver : MonoBehaviour
 
     void Update()
     {
-        if (!hasTriggered && targetToWatch != null)
-        {
-            if (!targetToWatch.activeInHierarchy)
-            {
-                RemoveFogWall();
-            }
-        }
-        else if (!hasTriggered && targetToWatch == null)
+        if (hasTriggered) return;
+
+        // ตรวจสอบว่าใน List ยังมีบอสที่ยังมีชีวิตอยู่หรือไม่
+        if (IsAllTargetsDead())
         {
             RemoveFogWall();
         }
     }
 
+    // ฟังก์ชันเช็คว่าบอสทุกตัวใน List ตายหรือถูกปิดไปหมดแล้วยัง
+    bool IsAllTargetsDead()
+    {
+        // ถ้าไม่มีบอสในลิสต์เลย ให้ถือว่าผ่าน (เปิดหมอก)
+        if (targetsToWatch.Count == 0) return true;
+
+        foreach (GameObject target in targetsToWatch)
+        {
+            // ถ้ายังมีแม้แต่ตัวเดียวที่ยัง Active อยู่ และยังไม่ถูก Destroy ให้ส่งค่า false
+            if (target != null && target.activeInHierarchy)
+            {
+                return false;
+            }
+        }
+
+        // ถ้าวนลูปจนจบแล้วไม่เจอตัวที่รอดอยู่เลย ให้ส่งค่า true
+        return true;
+    }
+
     void RemoveFogWall()
     {
         hasTriggered = true;
-        Debug.Log("Target is inactive or destroyed! Playing Sound and Removing Fog Wall...");
+        Debug.Log("All targets are inactive or destroyed! Opening Fog Wall...");
 
-        // 1. เล่นเสียงที่กำหนดไว้
         if (victorySound != null && audioSource != null)
         {
             audioSource.Play();
@@ -58,13 +71,12 @@ public class TargetObserver : MonoBehaviour
 
         if (objectToRemove != null)
         {
-            // 2. ปิด Collider ทันทีเพื่อให้เดินผ่านได้เลย
+            // ปิด Collider ทันที
             Collider col = objectToRemove.GetComponentInChildren<Collider>();
             if (col != null) col.enabled = false;
 
             if (useFadeOut)
             {
-                // สำหรับ Particle System
                 ParticleSystem ps = objectToRemove.GetComponentInChildren<ParticleSystem>();
                 if (ps != null)
                 {
@@ -73,7 +85,6 @@ public class TargetObserver : MonoBehaviour
                 }
                 else
                 {
-                    // สำหรับ VFX Graph
                     UnityEngine.VFX.VisualEffect vfx = objectToRemove.GetComponentInChildren<UnityEngine.VFX.VisualEffect>();
                     if (vfx != null)
                     {
