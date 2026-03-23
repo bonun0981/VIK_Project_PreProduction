@@ -1,15 +1,16 @@
 using UnityEngine;
+using System.Collections.Generic; // ต้องมีเพื่อใช้ List
 
 [RequireComponent(typeof(BoxCollider))]
 public class EventBomb : MonoBehaviour
 {
     [Header("Particle Settings")]
-    [Tooltip("Particle แบบที่ 1: เล่นครั้งเดียวแล้วลบทิ้ง")]
-    public GameObject particleOnce;
+    [Tooltip("รายการ Particle แบบที่ 1: เล่นครั้งเดียวแล้วลบทิ้ง (เช่น เอฟเฟกต์ระเบิดหลายจุด)")]
+    public List<GameObject> particlesOnce = new List<GameObject>();
     public float destroyDelay = 5f;
 
-    [Tooltip("Particle แบบที่ 2: เล่นค้างไว้ตลอดไป")]
-    public GameObject particleLoop;
+    [Tooltip("รายการ Particle แบบที่ 2: เล่นค้างไว้ตลอดไป (เช่น ไฟ, ควัน หลายจุด)")]
+    public List<GameObject> particlesLoop = new List<GameObject>();
 
     [Header("Audio Settings")]
     [Tooltip("ลาก Audio Source ที่ตั้งค่าเสียงไว้แล้วมาใส่ที่นี่")]
@@ -26,7 +27,6 @@ public class EventBomb : MonoBehaviour
 
     void Awake()
     {
-        // บังคับให้ Collider เป็น Trigger เสมอ
         if (GetComponent<Collider>() != null)
         {
             GetComponent<Collider>().isTrigger = true;
@@ -46,32 +46,37 @@ public class EventBomb : MonoBehaviour
         hasTriggered = true;
         Debug.Log("Trigger Activated!");
 
-        // 1. เล่น Audio Source ที่ลากมาใส่
+        // 1. เล่นเสียง
         if (audioToPlay != null)
         {
             audioToPlay.Play();
         }
 
-        // 2. จัดการ Particle Once (เปิด + สั่ง Play + ลบทิ้ง)
-        if (particleOnce != null)
+        // 2. จัดการ List ของ Particle Once (เล่นแล้วลบ)
+        foreach (GameObject pOnce in particlesOnce)
         {
-            particleOnce.SetActive(true);
-            // สั่ง Play ซ้ำเพื่อความชัวร์ (เผื่อไม่ได้ติ๊ก Play On Awake)
-            ParticleSystem ps = particleOnce.GetComponentInChildren<ParticleSystem>();
-            if (ps != null) ps.Play();
+            if (pOnce != null)
+            {
+                pOnce.SetActive(true);
+                ParticleSystem ps = pOnce.GetComponentInChildren<ParticleSystem>();
+                if (ps != null) ps.Play();
 
-            Destroy(particleOnce, destroyDelay);
+                Destroy(pOnce, destroyDelay);
+            }
         }
 
-        // 3. จัดการ Particle Loop (เปิด + สั่ง Play ค้างไว้)
-        if (particleLoop != null)
+        // 3. จัดการ List ของ Particle Loop (เล่นค้างไว้)
+        foreach (GameObject pLoop in particlesLoop)
         {
-            particleLoop.SetActive(true);
-            ParticleSystem ps = particleLoop.GetComponentInChildren<ParticleSystem>();
-            if (ps != null) ps.Play();
+            if (pLoop != null)
+            {
+                pLoop.SetActive(true);
+                ParticleSystem ps = pLoop.GetComponentInChildren<ParticleSystem>();
+                if (ps != null) ps.Play();
+            }
         }
 
-        // 4. ลบ Object (เช่น FogWall)
+        // 4. จัดการ Object ที่ต้องการเอาออก
         if (objectToRemove != null)
         {
             HandleObjectRemoval();
