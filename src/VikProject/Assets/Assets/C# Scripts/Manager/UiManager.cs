@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UiManager : MonoBehaviour
 {
     [SerializeField]private GameObject pauseMenu;
     [SerializeField]private GameObject settingMenu;
+    [SerializeField] private int sceneNum=1;
 
 
     private void Update()
@@ -52,5 +54,8 @@ public class UiManager : MonoBehaviour
     {
         settingMenu?.SetActive(false);
     }
-
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene(sceneNum);
+    }
 }
