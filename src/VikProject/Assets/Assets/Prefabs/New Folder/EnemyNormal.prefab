@@ -883,8 +883,8 @@ GameObject:
   - component: {fileID: 3845868182348086849}
   - component: {fileID: 669348456381973142}
   - component: {fileID: 3518916707500085198}
-  - component: {fileID: 1619978178414806306}
   - component: {fileID: 4798992359278884219}
+  - component: {fileID: 7544525888282635813}
   m_Layer: 6
   m_Name: EnemyNormal
   m_TagString: Enemy
@@ -1209,8 +1209,8 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 1619978178414806306}
-          m_TargetAssemblyTypeName: EntitySoundEmitter, Assembly-CSharp
+        - m_Target: {fileID: 7544525888282635813}
+          m_TargetAssemblyTypeName: PlayerAudioController, Assembly-CSharp
           m_MethodName: PlayAttack
           m_Mode: 1
           m_Arguments:
@@ -1285,8 +1285,8 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 1619978178414806306}
-          m_TargetAssemblyTypeName: EntitySoundEmitter, Assembly-CSharp
+        - m_Target: {fileID: 7544525888282635813}
+          m_TargetAssemblyTypeName: PlayerAudioController, Assembly-CSharp
           m_MethodName: PlayHurt
           m_Mode: 1
           m_Arguments:
@@ -1301,8 +1301,8 @@ MonoBehaviour:
     OnAnimationEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1619978178414806306}
-          m_TargetAssemblyTypeName: EntitySoundEmitter, Assembly-CSharp
+        - m_Target: {fileID: 7544525888282635813}
+          m_TargetAssemblyTypeName: PlayerAudioController, Assembly-CSharp
           m_MethodName: PlayHurt
           m_Mode: 1
           m_Arguments:
@@ -1388,28 +1388,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   knockbackDuration: 0.3
---- !u!114 &1619978178414806306
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1153369642687529573}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3c7a7d6782bcf44c93166711bc7bcc1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackClips:
-  - {fileID: 8300000, guid: 0d3411608f71ce948be6b81b02eea892, type: 3}
-  - {fileID: 8300000, guid: a5a14a69eaff2214bb2b1a9630790745, type: 3}
-  - {fileID: 8300000, guid: 38efb2c607102b54b85b8103fb082246, type: 3}
-  hurtClips:
-  - {fileID: 8300000, guid: 74198389e177d0948b63ca9a3fb22801, type: 3}
-  - {fileID: 8300000, guid: e5ecc98ff40556543b77c8c2aa090822, type: 3}
-  - {fileID: 8300000, guid: d0f166575306db84091dc03fce0eff69, type: 3}
-  walkClips: []
-  runClips: []
 --- !u!82 &4798992359278884219
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1419,7 +1397,7 @@ AudioSource:
   m_GameObject: {fileID: 1153369642687529573}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2221103533226716985, guid: a54d3d49a5c8b294d9a4f06f1f0f1607, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
@@ -1507,6 +1485,39 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7544525888282635813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1153369642687529573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fab283bcb6e4e6c4da15ed47044a2a16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 4798992359278884219}
+  attackClips:
+  - {fileID: 8300000, guid: a5a14a69eaff2214bb2b1a9630790745, type: 3}
+  hurtClips:
+  - {fileID: 8300000, guid: 8ba1ce15e8593064aa781b941381f053, type: 3}
+  terrainFootsteps:
+  - terrainTag: GrassFloor
+    walkClips:
+    - {fileID: 8300000, guid: 429a9314148a4b24aa035f14d669c10d, type: 3}
+    runClips:
+    - {fileID: 8300000, guid: 232547dfbc7484d4eb872a2c1b9ca2cc, type: 3}
+  - terrainTag: WoodFloor
+    walkClips:
+    - {fileID: 8300000, guid: 232547dfbc7484d4eb872a2c1b9ca2cc, type: 3}
+    runClips:
+    - {fileID: 8300000, guid: 429a9314148a4b24aa035f14d669c10d, type: 3}
+  rayRange: 2
+  minPitch: 0.9
+  maxPitch: 1.1
+  minVolume: 0.8
+  maxVolume: 1
 --- !u!1 &1199498098642302697
 GameObject:
   m_ObjectHideFlags: 0

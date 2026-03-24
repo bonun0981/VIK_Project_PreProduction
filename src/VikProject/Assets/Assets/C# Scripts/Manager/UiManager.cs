@@ -6,8 +6,15 @@ public class UiManager : MonoBehaviour
     [SerializeField]private GameObject pauseMenu;
     [SerializeField]private GameObject settingMenu;
     [SerializeField] private int sceneNum=1;
-
-
+    private void Start()
+    {
+        ShowCursor(false); // เริ่มเกม → ซ่อนเมาส์
+    }
+    public void ShowCursor(bool show)
+    {
+        Cursor.visible = show;
+        Cursor.lockState = show ? CursorLockMode.None : CursorLockMode.Locked;
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -29,6 +36,8 @@ public class UiManager : MonoBehaviour
         settingMenu?.SetActive(false);
         pauseMenu?.SetActive(false);
         Time.timeScale = 1;
+
+        ShowCursor(false); // 🔒 กลับเข้าเกม → ซ่อนเมาส์
     }
 
 
@@ -38,11 +47,15 @@ public class UiManager : MonoBehaviour
         {
             Time.timeScale = 1;
             pauseMenu.SetActive(false);
+
+            ShowCursor(false); // 🔒 ซ่อนเมาส์
         }
         else
         {
             Time.timeScale = 0;
             pauseMenu.SetActive(true);
+
+            ShowCursor(true); // 🔓 แสดงเมาส์
         }
     }
 

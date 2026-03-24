@@ -19,6 +19,7 @@ public class PlayerAudioController : MonoBehaviour
 
     [Header("Footsteps")]
     public TerrainFootstep[] terrainFootsteps;
+    public float rayRange = 2f;
 
     [Header("Random Settings")]
     public float minPitch = 0.9f;
@@ -43,17 +44,23 @@ public class PlayerAudioController : MonoBehaviour
         PlayRandom(hurtClips);
     }
 
-    public void PlayFootstep(bool isRunning)
+    public void PlayWalk()
     {
         var terrain = GetTerrain(currentTerrain);
         if (terrain == null) return;
 
-        if (isRunning)
-            PlayRandom(terrain.runClips);
-        else
+        
             PlayRandom(terrain.walkClips);
     }
+    public void PlayRun()
+    {
+        var terrain = GetTerrain(currentTerrain);
+        if (terrain == null) return;
 
+       
+            PlayRandom(terrain.runClips);
+        
+    }
     // ---------------------------
     // CORE LOGIC
     // ---------------------------
@@ -95,7 +102,7 @@ public class PlayerAudioController : MonoBehaviour
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, 2f))
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, rayRange))
         {
             currentTerrain = hit.collider.tag;
         }
