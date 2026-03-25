@@ -163,7 +163,7 @@ public class EnemyNormal : MonoBehaviour
     }
     void Update()
     {
-        
+        if (!aiActive) return;
         if (isKnockedBack)
             return;
 
