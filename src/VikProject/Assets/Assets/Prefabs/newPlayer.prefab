@@ -1031,14 +1031,22 @@ MonoBehaviour:
   terrainFootsteps:
   - terrainTag: GrassFloor
     walkClips:
-    - {fileID: 8300000, guid: 429a9314148a4b24aa035f14d669c10d, type: 3}
+    - {fileID: 8300000, guid: a547cee39f55e1144a24f7ff52f56292, type: 3}
+    - {fileID: 8300000, guid: 8d97e2465acc3c1499ee59b14b5ed051, type: 3}
+    - {fileID: 8300000, guid: 248da79b785ff1e4daa4565dce1f7cde, type: 3}
     runClips:
-    - {fileID: 8300000, guid: 232547dfbc7484d4eb872a2c1b9ca2cc, type: 3}
+    - {fileID: 8300000, guid: 70060aed43f31fd4aa1711716b86403e, type: 3}
+    - {fileID: 8300000, guid: 21c7b5cfe64d72649a5a29e65a6abe86, type: 3}
+    - {fileID: 8300000, guid: 78f5c60cd52dd1245b7a12c137e9047a, type: 3}
   - terrainTag: WoodFloor
     walkClips:
-    - {fileID: 8300000, guid: 232547dfbc7484d4eb872a2c1b9ca2cc, type: 3}
+    - {fileID: 8300000, guid: 2d7bd7aaa01c9db438889161fb27def8, type: 3}
+    - {fileID: 8300000, guid: c18b6b44b0708b249b3845745595b9fd, type: 3}
+    - {fileID: 8300000, guid: 84ec640ec7ec1964982be6c3064aae38, type: 3}
     runClips:
-    - {fileID: 8300000, guid: 429a9314148a4b24aa035f14d669c10d, type: 3}
+    - {fileID: 8300000, guid: ba7c8b8ddc75f5945b2ae42b4f2b6b64, type: 3}
+    - {fileID: 8300000, guid: 0c68547b305c85744a7cf8e2f94df6cd, type: 3}
+    - {fileID: 8300000, guid: c263869b40567d74187f3a98f2c4eda8, type: 3}
   rayRange: 5
   minPitch: 0.9
   maxPitch: 1.1
