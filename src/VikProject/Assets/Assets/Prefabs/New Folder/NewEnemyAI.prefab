@@ -1117,7 +1117,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5190258653015844288
 Transform:
   m_ObjectHideFlags: 0
@@ -1532,7 +1532,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6141652323853313595
 Transform:
   m_ObjectHideFlags: 0
@@ -2056,6 +2056,7 @@ Transform:
   m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4897609440921722162}
   - {fileID: 6141652323853313595}
   - {fileID: 5190258653015844288}
   m_Father: {fileID: 0}
@@ -2069,7 +2070,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6943641662403046915}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 97ada40f57d401540b8eafeeba1f0e9c, type: 3}
+  m_Avatar: {fileID: 9000000, guid: 58cfcef3609bccb48bd6169490fc0c2e, type: 3}
   m_Controller: {fileID: 9100000, guid: 4827166d8ca754e45ac65eacb04ab6ec, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
@@ -2439,6 +2440,7 @@ MonoBehaviour:
   currentHealth: 100
   animator: {fileID: 0}
   cameraShakeManager: {fileID: 0}
+  iframeDuration: 0.3
 --- !u!114 &6762530921857273086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3062,3 +3064,65 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2517389295167236551}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &4935229044456192729
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8920468684227503244}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 58cfcef3609bccb48bd6169490fc0c2e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 58cfcef3609bccb48bd6169490fc0c2e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 58cfcef3609bccb48bd6169490fc0c2e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 58cfcef3609bccb48bd6169490fc0c2e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 58cfcef3609bccb48bd6169490fc0c2e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 58cfcef3609bccb48bd6169490fc0c2e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 58cfcef3609bccb48bd6169490fc0c2e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 58cfcef3609bccb48bd6169490fc0c2e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 58cfcef3609bccb48bd6169490fc0c2e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 58cfcef3609bccb48bd6169490fc0c2e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 58cfcef3609bccb48bd6169490fc0c2e, type: 3}
+      propertyPath: m_Name
+      value: Full_animation_Enemy_Spear
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 58cfcef3609bccb48bd6169490fc0c2e, type: 3}
+--- !u!4 &4897609440921722162 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 58cfcef3609bccb48bd6169490fc0c2e, type: 3}
+  m_PrefabInstance: {fileID: 4935229044456192729}
+  m_PrefabAsset: {fileID: 0}
