@@ -69,6 +69,13 @@ public class UiManager : MonoBehaviour
     }
     public void GoToMainMenu()
     {
+        // 1. ต้องคืนค่า Time Scale เป็นปกติก่อน (ไม่งั้น Scene หน้าอาจจะหยุดนิ่ง)
+        Time.timeScale = 1;
+
+        // 2. ปลดล็อกเมาส์ให้แสดงผลสำหรับหน้า Main Menu
+        ShowCursor(true);
+
+        // 3. แล้วค่อยโหลด Scene
         SceneManager.LoadScene(sceneNum);
     }
 }

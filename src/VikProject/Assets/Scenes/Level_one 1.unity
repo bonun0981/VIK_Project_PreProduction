@@ -72697,8 +72697,7 @@ MeshRenderer:
   m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -91564,7 +91563,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.066
+  m_Volume: 0.304
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -91660,7 +91659,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c9e83bdbb10084a9ee2808f886185d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundMusic: {fileID: 8300000, guid: 1411fb795fa172f4d8c9f3114f83f185, type: 3}
+  backgroundMusic: {fileID: 8300000, guid: b9233b6aa8088664a80b0dcd8be26055, type: 3}
 --- !u!114 &2080121522
 MonoBehaviour:
   m_ObjectHideFlags: 0

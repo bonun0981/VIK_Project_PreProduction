@@ -5,67 +5,68 @@ using System.Collections;
 
 public class FadeManager : MonoBehaviour
 {
-    public static FadeManager Instance;
+    
 
     public Image fadeImage;
     public float fadeSpeed = 2f;
 
     bool isTransitioning = false;
 
-    void Awake()
+    private void Start()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-
-            // เริ่มต้นโปร่งใส
-            SetAlpha(0f);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        ShowCursor(); // เรียกใช้ตอนเริ่ม
     }
 
-    // 🔥 Fade ไปดำ
+    void Awake()
+    {
+        
+            ShowCursor(); // เรียกใช้เพื่อให้มั่นใจ
+            SetAlpha(0f);
+        
+        
+    }
+
+    // ฟังก์ชันสำหรับเปิดเมาส์ (สร้างแยกไว้จะได้เรียกใช้ง่ายๆ)
+    public void ShowCursor()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None; // ปลดล็อกเมาส์ให้ขยับได้อิสระ
+    }
+
     IEnumerator FadeToBlack()
     {
         float alpha = 0f;
-
         while (alpha < 1f)
         {
             alpha += Time.unscaledDeltaTime * fadeSpeed;
             SetAlpha(alpha);
             yield return null;
         }
-
         SetAlpha(1f);
     }
 
-    // 🔥 Fade ออกจากดำ
     IEnumerator FadeFromBlack()
     {
         float alpha = 1f;
-
         while (alpha > 0f)
         {
             alpha -= Time.unscaledDeltaTime * fadeSpeed;
             SetAlpha(alpha);
             yield return null;
         }
-
         SetAlpha(0f);
     }
 
     void SetAlpha(float a)
     {
-        Color c = fadeImage.color;
-        c.a = a;
-        fadeImage.color = c;
+        if (fadeImage != null)
+        {
+            Color c = fadeImage.color;
+            c.a = a;
+            fadeImage.color = c;
+        }
     }
 
-    // 🔥 เรียกตอนกด Play
     public void LoadSceneWithFade(string sceneName)
     {
         if (!isTransitioning)
@@ -75,13 +76,14 @@ public class FadeManager : MonoBehaviour
     IEnumerator Transition(string sceneName)
     {
         isTransitioning = true;
-
         yield return StartCoroutine(FadeToBlack());
 
         SceneManager.LoadScene(sceneName);
 
-        yield return null;
+        // หลังจากโหลด Scene ใหม่เสร็จ ถ้าเป็นหน้าเมนู ให้เปิดเมาส์อีกรอบ
+        ShowCursor();
 
+        yield return new WaitForSeconds(0.1f); // รอเล็กน้อยเพื่อให้ Scene โหลด Object ครบ
         yield return StartCoroutine(FadeFromBlack());
 
         isTransitioning = false;
