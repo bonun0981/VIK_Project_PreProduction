@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
 
 public class ProjectileSkill : MonoBehaviour
@@ -54,17 +54,41 @@ public class ProjectileSkill : MonoBehaviour
             return;
 
         IDamageable damageable = other.GetComponent<IDamageable>();
-        IKnockbackable knockbackable = other.GetComponent<IKnockbackable>();
 
         if (damageable != null && !hitTargets.Contains(damageable))
         {
-            damageable.TakeDamage(data.damage);
             hitTargets.Add(damageable);
 
-            if (knockbackable != null)
-                knockbackable.Knockback(data.knockback);
+            // ✅ Activate enemy
+            EnemyNormal enemy = other.GetComponent<EnemyNormal>();
+            if (enemy != null && !enemy.aiActive)
+            {
+                enemy.ActivateAI();
+            }
 
-            //HitStopManager.Instance.DoHitStop(data.hitStopDuration);
+            // ✅ Damage
+            damageable.TakeDamage(data.damage);
+
+            // ✅ Hurt reaction
+            if (enemy != null)
+            {
+                enemy.OnHurt();
+            }
+
+            // ✅ Knockback (unified)
+            if (data.knockback > 0)
+            {
+                KnockbackReceiver knockback = other.GetComponent<KnockbackReceiver>();
+
+                if (knockback != null)
+                {
+                    Vector3 dir = other.transform.position - transform.position;
+                    dir.y = 0f;
+                    dir.Normalize();
+
+                    knockback.Knockback(dir, data.knockback);
+                }
+            }
         }
     }
 }
