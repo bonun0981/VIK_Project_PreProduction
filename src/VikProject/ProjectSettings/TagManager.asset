@@ -9,6 +9,8 @@ TagManager:
   - ShakeController
   - enemysound
   - Ally
+  - GrassFloor
+  - WoodFloor
   layers:
   - Default
   - TransparentFX
