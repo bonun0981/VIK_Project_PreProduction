@@ -1328,6 +1328,10 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 100
   animator: {fileID: 0}
+  targetRenderer: {fileID: 0}
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
+  flashIntensity: 2
+  flashDuration: 0.1
   cameraShakeManager: {fileID: 0}
   iframeDuration: 0.3
 --- !u!114 &3845868182348086849
@@ -1410,7 +1414,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 4
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -1497,6 +1501,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fab283bcb6e4e6c4da15ed47044a2a16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  walkVolume: 0.5
+  runVolume: 0.8
   audioSource: {fileID: 4798992359278884219}
   attackClips:
   - {fileID: 8300000, guid: a5a14a69eaff2214bb2b1a9630790745, type: 3}
