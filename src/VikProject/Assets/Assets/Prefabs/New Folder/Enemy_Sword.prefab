@@ -3219,6 +3219,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - eventName: StopMove
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 9059934587083655883}
+          m_TargetAssemblyTypeName: EnemyNormal, Assembly-CSharp
+          m_MethodName: LockMovement
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &6039096157245906889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3239,7 +3255,7 @@ MonoBehaviour:
   flashIntensity: 2
   flashDuration: 0.1
   cameraShakeManager: {fileID: 0}
-  iframeDuration: 0.3
+  iframeDuration: 1
 --- !u!114 &6444579973431466698
 MonoBehaviour:
   m_ObjectHideFlags: 0

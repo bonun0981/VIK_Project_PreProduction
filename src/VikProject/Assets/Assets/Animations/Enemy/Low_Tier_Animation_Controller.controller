@@ -1717,7 +1717,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94d12e95b595ec546a8b469456098d8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startEventName: 
+  startEventName: StopMove
   startUpdateEventName: 
   triggerTime: 0
   endUpdateEventName: SetActive
