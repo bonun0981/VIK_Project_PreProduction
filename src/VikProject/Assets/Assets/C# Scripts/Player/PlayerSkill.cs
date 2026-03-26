@@ -14,7 +14,7 @@ public class PlayerSkill : MonoBehaviour
     [SerializeField] private PlayerResource playerResource;
 
     [SerializeField]private float cooldownTimer;
-
+   
     private void Update()
     {
         if (cooldownTimer > 0)
@@ -26,16 +26,12 @@ public class PlayerSkill : MonoBehaviour
         if (abilityData == null || abilityData.skillPrefab == null)
             return;
 
-        // cooldown check
-        if (cooldownTimer > 0)
-            return;
+        // ❌ ไม่เช็ค cooldown แล้ว
+        // ❌ ไม่เช็ค resource แล้ว
 
-        // ultimate resource check
+        // 🔥 ถ้าเป็น ultimate → consume อย่างเดียว
         if (isUltimateSkill)
         {
-            if (!playerResource.IsFull())
-                return;
-
             playerResource.ConsumeAll();
         }
 
@@ -52,14 +48,13 @@ public class PlayerSkill : MonoBehaviour
             skillObj.transform.SetParent(weaponTransform);
         }
 
-        AOESkillPrefab aoe = skillObj.GetComponent<AOESkillPrefab>();
-        if (aoe != null)
+        if (skillObj.TryGetComponent(out AOESkillPrefab aoe))
             aoe.Initialize(abilityData);
 
-        ProjectileSkill projectile = skillObj.GetComponent<ProjectileSkill>();
-        if (projectile != null)
+        if (skillObj.TryGetComponent(out ProjectileSkill projectile))
             projectile.Initialize(abilityData);
 
+        // 🔥 cooldown reset ยังอยู่
         cooldownTimer = abilityData.cooldown;
     }
 
@@ -77,7 +72,24 @@ public class PlayerSkill : MonoBehaviour
                 return transform;
         }
     }
+    public bool CanActivate()
+    {
+        if (abilityData == null)
+            return false;
 
+        // 🔥 cooldown ต้องหมดก่อนเสมอ
+        if (cooldownTimer > 0)
+            return false;
+
+        // 🔥 ถ้าเป็น Ultimate → ต้อง resource เต็ม
+        if (isUltimateSkill)
+        {
+            if (!playerResource.IsFull())
+                return false;
+        }
+
+        return true;
+    }
     public float CooldownRemaining()
     {
         return cooldownTimer;
