@@ -5938,6 +5938,10 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 100
   animator: {fileID: 0}
+  targetRenderer: {fileID: 7115397627208665735}
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
+  flashIntensity: 2
+  flashDuration: 0.1
   cameraShakeManager: {fileID: 0}
   iframeDuration: 0.3
 --- !u!114 &313295025710500851
@@ -8632,6 +8636,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1722263752148756963}
   m_SourcePrefab: {fileID: 100100000, guid: bbee91dea7965e448b45ff008876374c, type: 3}
+--- !u!137 &7115397627208665735 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7160752219881262937, guid: bbee91dea7965e448b45ff008876374c, type: 3}
+  m_PrefabInstance: {fileID: 9088578211940219424}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7626165061628048043 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7497216790387718005, guid: bbee91dea7965e448b45ff008876374c, type: 3}
