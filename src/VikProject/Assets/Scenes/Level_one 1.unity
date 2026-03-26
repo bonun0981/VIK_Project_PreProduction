@@ -6692,6 +6692,10 @@ PrefabInstance:
       propertyPath: cameraShakeManager
       value: 
       objectReference: {fileID: 2080121513}
+    - target: {fileID: 8537098020970654137, guid: 45e6ff431419d07438bb3c62dc0d8e38, type: 3}
+      propertyPath: rootNode
+      value: 
+      objectReference: {fileID: 11400000, guid: 66e8b3a3ca780a846b6046b36bb3bc41, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

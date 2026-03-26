@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84ba8543ddb99b24bb92c59113f168d0, type: 3}
+  m_Name: NewRootNode
+  m_EditorClassIdentifier: 
+  attack: {fileID: 0}
+  transitions:
+  - input: 0
+    nextNode: {fileID: 11400000, guid: ddb5f6669fac09f469ce25b43dbdb735, type: 2}
