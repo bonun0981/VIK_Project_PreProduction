@@ -16,3 +16,5 @@ MonoBehaviour:
   transitions:
   - input: 0
     nextNode: {fileID: 11400000, guid: ddb5f6669fac09f469ce25b43dbdb735, type: 2}
+  - input: 1
+    nextNode: {fileID: 11400000, guid: 97c28aacf3c17734286f6990ea9396a6, type: 2}

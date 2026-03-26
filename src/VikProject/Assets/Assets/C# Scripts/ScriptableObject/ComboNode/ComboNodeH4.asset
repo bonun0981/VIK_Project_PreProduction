@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84ba8543ddb99b24bb92c59113f168d0, type: 3}
   m_Name: ComboNodeH4
   m_EditorClassIdentifier: 
-  attack: {fileID: 11400000, guid: b175d2e8cc6435b48b0c02b02ed27a2a, type: 2}
+  attack: {fileID: 11400000, guid: f06f9c22ca6541444814c05c29e2e377, type: 2}
   transitions:
-  - input: 0
-    nextNode: {fileID: 11400000, guid: f6ae60ea73f94584bb6ffe6b83cf675b, type: 2}
+  - input: 1
+    nextNode: {fileID: 11400000, guid: 97c28aacf3c17734286f6990ea9396a6, type: 2}

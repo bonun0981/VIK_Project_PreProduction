@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb0557315fe21d47b2bbcbf495df50c, type: 3}
   m_Name: H1
   m_EditorClassIdentifier: 
-  stateName: L_1
-  startPercent: 0.134
+  stateName: H_1
+  startPercent: 0
   transitionDuration: 0.1
-  allowComboTime: 0.7
+  allowComboTime: 0.822
   comboWindow: 1
   comboDelayTime: 1
   earlyBufferTime: 0.2

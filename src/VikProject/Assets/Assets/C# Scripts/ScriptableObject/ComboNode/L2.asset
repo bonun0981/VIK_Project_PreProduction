@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: L2
   m_EditorClassIdentifier: 
   stateName: L_2
-  startPercent: 0.134
+  startPercent: 0
   transitionDuration: 0.1
   allowComboTime: 0.45
   comboWindow: 1
