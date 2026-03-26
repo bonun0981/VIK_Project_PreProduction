@@ -20,7 +20,6 @@ public class Health : MonoBehaviour, IDamageable
     Material materialInstance;
     Color originalEmission;
 
-
     [SerializeField] private CameraShakeManager cameraShakeManager;
 
     [Header("Invincibility Frames")]
@@ -43,6 +42,7 @@ public class Health : MonoBehaviour, IDamageable
             }
         }
     }
+
     IEnumerator FlashRoutine()
     {
         if (materialInstance == null || !materialInstance.HasProperty("_EmissionColor"))
@@ -57,6 +57,7 @@ public class Health : MonoBehaviour, IDamageable
         // กลับค่าเดิม
         materialInstance.SetColor("_EmissionColor", originalEmission);
     }
+
     public void Die()
     {
         EnemyNormal enemy = GetComponent<EnemyNormal>();
@@ -76,10 +77,12 @@ public class Health : MonoBehaviour, IDamageable
             animator.SetTrigger("Die");
         }
     }
+
     public void DisableAfterDeath()
     {
         gameObject.SetActive(false);
     }
+
     bool isDead;
 
     public bool IsDead => isDead;
@@ -103,6 +106,7 @@ public class Health : MonoBehaviour, IDamageable
         animator?.SetTrigger("Hurt");
         StartCoroutine(IFrameRoutine());
     }
+
     IEnumerator IFrameRoutine()
     {
         isInvincible = true;
