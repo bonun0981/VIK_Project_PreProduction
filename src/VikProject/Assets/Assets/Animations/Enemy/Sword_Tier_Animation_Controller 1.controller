@@ -922,9 +922,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startEventName: StartAttack
   startUpdateEventName: EnableHitbox
-  triggerTime: 0.294
+  triggerTime: 0.228
   endUpdateEventName: DisableHitbox
-  endTime: 0.36
+  endTime: 0.683
   exitEventName: EndAttack
 --- !u!91 &9100000
 AnimatorController:
