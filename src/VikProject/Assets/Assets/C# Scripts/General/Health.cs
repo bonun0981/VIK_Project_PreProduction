@@ -10,8 +10,16 @@ public class Health : MonoBehaviour, IDamageable
     public float currentHealth = 100f;
 
     [SerializeField] Animator animator;
+    [SerializeField] Renderer targetRenderer;
 
-    public bool IsDead => currentHealth <= 0;
+    [Header("Hit Flash")]
+    [SerializeField] Color flashColor = Color.white;
+    [SerializeField] float flashIntensity = 2f;
+    [SerializeField] float flashDuration = 0.1f;
+
+    Material materialInstance;
+    Color originalEmission;
+
 
     [SerializeField] private CameraShakeManager cameraShakeManager;
 
@@ -24,8 +32,31 @@ public class Health : MonoBehaviour, IDamageable
     {
         animator = GetComponent<Animator>();
         currentHealth = maxHealth;
-    }
 
+        if (targetRenderer != null)
+        {
+            materialInstance = targetRenderer.material; // instance ไม่ให้ไปแก้ shared
+
+            if (materialInstance.HasProperty("_EmissionColor"))
+            {
+                originalEmission = materialInstance.GetColor("_EmissionColor");
+            }
+        }
+    }
+    IEnumerator FlashRoutine()
+    {
+        if (materialInstance == null || !materialInstance.HasProperty("_EmissionColor"))
+            yield break;
+
+        // เปิด emission
+        materialInstance.EnableKeyword("_EMISSION");
+        materialInstance.SetColor("_EmissionColor", flashColor * flashIntensity);
+
+        yield return new WaitForSeconds(flashDuration);
+
+        // กลับค่าเดิม
+        materialInstance.SetColor("_EmissionColor", originalEmission);
+    }
     public void Die()
     {
         EnemyNormal enemy = GetComponent<EnemyNormal>();
@@ -36,37 +67,42 @@ public class Health : MonoBehaviour, IDamageable
             EnemyCombatDirector.Instance.UnregisterEnemy(enemy);
         }
 
+        // ปิด collider หรือ logic อื่นก่อน (optional)
+        GetComponent<Collider>().enabled = false;
+
+        // เล่น animation ตาย
+        if (animator != null)
+        {
+            animator.SetTrigger("Die");
+        }
+    }
+    public void DisableAfterDeath()
+    {
         gameObject.SetActive(false);
     }
+    bool isDead;
+
+    public bool IsDead => isDead;
 
     public void TakeDamage(float damage)
     {
-        if (isInvincible) return;
-
-        Debug.Log("Enemy took damage: " + damage);
-
-        OnDamaged?.Invoke(damage);
-
-        if (IsDead) return;
+        if (isInvincible || isDead) return;
 
         currentHealth -= damage;
 
-        if (animator != null)
-        {
-            animator.SetTrigger("Hurt");
-        }
+        // 🎯 เพิ่มตรงนี้
+        StartCoroutine(FlashRoutine());
 
-        Debug.Log(gameObject.name + " take damage");
-
-        if (IsDead)
+        if (currentHealth <= 0)
         {
+            isDead = true;
             Die();
             return;
         }
 
+        animator?.SetTrigger("Hurt");
         StartCoroutine(IFrameRoutine());
     }
-
     IEnumerator IFrameRoutine()
     {
         isInvincible = true;
