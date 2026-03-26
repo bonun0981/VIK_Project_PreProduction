@@ -1908,7 +1908,7 @@ MonoBehaviour:
   targetType: 1
   weaponState: {fileID: 11400000, guid: 3b58261315ed168499e5226eac347919, type: 2}
   currentAttackData: {fileID: 11400000, guid: dac4fea240bf25646a37c93cb87ff590, type: 2}
-  hitBoxCollider: {fileID: 0}
+  hitBoxCollider: {fileID: 2894893310477446096}
   isPlayerWeapon: 0
   cameraShakeManager: {fileID: 0}
 --- !u!114 &5610861445690600759
@@ -2690,6 +2690,7 @@ GameObject:
   - component: {fileID: 8061799682862379811}
   - component: {fileID: 8435119860534540160}
   - component: {fileID: 7764971676519952853}
+  - component: {fileID: 2894893310477446096}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -2765,6 +2766,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2894893310477446096
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010630930922542786}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 0.048692208, y: 0.011087509, z: 0.35839808}
+  m_Center: {x: -0.000000101052514, y: -4.8157034e-12, z: 0.15630387}
 --- !u!1 &2024458341229051608
 GameObject:
   m_ObjectHideFlags: 0

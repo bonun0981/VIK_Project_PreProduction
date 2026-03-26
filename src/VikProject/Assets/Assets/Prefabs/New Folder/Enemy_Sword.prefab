@@ -2794,7 +2794,7 @@ Animator:
   m_GameObject: {fileID: 8047089326718515956}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: c96a2c8176499de4894ab179fd9bef39, type: 3}
-  m_Controller: {fileID: 9100000, guid: 4827166d8ca754e45ac65eacb04ab6ec, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9f6b0692ecdde2f448ec3975fff752c6, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -3187,6 +3187,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - eventName: SetActive
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6039096157245906889}
+          m_TargetAssemblyTypeName: Health, Assembly-CSharp
+          m_MethodName: DisableAfterDeath
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &6039096157245906889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3250,7 +3266,7 @@ MonoBehaviour:
   targetType: 1
   weaponState: {fileID: 11400000, guid: 3b58261315ed168499e5226eac347919, type: 2}
   currentAttackData: {fileID: 11400000, guid: dac4fea240bf25646a37c93cb87ff590, type: 2}
-  hitBoxCollider: {fileID: 7897488564713499378}
+  hitBoxCollider: {fileID: 1055256714039844387}
   isPlayerWeapon: 0
   cameraShakeManager: {fileID: 0}
 --- !u!114 &3009250123700105779
@@ -4131,10 +4147,39 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5082079157832080553, guid: c96a2c8176499de4894ab179fd9bef39, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1055256714039844387}
   m_SourcePrefab: {fileID: 100100000, guid: c96a2c8176499de4894ab179fd9bef39, type: 3}
 --- !u!4 &4476328173303483895 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c96a2c8176499de4894ab179fd9bef39, type: 3}
   m_PrefabInstance: {fileID: 4149404861608143388}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &9156532372270872245 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5082079157832080553, guid: c96a2c8176499de4894ab179fd9bef39, type: 3}
+  m_PrefabInstance: {fileID: 4149404861608143388}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1055256714039844387
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9156532372270872245}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 0.22634785, y: 0.08756705, z: 1.6589637}
+  m_Center: {x: 0.000000014052503, y: -0.0009224451, z: 0.6286831}
