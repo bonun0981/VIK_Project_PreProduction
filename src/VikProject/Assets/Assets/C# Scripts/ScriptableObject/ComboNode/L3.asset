@@ -15,7 +15,7 @@ MonoBehaviour:
   stateName: L_3
   startPercent: 0.134
   transitionDuration: 0.1
-  allowComboTime: 0.45
+  allowComboTime: 0.7
   comboWindow: 1
   comboDelayTime: 1
   earlyBufferTime: 0.2
