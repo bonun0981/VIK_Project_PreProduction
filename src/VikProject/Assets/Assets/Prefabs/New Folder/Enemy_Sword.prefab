@@ -3203,6 +3203,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - eventName: PlayAttackSound
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8851107725423015575}
+          m_TargetAssemblyTypeName: PlayerAudioController, Assembly-CSharp
+          m_MethodName: PlayAttack
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &6039096157245906889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3391,27 +3407,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fab283bcb6e4e6c4da15ed47044a2a16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  walkVolume: 0.5
+  runVolume: 0.8
   audioSource: {fileID: 5932135328582203571}
   attackClips:
-  - {fileID: 8300000, guid: a5a14a69eaff2214bb2b1a9630790745, type: 3}
+  - {fileID: 8300000, guid: 0869bc2cd256cef4b94448d555a5eb9c, type: 3}
+  - {fileID: 8300000, guid: 7854291f17af93d47ac1424083aadee9, type: 3}
+  - {fileID: 8300000, guid: 607680cf9311d7c4486736b9701c4513, type: 3}
+  - {fileID: 8300000, guid: 989ff017727a81e4babb24823bd9a377, type: 3}
   hurtClips:
-  - {fileID: 8300000, guid: 8ba1ce15e8593064aa781b941381f053, type: 3}
+  - {fileID: 8300000, guid: 7cbd6cd765888ff418d01d98bd1ce9c2, type: 3}
+  - {fileID: 8300000, guid: 3df9bbbc130ccb344af5f3fc793a630f, type: 3}
   terrainFootsteps:
   - terrainTag: GrassFloor
     walkClips:
-    - {fileID: 8300000, guid: 429a9314148a4b24aa035f14d669c10d, type: 3}
+    - {fileID: 8300000, guid: a547cee39f55e1144a24f7ff52f56292, type: 3}
+    - {fileID: 8300000, guid: 248da79b785ff1e4daa4565dce1f7cde, type: 3}
     runClips:
     - {fileID: 8300000, guid: 232547dfbc7484d4eb872a2c1b9ca2cc, type: 3}
   - terrainTag: WoodFloor
     walkClips:
-    - {fileID: 8300000, guid: 232547dfbc7484d4eb872a2c1b9ca2cc, type: 3}
+    - {fileID: 8300000, guid: 2d7bd7aaa01c9db438889161fb27def8, type: 3}
+    - {fileID: 8300000, guid: c18b6b44b0708b249b3845745595b9fd, type: 3}
     runClips:
     - {fileID: 8300000, guid: 429a9314148a4b24aa035f14d669c10d, type: 3}
   rayRange: 2
   minPitch: 0.9
   maxPitch: 1.1
-  minVolume: 0.8
-  maxVolume: 1
+  minVolume: 0.5
+  maxVolume: 0.8
 --- !u!1 &8097305081633202849
 GameObject:
   m_ObjectHideFlags: 0
@@ -4181,5 +4205,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Size: {x: 0.22634785, y: 0.08756705, z: 1.6589637}
-  m_Center: {x: 0.000000014052503, y: -0.0009224451, z: 0.6286831}
+  m_Size: {x: 0.4352057, y: 0.45931602, z: 1.6589637}
+  m_Center: {x: -0.018222133, y: -0.032070614, z: 0.62868315}

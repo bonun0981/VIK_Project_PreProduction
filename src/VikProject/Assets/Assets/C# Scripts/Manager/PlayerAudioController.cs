@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 
 [System.Serializable]
 public class TerrainFootstep
@@ -10,6 +11,9 @@ public class TerrainFootstep
 
 public class PlayerAudioController : MonoBehaviour
 {
+    [Header("Footstep Volume")]
+    [SerializeField] float walkVolume = 0.5f;
+    [SerializeField] float runVolume = 0.8f;
     [Header("Audio Source")]
     public AudioSource audioSource;
 
@@ -33,6 +37,10 @@ public class PlayerAudioController : MonoBehaviour
     // ---------------------------
     // PUBLIC API (เรียกจาก Animation)
     // ---------------------------
+    
+    
+    
+
 
     public void PlayAttack()
     {
@@ -41,6 +49,7 @@ public class PlayerAudioController : MonoBehaviour
 
     public void PlayHurt()
     {
+      
         PlayRandom(hurtClips);
     }
 
@@ -49,23 +58,23 @@ public class PlayerAudioController : MonoBehaviour
         var terrain = GetTerrain(currentTerrain);
         if (terrain == null) return;
 
-        
-            PlayRandom(terrain.walkClips);
+        PlayRandom(terrain.walkClips, walkVolume);
+        Debug.Log("walk");
     }
+
     public void PlayRun()
     {
         var terrain = GetTerrain(currentTerrain);
         if (terrain == null) return;
 
-       
-            PlayRandom(terrain.runClips);
-        
+        PlayRandom(terrain.runClips, runVolume);
+        Debug.Log("run");
     }
     // ---------------------------
     // CORE LOGIC
     // ---------------------------
 
-    void PlayRandom(AudioClip[] clips)
+    void PlayRandom(AudioClip[] clips, float volumeMultiplier = 1f)
     {
         if (clips == null || clips.Length == 0) return;
 
@@ -78,9 +87,11 @@ public class PlayerAudioController : MonoBehaviour
         lastIndex = index;
 
         audioSource.pitch = Random.Range(minPitch, maxPitch);
-        audioSource.volume = Random.Range(minVolume, maxVolume);
 
-        audioSource.PlayOneShot(clips[index]);
+        float randomVolume = Random.Range(minVolume, maxVolume);
+
+        // 🔥 ใช้ PlayOneShot + volumeMultiplier
+        audioSource.PlayOneShot(clips[index], randomVolume * volumeMultiplier);
     }
 
     TerrainFootstep GetTerrain(string tag)
@@ -96,15 +107,39 @@ public class PlayerAudioController : MonoBehaviour
     void Update()
     {
         DetectTerrain();
+       
     }
 
     void DetectTerrain()
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, rayRange))
+        // 🔼 ยกจุดเริ่ม ray ขึ้น
+        Vector3 origin = transform.position + Vector3.up * 0.3f;
+
+        // 🔴 debug ray
+        Debug.DrawRay(origin, Vector3.down * rayRange, Color.red);
+
+        if (Physics.Raycast(origin, Vector3.down, out hit, rayRange))
         {
             currentTerrain = hit.collider.tag;
+
+            // 🟢 hit แล้วเป็นสีเขียว
+            Debug.DrawRay(origin, Vector3.down * hit.distance, Color.green);
+
+            Debug.Log("Hit: " + hit.collider.name + " | Tag: " + currentTerrain);
         }
+        else
+        {
+            currentTerrain = null;
+            Debug.LogWarning("No terrain detected!");
+        }
+    }
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+
+        Vector3 origin = transform.position + Vector3.up * 0.3f;
+        Gizmos.DrawLine(origin, origin + Vector3.down * rayRange);
     }
 }
