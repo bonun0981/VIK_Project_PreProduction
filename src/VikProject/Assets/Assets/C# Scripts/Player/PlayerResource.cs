@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerResource : MonoBehaviour
 {
@@ -14,6 +15,20 @@ public class PlayerResource : MonoBehaviour
     private void Start()
     {
         currentResource = 0;
+        StartCoroutine(ResourceRegenRoutine());
+    }
+
+    IEnumerator ResourceRegenRoutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+
+            if (!IsFull())
+            {
+                AddResource(1f);
+            }
+        }
     }
 
     public void AddResource(float amount)
@@ -21,7 +36,7 @@ public class PlayerResource : MonoBehaviour
         currentResource += amount;
         currentResource = Mathf.Clamp(currentResource, 0, maxResource);
     }
-
+    
     public bool IsFull()
     {
         return currentResource >= maxResource;
