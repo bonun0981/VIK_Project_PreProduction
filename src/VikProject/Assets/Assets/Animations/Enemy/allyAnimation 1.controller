@@ -110,7 +110,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -3248668816046920263}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -4286155844766680478}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -119,7 +120,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 4985041854964964338, guid: 61e50d4e3cae1024f9483385c17d78d1, type: 3}
+  m_Motion: {fileID: -1975869677118204365, guid: 58cfcef3609bccb48bd6169490fc0c2e, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -222,6 +223,24 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-4286155844766680478
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94d12e95b595ec546a8b469456098d8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startEventName: 
+  startUpdateEventName: 
+  triggerTime: 0
+  endUpdateEventName: SetActive
+  endTime: 0.679
+  exitEventName: SetActive
 --- !u!1102 &-3991562501373675033
 AnimatorState:
   serializedVersion: 6
@@ -569,6 +588,12 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
+  - m_Name: Die
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -889,7 +914,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -4452440636216180258, guid: 2259e22041db7774a8736029a9284fdd, type: 3}
+  m_Motion: {fileID: 7400000, guid: 6a62f3915549e0f4eb8a720bb343bae4, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

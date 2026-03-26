@@ -84,9 +84,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94d12e95b595ec546a8b469456098d8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startEventName: Ultimate Active
-  startUpdateEventName: trycombo
-  triggerTime: 0.5
+  startEventName: 
+  startUpdateEventName: Ultimate Active
+  triggerTime: 0.839
   endUpdateEventName: End Attack
   endTime: 0.9
   exitEventName: End Attack
@@ -404,7 +404,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -4225862554828366968, guid: daf1c8ef8b68a5a4c8fe488ef410c594, type: 3}
+  m_Motion: {fileID: -8184033179028042710, guid: c24a6543779d8444390fea4cfc2469d9, type: 3}
   m_Tag: Attack
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -595,9 +595,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94d12e95b595ec546a8b469456098d8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startEventName: Skill Active
-  startUpdateEventName: trycombo
-  triggerTime: 0.5
+  startEventName: 
+  startUpdateEventName: Skill Active
+  triggerTime: 0.309
   endUpdateEventName: End Attack
   endTime: 0.9
   exitEventName: End Attack
@@ -1222,7 +1222,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 907d5dd939b507648a0ad63272d9487b, type: 2}
+  m_Motion: {fileID: 4756447876345649193, guid: bf9f5c5cf3ef1d3479da65e4a188a076, type: 3}
   m_Tag: Attack
   m_SpeedParameter: 
   m_MirrorParameter: 

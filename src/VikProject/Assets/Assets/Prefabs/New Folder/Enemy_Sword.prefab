@@ -3234,7 +3234,7 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 100
   animator: {fileID: 0}
-  targetRenderer: {fileID: 0}
+  targetRenderer: {fileID: 2782397769232481673}
   flashColor: {r: 1, g: 1, b: 1, a: 1}
   flashIntensity: 2
   flashDuration: 0.1
@@ -5115,6 +5115,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1055256714039844387}
   m_SourcePrefab: {fileID: 100100000, guid: c96a2c8176499de4894ab179fd9bef39, type: 3}
+--- !u!137 &2782397769232481673 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2236237030686087061, guid: c96a2c8176499de4894ab179fd9bef39, type: 3}
+  m_PrefabInstance: {fileID: 4149404861608143388}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4476328173303483895 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c96a2c8176499de4894ab179fd9bef39, type: 3}

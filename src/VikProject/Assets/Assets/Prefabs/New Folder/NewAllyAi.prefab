@@ -2554,6 +2554,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - eventName: SetActive
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4207351909102736528}
+          m_TargetAssemblyTypeName: Health, Assembly-CSharp
+          m_MethodName: DisableAfterDeath
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &-4653714833182481952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2584,8 +2600,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a0ac4673bf89d14f91de2476489ef2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 500
-  currentHealth: 500
+  maxHealth: 10
+  currentHealth: 10
   animator: {fileID: 8579552182600866647}
   targetRenderer: {fileID: 0}
   flashColor: {r: 1, g: 1, b: 1, a: 1}
