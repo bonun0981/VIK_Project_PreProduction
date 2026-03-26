@@ -245,6 +245,32 @@ MonoBehaviour:
   endUpdateEventName: Disable Hitbox
   endTime: 0.98
   exitEventName: Disable Hitbox
+--- !u!1102 &-4396135917312673140
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: New State 0
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 0}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!114 &-4096543425014608677
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -629,6 +655,9 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: -3314344362075863684}
     m_Position: {x: -330, y: 420, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -4396135917312673140}
+    m_Position: {x: 352.86493, y: 95.62695, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: -6830359226089823602}
@@ -902,14 +931,14 @@ AnimatorStateTransition:
     m_EventTreshold: 0.1
   - m_ConditionMode: 3
     m_ConditionEvent: Velocity
-    m_EventTreshold: 0.2
+    m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -3537068027907000548}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.2153498
+  m_TransitionDuration: 0.0000000054130114
   m_TransitionOffset: 0
   m_ExitTime: 0
   m_HasExitTime: 0
@@ -1024,9 +1053,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.0000000061600955
+  m_TransitionDuration: 0.35672507
   m_TransitionOffset: 0
-  m_ExitTime: 0
+  m_ExitTime: 6.157715e-11
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
