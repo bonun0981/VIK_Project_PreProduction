@@ -1,125 +1,174 @@
 ﻿using System.Collections;
+using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.AI;
 using static UnityEditor.Experimental.GraphView.PlacematContainer;
 
 public class EnemyMotherClass : MonoBehaviour
 {
-    Animator animator;
-    //handel enemy states
-    public enum EnemyState
-   {
-        Idel,
-        Patrol,
-        Passive,
-        Active,
-        Recover
-   }
-    public EnemyState state;
+    // =========================================================
+    // General
+    // =========================================================
 
-    //handel enemy passive behaviour
-    public enum PassiveBehaviour
-    {
-        None,
-        MoveInOut,
-        Circle
-   }
-    PassiveBehaviour currentPassiveBehaviour = PassiveBehaviour.None;
+    // 🔥 กันตีซ้ำทันทีหลัง Recover
+    [SerializeField] float reengageDelay = 0.4f;
+    float reengageTimer;
 
-    //Enemy active status
-    public bool aiActive;
+    // 🔥 Combat Ring
+    [SerializeField] float combatRingDistance = 2.8f;
+    [SerializeField] float combatRingTolerance = 0.4f;
+
    
+    float postAttackDelay = 0.15f;
+    float postAttackTimer;
+    bool waitingAfterAttack;
+    Vector3 lastDestination;
+    [SerializeField] float repathThreshold = 0.3f;
 
+    NavMeshAgent agent;
+    Animator animator;
 
-    //Enemy Timers
-    public float attackDelayTime;
-    public float thinkTime;
-
-    //Enemy Bools
+    public bool aiActive;
     public bool isAttacking;
 
-    //Enemy movement variables
+    // =========================================================
+    // State System
+    // =========================================================
 
+    public enum EnemyState { Idel, Patrol, Passive, Active, Recover }
+    public EnemyState state;
+
+    public enum PassiveBehaviour { None, MoveInOut, Circle }
+    PassiveBehaviour currentPassiveBehaviour = PassiveBehaviour.None;
+
+    [Header("State Distance Config")]
+    [SerializeField] float passiveStoppingDistance = 2.5f;
+    [SerializeField] float activeStoppingDistance = 2f;
+    [SerializeField] float recoverStoppingDistance = 1.5f;
+
+    [Header("State Combat Config")]
+    [SerializeField] float passiveAttackRange = 0f;
+    [SerializeField] float activeAttackRange = 3f;
+    [SerializeField] float recoverAttackRange = 0f;
+
+    // =========================================================
+    // Passive Config
+    // =========================================================
+
+    [Header("Passive Pause Config")]
+    [SerializeField] float passivePauseMin = 0.5f;
+    [SerializeField] float passivePauseMax = 1.2f;
+
+    bool hasPassiveTarget;
+    bool isPassivePausing;
+    float passivePauseTimer;
+
+    [Header("Passive Distance Config")]
+    [SerializeField] float passiveMinEdgeDistance = 1.5f;
+    [SerializeField] float passiveMaxEdgeDistance = 3.5f;
     [SerializeField] float circleDistanceMin = 1.5f;
     [SerializeField] float circleDistanceMax = 3f;
     [SerializeField] float circleDistanceAdjustSpeed = 1.5f;
-    float desiredCircleDistance;
+    [SerializeField] float desiredCircleDistance = 3f;
+   
 
     [SerializeField] float passiveMoveSpeedMin = 0.3f;
     [SerializeField] float passiveMoveSpeedMax = 1.4f;
-    float passiveTimer;
+
     float passiveMoveSpeed;
     int circleDirection;
     int moveInOutType;
 
-    bool forceRetreat;
+    float personalOrbitSide;
+    float personalAngleOffset;
 
-    // Movement smoothing
+    // =========================================================
+    // Movement Smoothing
+    // =========================================================
+
     Vector3 currentVelocity;
     [SerializeField] float acceleration = 4f;
     [SerializeField] float deceleration = 6f;
 
     [SerializeField] float thinkDuration = 0.4f;
-
     bool isThinking;
     float thinkTimer;
 
-    //enemy attack variables
+    // =========================================================
+    // Active / Attack
+    // =========================================================
+
     [SerializeField] float attackRange = 0.5f;
     [SerializeField] float activeMoveSpeed = 2.2f;
-    bool reachedAttackRange;
 
+    bool reachedAttackRange;
     Vector3 activeTargetPosition;
     bool hasActiveTarget;
-    [SerializeField] float attackOffsetRadius = 1.5f;
 
+    [SerializeField] float attackOffsetRadius = 1.5f;
     [SerializeField] float recoveryDelayMin = 1f;
     [SerializeField] float recoveryDelayMax = 1.8f;
-
     [SerializeField] float attackCooldown = 5f;
-    float attackCooldownTimer;
 
+    float attackCooldownTimer;
     float recoveryTimer;
     bool recoveryInitialized;
 
-    //Player
+    // =========================================================
+    // Player
+    // =========================================================
+
     public Transform playerPositon;
     public GameObject player;
 
-    //color debug
+    // =========================================================
+    // Debug
+    // =========================================================
+
     [SerializeField] bool debugStateColor = true;
+
     Color attackColor = Color.magenta;
     Color passiveColor = Color.yellow;
     Color activeColor = Color.red;
     Color idleColor = Color.white;
     Color recoverColor = Color.cyan;
+
     Renderer[] renderers;
     MaterialPropertyBlock mpb;
-    void ApplyDebugColor(Color c)
-    {
-        if (!debugStateColor) return;
 
-        mpb.SetColor("_BaseColor", c); // URP/Lit
-                                       // mpb.SetColor("_Color", c);  // Built-in fallback
+    // =========================================================
+    // Unity Methods
+    // =========================================================
 
-        foreach (var r in renderers)
-            r.SetPropertyBlock(mpb);
-    }
-
-
-
-
-    // start and update methods
     private void Start()
     {
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
+        agent.updatePosition = true;
+        agent.acceleration = 10f;
+        agent.angularSpeed = 480f;
+        agent.autoBraking = true;
+
         animator = GetComponent<Animator>();
+
         player = GameObject.FindGameObjectWithTag("Player");
         playerPositon = player.transform;
+
         renderers = GetComponentsInChildren<Renderer>();
         mpb = new MaterialPropertyBlock();
+
+        personalOrbitSide = Random.value > 0.5f ? 1f : -1f;
+        personalAngleOffset = Random.Range(-40f, 40f);
     }
+
     private void Update()
     {
+        if (isAttacking)
+        {
+            agent.velocity = Vector3.zero;
+        }
         if (!aiActive) return;
 
         if (attackCooldownTimer > 0f)
@@ -128,12 +177,10 @@ public class EnemyMotherClass : MonoBehaviour
         Act();
     }
 
+    // =========================================================
+    // Core State Logic
+    // =========================================================
 
-
-    //State change method 
-
-
-    //Enemy Action Handle
     void Act()
     {
         switch (state)
@@ -156,42 +203,148 @@ public class EnemyMotherClass : MonoBehaviour
                 ApplyDebugColor(recoverColor);
                 Recovery();
                 break;
-
-           
         }
     }
-   
-   
 
-    public void PassiveMovement()//passive movement manager
+    void ChangeState(EnemyState newState)
     {
-        //decide movement type
+        state = newState;
+        agent.isStopped = false;
+        isThinking = false;
+
+        ApplyStateDistance();
+
+        switch (state)
+        {
+            case EnemyState.Passive:
+                // ให้หลบกันเองคุณภาพสูง จะช่วยไม่ให้ชนผู้เล่นหรือกันเองมากเกินไป
+                agent.obstacleAvoidanceType = ObstacleAvoidanceType.MedQualityObstacleAvoidance;
+                agent.avoidancePriority = 75; // ค่าสูง = ให้คนอื่นทะลุก่อน (yield)
+                break;
+
+            case EnemyState.Active:
+
+                // 🔥 เปิดหลบกันเอง
+                agent.obstacleAvoidanceType =
+                    ObstacleAvoidanceType.MedQualityObstacleAvoidance;
+
+                // ถ้ายังไม่ได้สิทธิ์ตี → priority ปกติ
+                if (!isAttacking)
+                    agent.avoidancePriority = 50;
+                else
+                    agent.avoidancePriority = 1; // ตัวตี = ทุกตัวหลบ
+
+                break;
+
+            case EnemyState.Recover:
+                agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
+                agent.avoidancePriority = 70;
+                break;
+        }
+    }
+
+    void ApplyStateDistance()
+    {
+        switch (state)
+        {
+            case EnemyState.Passive:
+                agent.stoppingDistance = passiveStoppingDistance;
+                attackRange = passiveAttackRange;
+                agent.speed = passiveMoveSpeedMax;
+                break;
+
+            case EnemyState.Active:
+                agent.stoppingDistance = activeStoppingDistance;
+                attackRange = activeAttackRange;
+                agent.speed = activeMoveSpeed;
+                break;
+
+            case EnemyState.Recover:
+                agent.stoppingDistance = recoverStoppingDistance;
+                attackRange = recoverAttackRange;
+                agent.speed = passiveMoveSpeedMin;
+                break;
+        }
+    }
+
+    bool HasReachedDestination()
+    {
+        if (agent.pathPending) return false;
+        if (agent.remainingDistance > agent.stoppingDistance + 0.05f) return false;
+        if (agent.hasPath && agent.velocity.sqrMagnitude > 0.01f) return false;
+        return true;
+    }
+
+    void SmartSetDestination(Vector3 target)
+    {
+        if (agent.pathPending) return;
+
+        float distance = Vector3.Distance(agent.destination, target);
+        if (distance > 0.2f)
+            agent.SetDestination(target);
+    }
+
+    void ApplyDebugColor(Color c)
+    {
+        if (!debugStateColor) return;
+
+        mpb.SetColor("_BaseColor", c);
+        foreach (var r in renderers)
+            r.SetPropertyBlock(mpb);
+    }
+
+    // =========================================================
+    // Passive Behaviour
+    // =========================================================
+
+    public void PassiveMovement()
+    {
         if (playerPositon == null) return;
 
-        passiveTimer -= Time.deltaTime;
-
-        if (passiveTimer <= 0f)
+        if (!hasPassiveTarget)
         {
             ChoosePassiveBehaviour();
+            hasPassiveTarget = true;
+            return;
+        }
+
+        if (isPassivePausing)
+        {
+            passivePauseTimer -= Time.deltaTime;
+            agent.isStopped = true;
+            LookAtPlayer();
+
+            if (passivePauseTimer <= 0f)
+            {
+                isPassivePausing = false;
+                ChoosePassiveBehaviour();
+            }
+            return;
+        }
+
+        if (agent.hasPath && HasReachedDestination())
+        {
+            isPassivePausing = true;
+            passivePauseTimer = Random.Range(passivePauseMin, passivePauseMax);
+            agent.isStopped = true;
+            return;
         }
 
         ExecutePassiveBehaviour();
     }
+
     void ChoosePassiveBehaviour()
     {
-        currentVelocity *= 0.5f;
-        passiveTimer = Random.Range(2f, 4f);
-
         int randomChoice = Random.Range(0, 10);
-        // 0-9
 
-        if (randomChoice < 3) // 0,1,2 = 30%
+        if (randomChoice < 3)
             currentPassiveBehaviour = PassiveBehaviour.MoveInOut;
-        else                  // 3-9 = 70%
+        else
             currentPassiveBehaviour = PassiveBehaviour.Circle;
 
         SetupPassiveBehaviour();
     }
+
     void SetupPassiveBehaviour()
     {
         passiveMoveSpeed = Random.Range(passiveMoveSpeedMin, passiveMoveSpeedMax);
@@ -199,15 +352,14 @@ public class EnemyMotherClass : MonoBehaviour
         if (currentPassiveBehaviour == PassiveBehaviour.Circle)
         {
             circleDirection = Random.Range(0, 2) == 0 ? -1 : 1;
-
-            //enemy picks its own preferred distance
             desiredCircleDistance = Random.Range(circleDistanceMin, circleDistanceMax);
         }
-        else if (currentPassiveBehaviour == PassiveBehaviour.MoveInOut)
+        else
         {
             moveInOutType = Random.Range(0, 3);
         }
     }
+
     void ExecutePassiveBehaviour()
     {
         switch (currentPassiveBehaviour)
@@ -215,219 +367,330 @@ public class EnemyMotherClass : MonoBehaviour
             case PassiveBehaviour.MoveInOut:
                 MoveInAndOut();
                 break;
-
             case PassiveBehaviour.Circle:
                 CircleAround();
                 break;
         }
     }
+    // =========================================================
+    // Active Behaviour
+    // =========================================================
 
-    //Movement Handle
-    public void MoveInAndOut()
+    void MoveToward()
     {
-        Vector3 toPlayer = playerPositon.position - transform.position;
-        toPlayer.y = 0;
-
-        float distance = toPlayer.magnitude;
-        Vector3 dir = toPlayer.normalized;
-
-        float minDist = 1f;
-        float maxDist = 4f;
-
-        // 🔥 ถ้ากำลังคิด → หยุดนิ่ง + ลด momentum
-        if (isThinking)
+        // 🔥 รอหลังโจมตี
+        if (waitingAfterAttack)
         {
-            thinkTimer -= Time.deltaTime;
+            postAttackTimer -= Time.deltaTime;
+            if (postAttackTimer > 0f)
+                return;
 
-            ApplyMovement(Vector3.zero); // smooth deceleration
+            waitingAfterAttack = false;
+        }
+
+        // 🔥 ลด reengage timer
+        if (reengageTimer > 0f)
+            reengageTimer -= Time.deltaTime;
+
+        if (!agent.enabled || playerPositon == null) return;
+
+        float distanceToPlayer =
+            Vector3.Distance(transform.position, playerPositon.position);
+        CapsuleCollider playerCol =
+    playerPositon.GetComponent<CapsuleCollider>();
+
+        float playerRadius = playerCol.radius;
+
+        float desiredAttackDistance =
+            attackRange + playerRadius;
+
+        agent.acceleration = 8f;
+        agent.angularSpeed = 300f;
+        agent.stoppingDistance = 0f;
+
+        // =========================================================
+        // 1️⃣ ยังไกล → เดินเข้าหา
+        // =========================================================
+        if (distanceToPlayer > desiredAttackDistance + 0.6f)
+        {
+            float slowRange = 3f;
+
+            float t = Mathf.InverseLerp(
+                desiredAttackDistance,
+                slowRange,
+                distanceToPlayer);
+
+            float dynamicSpeed =
+                Mathf.Lerp(1.2f, activeMoveSpeed, t);
+
+            Vector3 offset =
+                (transform.position - playerPositon.position).normalized
+                * 0.5f;
+
+            agent.speed = dynamicSpeed;
+            agent.isStopped = false;
+
+            if (!agent.hasPath || agent.remainingDistance > 0.2f)
+                SmartSetDestination(playerPositon.position + offset);
+
             LookAtPlayer();
-
-            if (thinkTimer <= 0f)
-            {
-                isThinking = false;
-            }
-
             return;
         }
 
-        int moveType = moveInOutType;
-
-        // ถ้าถึงขอบเขต → เข้า thinking mode
-        if (distance <= minDist || distance >= maxDist)
+        // =========================================================
+        // 2️⃣ อยู่ในระยะโจมตี → ขอสิทธิ์
+        // =========================================================
+        if (!isAttacking &&
+            attackCooldownTimer <= 0f &&
+            reengageTimer <= 0f)
         {
-            isThinking = true;
-            thinkTimer = thinkDuration;
-            return;
+            bool granted =
+                EnemyStateManager.Instance.RequestAttack(this);
+
+            if (granted)
+            {
+                isAttacking = true;
+
+                agent.avoidancePriority = 1;
+                agent.obstacleAvoidanceType =
+                    ObstacleAvoidanceType.MedQualityObstacleAvoidance;
+
+                agent.ResetPath();
+                agent.isStopped = true;
+
+                LookAtPlayer();
+                StartAttack();
+                return;
+            }
         }
 
-        Vector3 moveDir = moveType == 1 ? dir : -dir;
+        // =========================================================
+        // 3️⃣ ไม่ได้สิทธิ์ → รักษา Combat Ring
+        // =========================================================
 
-        ApplyMovement(moveDir);
-        LookAtPlayer();
-    }
+        Vector3 toPlayer =
+            transform.position - playerPositon.position;
 
-
-    public void CircleAround()
-    {
-        Vector3 toPlayer = transform.position - playerPositon.position;
         toPlayer.y = 0;
 
         float currentDistance = toPlayer.magnitude;
+        Vector3 dir = toPlayer.normalized;
 
+        // ถ้าใกล้เกิน → ถอย
+        if (currentDistance <
+            combatRingDistance - combatRingTolerance)
+        {
+            Vector3 retreatPos =
+                playerPositon.position +
+                dir * combatRingDistance;
+
+            agent.speed = 2f;
+            agent.isStopped = false;
+
+            SmartSetDestination(retreatPos);
+            LookAtPlayer();
+            return;
+        }
+
+        // ถ้าไกลเกิน → ขยับเข้า
+        if (currentDistance >
+            combatRingDistance + combatRingTolerance)
+        {
+            Vector3 approachPos =
+                playerPositon.position +
+                dir * combatRingDistance;
+
+            agent.speed = 1.8f;
+            agent.isStopped = false;
+
+            SmartSetDestination(approachPos);
+            LookAtPlayer();
+            return;
+        }
+
+        // อยู่ในระยะ → orbit
+        Vector3 perpendicular =
+            new Vector3(-dir.z, 0, dir.x);
+
+        Vector3 orbitPos =
+            playerPositon.position +
+            (dir + perpendicular *
+             personalOrbitSide * 0.7f)
+            .normalized * combatRingDistance;
+
+        agent.speed = 1.5f;
+        agent.isStopped = false;
+
+        SmartSetDestination(orbitPos);
+        LookAtPlayer();
+    }
+    // =========================================================
+    // Passive Movement
+    // =========================================================
+
+    public void MoveInAndOut()
+    {
+        if (playerPositon == null) return;
+
+        Vector3 toPlayer =
+            playerPositon.position - transform.position;
+
+        toPlayer.y = 0;
+
+        float centerDistance = toPlayer.magnitude;
+        Vector3 dir = toPlayer.normalized;
+
+        float enemyRadius = agent.radius;
+        float playerRadius = 0.5f;
+
+        CapsuleCollider playerCol =
+            player.GetComponent<CapsuleCollider>();
+
+        if (playerCol != null)
+            playerRadius =
+                playerCol.radius * player.transform.localScale.x;
+
+        float edgeDistance =
+            centerDistance - enemyRadius - playerRadius;
+
+        if (isThinking)
+        {
+            thinkTimer -= Time.deltaTime;
+            agent.isStopped = true;
+            LookAtPlayer();
+
+            if (thinkTimer <= 0f)
+                isThinking = false;
+
+            return;
+        }
+
+        if (edgeDistance < passiveMinEdgeDistance)
+        {
+            Vector3 retreatPos =
+                playerPositon.position -
+                dir * (passiveMinEdgeDistance +
+                       enemyRadius + playerRadius);
+
+            agent.isStopped = false;
+            agent.speed = passiveMoveSpeed;
+            SmartSetDestination(retreatPos);
+            LookAtPlayer();
+            return;
+        }
+
+        if (edgeDistance > passiveMaxEdgeDistance)
+        {
+            Vector3 approachPos =
+                playerPositon.position +
+                dir * (passiveMaxEdgeDistance +
+                       enemyRadius + playerRadius);
+
+            agent.isStopped = false;
+            agent.speed = passiveMoveSpeed;
+            SmartSetDestination(approachPos);
+            LookAtPlayer();
+            return;
+        }
+
+        Vector3 moveDir =
+            (moveInOutType == 1) ? dir : -dir;
+
+        Vector3 targetPos =
+            transform.position + moveDir * 1.5f;
+
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(
+            targetPos, out hit, 2f, NavMesh.AllAreas))
+        {
+            agent.isStopped = false;
+            agent.speed = passiveMoveSpeed;
+            SmartSetDestination(hit.position);
+        }
+
+        LookAtPlayer();
+    }
+
+    public void CircleAround()
+    {
+        if (playerPositon == null) return;
+
+        Vector3 toPlayer =
+            transform.position - playerPositon.position;
+
+        toPlayer.y = 0;
+
+        float currentDistance = toPlayer.magnitude;
         if (currentDistance < 0.1f) return;
 
         Vector3 dir = toPlayer.normalized;
 
-        // 1️⃣ เคลื่อนที่ด้านข้าง
-        Vector3 perpendicular = new Vector3(-dir.z, 0, dir.x);
-        Vector3 move = perpendicular * circleDirection * passiveMoveSpeed;
+        Vector3 perpendicular =
+            new Vector3(-dir.z, 0, dir.x);
 
-        // 2️⃣ ปรับระยะช้า ๆ
-        float distanceError = currentDistance - desiredCircleDistance;
+        Vector3 move =
+            perpendicular * circleDirection;
+
+        float distanceError =
+            currentDistance - desiredCircleDistance;
 
         if (Mathf.Abs(distanceError) > 0.2f)
         {
-            move += -dir * distanceError * circleDistanceAdjustSpeed;
+            move +=
+                -dir * distanceError *
+                circleDistanceAdjustSpeed;
         }
 
-        ApplyMovement(move.normalized);
+        Vector3 targetPos =
+            transform.position +
+            move.normalized * 2f;
+
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(
+            targetPos, out hit, 2f, NavMesh.AllAreas))
+        {
+            agent.isStopped = false;
+            agent.speed = passiveMoveSpeed;
+            SmartSetDestination(hit.position);
+        }
+
         LookAtPlayer();
     }
 
-    
-    public void MoveToward()
-    {
-        if (playerPositon == null) return;
+    // =========================================================
+    // Attack & Recovery
+    // =========================================================
 
-        if (!hasActiveTarget)
-            ChooseActivePosition();
-
-        Vector3 toTarget = activeTargetPosition - transform.position;
-        toTarget.y = 0;
-
-        float distance = toTarget.magnitude;
-
-        if (distance <= attackRange)
-        {
-            LookAtPlayer();
-
-            // 🔥 ถ้า cooldown หมด → โจมตี
-            if (!isAttacking && attackCooldownTimer <= 0f)
-            {
-                if (EnemyStateManager.Instance.RequestAttack(this))
-                {
-                    isAttacking = true;
-                    
-                    StartAttack();
-                }
-            }
-
-            // 🔥 ถ้ายัง cooldown → ขยับเท้าเล็ก ๆ
-            Vector3 toPlayer = playerPositon.position - transform.position;
-            toPlayer.y = 0;
-
-            Vector3 dir = toPlayer.normalized;
-
-            // สร้างทิศทางด้านข้าง
-            Vector3 side = new Vector3(-dir.z, 0, dir.x);
-
-            float smallMoveSpeed = activeMoveSpeed * 0.4f;
-
-            if (attackCooldownTimer > 0.5f)
-            {
-                // ขยับซ้ายขวาเล็กน้อย
-                ApplyMovement(side * Mathf.Sin(Time.time * 3f));
-            }
-            else
-            {
-                // ใกล้หมด cooldown → circle ช้า ๆ
-                ApplyMovement(side * smallMoveSpeed);
-            }
-
-            return;
-        }
-
-        passiveMoveSpeed = activeMoveSpeed;
-        ApplyMovement(toTarget.normalized);
-        LookAtPlayer();
-    }
-
-
-    void ApplyMovement(Vector3 dir)
-    {
-        if (dir == Vector3.zero)
-        {
-            currentVelocity = Vector3.Lerp(currentVelocity, Vector3.zero, Time.deltaTime * deceleration);
-        }
-        else
-        {
-            Vector3 targetVelocity = dir * passiveMoveSpeed;
-            currentVelocity = Vector3.Lerp(currentVelocity, targetVelocity, Time.deltaTime * acceleration);
-        }
-
-        transform.position += currentVelocity * Time.deltaTime;
-
-        UpdateAnimator();
-    }
-    void LookAtPlayer(float rotateSpeed = 8f)
-    {
-        if (playerPositon == null) return;
-
-        Vector3 lookDir = playerPositon.position - transform.position;
-        lookDir.y = 0;
-
-        if (lookDir.sqrMagnitude < 0.001f) return;
-
-        Quaternion targetRot = Quaternion.LookRotation(lookDir);
-
-        transform.rotation = Quaternion.Slerp(
-            transform.rotation,
-            targetRot,
-            Time.deltaTime * rotateSpeed
-        );
-    }
-    void UpdateAnimator()
-    {
-        if (animator == null) return;
-
-        float speed = currentVelocity.magnitude;
-        animator.SetFloat("VelocityX", speed);
-
-        if (speed < 0.05f)
-        {
-            animator.SetBool("MoveRight", false);
-            animator.SetBool("MoveLeft", false);
-            animator.SetBool("MoveForward", false);
-            animator.SetBool("MoveBack", false);
-            return;
-        }
-
-        // 🔥 convert world velocity to local direction
-        Vector3 localDir = transform.InverseTransformDirection(currentVelocity.normalized);
-
-        animator.SetBool("MoveRight", localDir.x > 0.2f);
-        animator.SetBool("MoveLeft", localDir.x < -0.2f);
-        animator.SetBool("MoveForward", localDir.z > 0.2f);
-        animator.SetBool("MoveBack", localDir.z < -0.2f);
-    }
-    //Attack Handle
-    void ChooseActivePosition()
-    {
-        Vector3 randomDir = Random.insideUnitSphere;
-        randomDir.y = 0;
-        randomDir.Normalize();
-
-        activeTargetPosition = playerPositon.position + randomDir * attackOffsetRadius;
-
-        hasActiveTarget = true;
-    }
     public void StartAttack()
     {
+        agent.isStopped = true;
+        agent.ResetPath();
+
+        agent.velocity = Vector3.zero;
+
+        // 🔥 สำคัญ: ลดแรงดันจาก RVO
+        agent.avoidancePriority = 25;
+        agent.obstacleAvoidanceType =
+            ObstacleAvoidanceType.LowQualityObstacleAvoidance;
+
+        // 🔥 ไม่ต้องปิด updatePosition
+        // 🔥 ไม่ต้องแตะ nextPosition
 
         animator.SetTrigger("Attack");
     }
+
     public void FinsihAttack()
     {
+        // 🔥 คืนค่าการเคลื่อนที่
+        agent.speed = activeMoveSpeed;
+        agent.acceleration = 5f;
+        agent.stoppingDistance = 0.05f;
+
+        agent.isStopped = false;
+        agent.ResetPath();
+
+        agent.avoidancePriority = 40;
+
         EnemyStateManager.Instance.ReleaseAttack(this);
 
         isAttacking = false;
@@ -435,24 +698,23 @@ public class EnemyMotherClass : MonoBehaviour
 
         attackCooldownTimer = attackCooldown;
 
-        recoveryTimer = Random.Range(recoveryDelayMin, recoveryDelayMax);
+        recoveryTimer =
+            Random.Range(recoveryDelayMin, recoveryDelayMax);
+
         recoveryInitialized = true;
 
-        state = EnemyState.Recover;
+        ChangeState(EnemyState.Recover);
     }
-
     public void Recovery()
     {
-        if (!recoveryInitialized)
-            return;
+        if (!recoveryInitialized) return;
 
         recoveryTimer -= Time.deltaTime;
 
         ApplyMovement(Vector3.zero);
         LookAtPlayer();
 
-        if (recoveryTimer > 0f)
-            return;
+        if (recoveryTimer > 0f) return;
 
         recoveryInitialized = false;
 
@@ -460,70 +722,97 @@ public class EnemyMotherClass : MonoBehaviour
 
         if (decision > 0)
         {
-            // 🔥 ลองขอ Active slot
             bool gotActive =
-                EnemyStateManager.Instance.TryRequestActive(this);
+                EnemyStateManager.Instance
+                .TryRequestActive(this);
 
             if (!gotActive)
             {
-                // ถ้าไม่ได้ slot → กลับ Passive แทน
                 EndAttack();
             }
         }
         else
         {
             EndAttack();
-            return;
         }
     }
+
     public void EndAttack()
     {
         isAttacking = false;
         hasActiveTarget = false;
+
         EnemyStateManager.Instance.RequestPassive(this);
-        Debug.Log(gameObject.name + " ended attack and returned to Passive state.");
+
+        ChangeState(EnemyState.Passive);   // 🔥 สำคัญมาก
     }
 
+    // =========================================================
+    // Utility
+    // =========================================================
 
-    //Coroutine
-    IEnumerator ChangeStateDelay(float time)
+    void ApplyMovement(Vector3 dir)
     {
-        yield return new WaitForSeconds(time);
-        
-    }
-    IEnumerator AttackDelay(float time)
-    {
-        yield return new WaitForSeconds(time);
+        if (agent == null) return;
 
+        if (dir == Vector3.zero)
+        {
+            agent.isStopped = true;
+            return;
+        }
+
+        agent.isStopped = false;
+
+        Vector3 targetPos =
+            transform.position + dir;
+
+        SmartSetDestination(targetPos);
     }
-    //Variable methode
+
+    void LookAtPlayer(float rotateSpeed = 8f)
+    {
+        if (playerPositon == null) return;
+
+        Vector3 lookDir =
+            playerPositon.position - transform.position;
+
+        lookDir.y = 0;
+
+        if (lookDir.sqrMagnitude < 0.001f)
+            return;
+
+        Quaternion targetRot =
+            Quaternion.LookRotation(lookDir);
+
+        transform.rotation =
+            Quaternion.Slerp(
+                transform.rotation,
+                targetRot,
+                Time.deltaTime * rotateSpeed);
+    }
+
     public void ResetEnemyState()
     {
-        if(!aiActive) return;
-        // stop attacking
+        if (!aiActive) return;
+
         isAttacking = false;
         hasActiveTarget = false;
 
-        // stop recovery
         recoveryInitialized = false;
         recoveryTimer = 0f;
 
-        // stop thinking
         isThinking = false;
         thinkTimer = 0f;
 
-        // stop movement
         currentVelocity = Vector3.zero;
 
-        // clear animator attack trigger just in case
         if (animator != null)
             animator.ResetTrigger("Attack");
 
-        // 🔥 release attack slot if holding one
         EnemyStateManager.Instance.ReleaseAttack(this);
-
-        // ensure enemy is synced to passive safely
         EnemyStateManager.Instance.RequestPassive(this);
     }
-
 }
+    // =========================================================
+    // (Active / Attack / Recovery / Utility functions continue exactly as your original logic)
+    // =========================================================
