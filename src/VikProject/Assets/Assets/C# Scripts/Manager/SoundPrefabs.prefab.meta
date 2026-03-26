@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:src/VikProject/Assets/Assets/Prefabs/particle/Particle Fire.prefab.meta
+guid: c7eb054d5179b88428672379e24cd3a8
+========
 guid: 7ce8749107d0a994384c3ff20aab1ae6
+>>>>>>>> Middle-Branches:src/VikProject/Assets/Assets/C# Scripts/Manager/SoundPrefabs.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 
