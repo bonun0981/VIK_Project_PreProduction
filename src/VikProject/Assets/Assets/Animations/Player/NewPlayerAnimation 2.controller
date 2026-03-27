@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startEventName: Start Attack
-  startUpdateEventName: ShowUI
+  startUpdateEventName: PlayerDie
   triggerTime: 0.126
   endUpdateEventName: SetActive
   endTime: 0.708
@@ -664,7 +664,7 @@ MonoBehaviour:
   startUpdateEventName: Start Attack
   triggerTime: 0
   endUpdateEventName: End Attack
-  endTime: 1
+  endTime: 0.635
   exitEventName: End Attack
 --- !u!114 &-1861944760325294929
 MonoBehaviour:

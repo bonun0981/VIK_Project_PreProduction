@@ -120,4 +120,9 @@ public class Health : MonoBehaviour, IDamageable
     {
         cameraShakeManager.TakeDamageShake();
     }
+
+    public void HpDebug()
+    {
+        currentHealth = maxHealth;
+    }
 }

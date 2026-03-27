@@ -30,7 +30,10 @@ public class PlayerResource : MonoBehaviour
             }
         }
     }
-
+    public void ResouceDebug()
+    {
+        currentResource = maxResource;
+    }
     public void AddResource(float amount)
     {
         currentResource += amount;

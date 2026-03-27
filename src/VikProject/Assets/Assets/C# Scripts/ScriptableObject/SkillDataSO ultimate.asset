@@ -15,13 +15,13 @@ MonoBehaviour:
   spawnType: 2
   cooldown: 1
   radius: 10
-  damage: 1
+  damage: 100
   knockback: 1
-  hitStopDuration: 0.1
+  hitStopDuration: 0
   duration: 2
-  moveDuration: 2
-  stayDuration: 2
+  moveDuration: 1
+  stayDuration: 4
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
-  skillPrefab: {fileID: 4279614031625572502, guid: 3a360ef078bf36a4583d194f0796359b, type: 3}
+  skillPrefab: {fileID: 1568254402617739177, guid: 9626e26ab58c6af429786aba96f143e0, type: 3}
