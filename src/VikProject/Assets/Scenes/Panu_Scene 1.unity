@@ -23981,6 +23981,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5151986482913752456, guid: 61b91b8c047e7de4caa54d33ab9e8f7b, type: 3}
   m_PrefabInstance: {fileID: 188392623}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &191759634 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8047089326718515956, guid: 4d0b9a109b526a14ba3a06b7dc1a0920, type: 3}
+  m_PrefabInstance: {fileID: 1273013580}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &193331289
 GameObject:
   m_ObjectHideFlags: 0
@@ -47380,24 +47385,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2418780968620536139, guid: 75f097416605b1344a1fe7401b628da7, type: 3}
   m_PrefabInstance: {fileID: 7152565680334254955}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &464955989
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 464955986}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72bab398e0b349b42902f690a9843721, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetsToWatch:
-  - {fileID: 1542123852}
-  objectToRemove: {fileID: 464955986}
-  victorySound: {fileID: 8300000, guid: c9a04abae71bc36429b9075109ad1a3d, type: 3}
-  volume: 1
-  useFadeOut: 1
 --- !u!1001 &466199741
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50953,11 +50940,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 5151986482913752456, guid: 61b91b8c047e7de4caa54d33ab9e8f7b, type: 3}
   m_PrefabInstance: {fileID: 543017962}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &544879901 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4081976880213391457, guid: 74362d07a671b864dacc7af02dfc332c, type: 3}
-  m_PrefabInstance: {fileID: 875132573644697307}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &545331496
 GameObject:
@@ -73414,7 +73396,6 @@ GameObject:
   m_Component:
   - component: {fileID: 790299425}
   - component: {fileID: 790299424}
-  - component: {fileID: 790299426}
   m_Layer: 0
   m_Name: SoulsDoor2
   m_TagString: Untagged
@@ -73459,24 +73440,6 @@ Transform:
   - {fileID: 2146377890}
   m_Father: {fileID: 1123518077}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &790299426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 790299423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72bab398e0b349b42902f690a9843721, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetsToWatch:
-  - {fileID: 865981868}
-  objectToRemove: {fileID: 790299423}
-  victorySound: {fileID: 8300000, guid: c9a04abae71bc36429b9075109ad1a3d, type: 3}
-  volume: 1
-  useFadeOut: 1
 --- !u!1 &790918521
 GameObject:
   m_ObjectHideFlags: 0
@@ -74464,6 +74427,114 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1715262883}
   m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: -180}
+--- !u!1 &827432034
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 827432035}
+  - component: {fileID: 827432038}
+  - component: {fileID: 827432037}
+  - component: {fileID: 827432036}
+  m_Layer: 0
+  m_Name: Wall_3 (171)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &827432035
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827432034}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.49999982, y: -0.5000003, z: -0.50000024, w: -0.4999997}
+  m_LocalPosition: {x: 648.43823, y: -129.89001, z: -174.42279}
+  m_LocalScale: {x: 398.82336, y: 131.57243, z: 427.48337}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1715262883}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -270}
+--- !u!65 &827432036
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827432034}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.020000009, y: 0.0042338106, z: 0.020793928}
+  m_Center: {x: -0.00003402683, y: -2.6932671e-11, z: 0.00009924268}
+--- !u!23 &827432037
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827432034}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 68a0f25aad680e642a54ef258acb9f09, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &827432038
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827432034}
+  m_Mesh: {fileID: -2495432268419892225, guid: fe42c418f60aed44e9a8577f45dab93d, type: 3}
 --- !u!1 &828752983
 GameObject:
   m_ObjectHideFlags: 0
@@ -76553,11 +76624,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f27561cdcf5018499cd4cf9f7d8fc9a, type: 3}
---- !u!1 &865981868 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1180236814583124198, guid: 2f27561cdcf5018499cd4cf9f7d8fc9a, type: 3}
-  m_PrefabInstance: {fileID: 865981867}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &866834887 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3464769411934609562, guid: da915f798a439624092269d59d167152, type: 3}
@@ -76763,7 +76829,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetsToWatch:
-  - {fileID: 0}
+  - {fileID: 191759634}
   objectToRemove: {fileID: 790299423}
   victorySound: {fileID: 8300000, guid: c9a04abae71bc36429b9075109ad1a3d, type: 3}
   volume: 0.3
@@ -83758,6 +83824,56 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1014678165}
   m_Mesh: {fileID: -2495432268419892225, guid: fe42c418f60aed44e9a8577f45dab93d, type: 3}
+--- !u!1 &1015350094
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1015350095}
+  - component: {fileID: 1015350096}
+  m_Layer: 0
+  m_Name: Souls_Door3 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1015350095
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015350094}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -100.22644, y: 1.2041855, z: 94.59271}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1123518077}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1015350096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015350094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72bab398e0b349b42902f690a9843721, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetsToWatch:
+  - {fileID: 1542123852}
+  objectToRemove: {fileID: 464955986}
+  victorySound: {fileID: 8300000, guid: c9a04abae71bc36429b9075109ad1a3d, type: 3}
+  volume: 0.3
+  useFadeOut: 1
 --- !u!1 &1015753510
 GameObject:
   m_ObjectHideFlags: 0
@@ -87642,6 +87758,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1952875902}
     m_Modifications:
+    - target: {fileID: 2300564045306573448, guid: 4d0b9a109b526a14ba3a06b7dc1a0920, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2782397769232481673, guid: 4d0b9a109b526a14ba3a06b7dc1a0920, type: 3}
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
@@ -87706,6 +87826,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3749119262303782658, guid: 4d0b9a109b526a14ba3a06b7dc1a0920, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6039096157245906889, guid: 4d0b9a109b526a14ba3a06b7dc1a0920, type: 3}
       propertyPath: maxHealth
       value: 200
@@ -87742,6 +87866,11 @@ PrefabInstance:
 --- !u!4 &1101096755 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3256242347009901602, guid: 4d0b9a109b526a14ba3a06b7dc1a0920, type: 3}
+  m_PrefabInstance: {fileID: 1101096754}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1101096756 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8047089326718515956, guid: 4d0b9a109b526a14ba3a06b7dc1a0920, type: 3}
   m_PrefabInstance: {fileID: 1101096754}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1102097879
@@ -87789,7 +87918,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetsToWatch:
-  - {fileID: 0}
+  - {fileID: 1101096756}
   objectToRemove: {fileID: 1220231146}
   victorySound: {fileID: 8300000, guid: c9a04abae71bc36429b9075109ad1a3d, type: 3}
   volume: 0.3
@@ -88914,7 +89043,6 @@ Transform:
   - {fileID: 1220231147}
   - {fileID: 1217109248}
   - {fileID: 1477464581}
-  - {fileID: 544879901}
   - {fileID: 1352535066}
   - {fileID: 585964896}
   - {fileID: 360300905}
@@ -88922,6 +89050,7 @@ Transform:
   - {fileID: 1832695053}
   - {fileID: 873900436}
   - {fileID: 1102097880}
+  - {fileID: 1015350095}
   - {fileID: 1927290627}
   - {fileID: 1959859659}
   - {fileID: 585380367}
@@ -94418,7 +94547,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1220231147}
   - component: {fileID: 1220231148}
-  - component: {fileID: 1220231149}
   m_Layer: 0
   m_Name: SoulsDoor3
   m_TagString: Untagged
@@ -94463,24 +94591,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 6, z: 10}
   m_Center: {x: 0, y: -2.5, z: 0.5000305}
---- !u!114 &1220231149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1220231146}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72bab398e0b349b42902f690a9843721, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetsToWatch:
-  - {fileID: 0}
-  objectToRemove: {fileID: 1220231146}
-  victorySound: {fileID: 8300000, guid: c9a04abae71bc36429b9075109ad1a3d, type: 3}
-  volume: 1
-  useFadeOut: 1
 --- !u!1001 &1224580404
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -135482,6 +135592,7 @@ Transform:
   - {fileID: 1033193377}
   - {fileID: 1281931124}
   - {fileID: 1991082670}
+  - {fileID: 827432035}
   - {fileID: 1581134173}
   - {fileID: 1327281929}
   - {fileID: 383327477}
@@ -169968,71 +170079,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8499927561362334390}
   m_Mesh: {fileID: -4308478601108066763, guid: fe42c418f60aed44e9a8577f45dab93d, type: 3}
---- !u!1001 &875132573644697307
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1123518077}
-    m_Modifications:
-    - target: {fileID: 3328788549685507388, guid: 74362d07a671b864dacc7af02dfc332c, type: 3}
-      propertyPath: m_Name
-      value: Souls_Door1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4081976880213391457, guid: 74362d07a671b864dacc7af02dfc332c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -100.22644
-      objectReference: {fileID: 0}
-    - target: {fileID: 4081976880213391457, guid: 74362d07a671b864dacc7af02dfc332c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.2041855
-      objectReference: {fileID: 0}
-    - target: {fileID: 4081976880213391457, guid: 74362d07a671b864dacc7af02dfc332c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 94.59271
-      objectReference: {fileID: 0}
-    - target: {fileID: 4081976880213391457, guid: 74362d07a671b864dacc7af02dfc332c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4081976880213391457, guid: 74362d07a671b864dacc7af02dfc332c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4081976880213391457, guid: 74362d07a671b864dacc7af02dfc332c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4081976880213391457, guid: 74362d07a671b864dacc7af02dfc332c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4081976880213391457, guid: 74362d07a671b864dacc7af02dfc332c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4081976880213391457, guid: 74362d07a671b864dacc7af02dfc332c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4081976880213391457, guid: 74362d07a671b864dacc7af02dfc332c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6460485657282876133, guid: 74362d07a671b864dacc7af02dfc332c, type: 3}
-      propertyPath: objectToRemove
-      value: 
-      objectReference: {fileID: 464955986}
-    - target: {fileID: 6460485657282876133, guid: 74362d07a671b864dacc7af02dfc332c, type: 3}
-      propertyPath: 'targetsToWatch.Array.data[0]'
-      value: 
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 74362d07a671b864dacc7af02dfc332c, type: 3}
 --- !u!4 &905321272617307209
 Transform:
   m_ObjectHideFlags: 0
@@ -173951,10 +173997,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8482143805725604883, guid: 75f097416605b1344a1fe7401b628da7, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 464955989}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75f097416605b1344a1fe7401b628da7, type: 3}
 --- !u!1 &7203573566304662096
 GameObject:

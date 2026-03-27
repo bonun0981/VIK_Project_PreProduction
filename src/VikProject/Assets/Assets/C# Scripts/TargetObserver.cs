@@ -43,19 +43,25 @@ public class TargetObserver : MonoBehaviour
     // ฟังก์ชันเช็คว่าบอสทุกตัวใน List ตายหรือถูกปิดไปหมดแล้วยัง
     bool IsAllTargetsDead()
     {
-        // ถ้าไม่มีบอสในลิสต์เลย ให้ถือว่าผ่าน (เปิดหมอก)
+        // ถ้าไม่มีบอสในลิสต์เลย ให้ถือว่าผ่าน
         if (targetsToWatch.Count == 0) return true;
 
         foreach (GameObject target in targetsToWatch)
         {
-            // ถ้ายังมีแม้แต่ตัวเดียวที่ยัง Active อยู่ และยังไม่ถูก Destroy ให้ส่งค่า false
-            if (target != null && target.activeInHierarchy)
+            // 1. ตรวจสอบว่า target ไม่เป็น null
+            if (target != null)
             {
-                return false;
+                // 2. ตรวจสอบว่ามี Tag เป็น "Enemy" หรือไม่
+                // 3. และตรวจสอบว่าตัวมันเองยังเปิดใช้งานอยู่หรือไม่ (activeSelf)
+                // ถ้าตัวมันเอง (ตัวหลัก) ยังเปิดอยู่ และมี Tag เป็น Enemy ให้ส่งค่า false
+                if (target.CompareTag("Enemy") && target.activeSelf)
+                {
+                    return false;
+                }
             }
         }
 
-        // ถ้าวนลูปจนจบแล้วไม่เจอตัวที่รอดอยู่เลย ให้ส่งค่า true
+        // ถ้าวนจนครบแล้ว ไม่เจอตัวที่ Tag: Enemy และยัง Active อยู่เลย ให้ส่งค่า true
         return true;
     }
 
