@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class FadeManager : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class FadeManager : MonoBehaviour
         
         
     }
-
+     
     // ฟังก์ชันสำหรับเปิดเมาส์ (สร้างแยกไว้จะได้เรียกใช้ง่ายๆ)
     public void ShowCursor()
     {

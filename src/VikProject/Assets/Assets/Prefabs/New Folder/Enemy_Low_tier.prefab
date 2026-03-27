@@ -5951,8 +5951,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a0ac4673bf89d14f91de2476489ef2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 100
+  maxHealth: 50
+  currentHealth: 50
   animator: {fileID: 0}
   targetRenderer: {fileID: 7115397627208665735}
   flashColor: {r: 1, g: 1, b: 1, a: 1}
@@ -8833,6 +8833,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0.6205315
       objectReference: {fileID: 0}
+    - target: {fileID: -4327678697971848367, guid: bbee91dea7965e448b45ff008876374c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 282ce76b1f860654eadde17b0180d47c, type: 2}
     - target: {fileID: -3652392405744820579, guid: bbee91dea7965e448b45ff008876374c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.00000010058262
