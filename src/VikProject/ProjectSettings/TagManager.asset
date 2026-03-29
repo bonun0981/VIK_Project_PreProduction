@@ -11,6 +11,7 @@ TagManager:
   - Ally
   - GrassFloor
   - WoodFloor
+  - Toon
   layers:
   - Default
   - TransparentFX
