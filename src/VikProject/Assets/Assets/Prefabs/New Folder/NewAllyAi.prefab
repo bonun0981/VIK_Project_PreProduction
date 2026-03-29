@@ -3475,9 +3475,21 @@ PrefabInstance:
       value: 0.19733086
       objectReference: {fileID: 0}
     - target: {fileID: -7160752219881262937, guid: bbee91dea7965e448b45ff008876374c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7160752219881262937, guid: bbee91dea7965e448b45ff008876374c, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -7160752219881262937, guid: bbee91dea7965e448b45ff008876374c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: b023f1a27f0c63545bfe201cda0f3bc7, type: 2}
+    - target: {fileID: -7160752219881262937, guid: bbee91dea7965e448b45ff008876374c, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 12d0cc0030e7ced42880a29871e16369, type: 2}
     - target: {fileID: -7087524679592306215, guid: bbee91dea7965e448b45ff008876374c, type: 3}
       propertyPath: m_Mesh
       value: 
