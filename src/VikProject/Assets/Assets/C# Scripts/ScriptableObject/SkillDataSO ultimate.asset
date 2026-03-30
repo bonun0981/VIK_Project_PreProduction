@@ -15,11 +15,11 @@ MonoBehaviour:
   spawnType: 2
   cooldown: 1
   radius: 10
-  damage: 100
-  knockback: 1
+  damage: 50
+  knockback: 100
   hitStopDuration: 0
-  duration: 2
-  moveDuration: 1
+  duration: 5
+  moveDuration: 3
   stayDuration: 4
   targetLayer:
     serializedVersion: 2

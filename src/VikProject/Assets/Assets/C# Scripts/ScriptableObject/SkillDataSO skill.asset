@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnType: 2
   cooldown: 5
-  radius: 10
-  damage: 20
-  knockback: 1
+  radius: 100
+  damage: 100
+  knockback: 50
   hitStopDuration: 0
   duration: 2
   moveDuration: 2
-  stayDuration: 4
+  stayDuration: 2
   targetLayer:
     serializedVersion: 2
     m_Bits: 64

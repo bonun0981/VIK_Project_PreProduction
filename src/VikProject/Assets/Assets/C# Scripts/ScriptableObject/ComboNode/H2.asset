@@ -23,6 +23,6 @@ MonoBehaviour:
   hitstopTime: 0
   useStartPercent: 1
   resetIfLate: 1
-  damageMultiplier: 1
-  statusPower: 10
+  damageMultiplier: 10
+  statusPower: 70
   statusEffect: 2

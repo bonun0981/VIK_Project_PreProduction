@@ -16,7 +16,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
-  m_ExitTime: 0.7222222
+  m_ExitTime: 1.2
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -216,7 +216,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
-  m_ExitTime: 0.88805974
+  m_ExitTime: 1.2
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -837,7 +837,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: L_3
-  m_Speed: 1.4
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -5468439355192170220}
@@ -920,7 +920,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: L_1
-  m_Speed: 1.3
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 6416425023097976573}
@@ -1169,7 +1169,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
-  m_ExitTime: 0.8026316
+  m_ExitTime: 1.2
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -1297,7 +1297,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
-  m_ExitTime: 0.8369565
+  m_ExitTime: 1.2
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -1560,7 +1560,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: H_1
-  m_Speed: 1.3
+  m_Speed: 1.6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -5197202475064049780}
