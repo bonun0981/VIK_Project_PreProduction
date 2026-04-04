@@ -3,23 +3,37 @@ using UnityEngine.SceneManagement;
 
 public class UiManager : MonoBehaviour
 {
-    [SerializeField]private GameObject pauseMenu;
-    [SerializeField]private GameObject settingMenu;
-    [SerializeField] private int sceneNum=1;
+    [Header("Menu Panels")]
+    [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject settingMenu;
+    [SerializeField] private GameObject gameOverMenu; // <--- เพิ่ม Canvas จบเกม
+
+    [SerializeField] private int sceneNum = 1;
+
+    private bool isGameOver = false; // <--- เช็กว่าจบเกมหรือยัง
+
     private void Start()
     {
-        ShowCursor(false); // เริ่มเกม → ซ่อนเมาส์
+        ShowCursor(false);
+        // มั่นใจว่าเปิดเกมมาเมนูทั้งหมดต้องปิด
+        pauseMenu?.SetActive(false);
+        settingMenu?.SetActive(false);
+        gameOverMenu?.SetActive(false);
     }
+
     public void ShowCursor(bool show)
     {
         Cursor.visible = show;
         Cursor.lockState = show ? CursorLockMode.None : CursorLockMode.Locked;
     }
+
     private void Update()
     {
+        // ถ้าจบเกมแล้ว ไม่ให้กด ESC เพื่อเปิด Pause Menu
+        if (isGameOver) return;
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            // ถ้า Settings เปิดอยู่ → ปิดทั้งหมด
             if (settingMenu != null && settingMenu.activeInHierarchy)
             {
                 CloseAllMenus();
@@ -31,15 +45,25 @@ public class UiManager : MonoBehaviour
         }
     }
 
+    // --- ฟังก์ชันใหม่สำหรับจบเกม ---
+    public void GameOver()
+    {
+        isGameOver = true;
+        Time.timeScale = 0; // หยุดเวลาเกม
+        gameOverMenu?.SetActive(true); // แสดงหน้าจอจบเกม
+        ShowCursor(true); // แสดงเมาส์
+    }
+
     private void CloseAllMenus()
     {
         settingMenu?.SetActive(false);
         pauseMenu?.SetActive(false);
+        gameOverMenu?.SetActive(false); // ปิดหน้าจบเกมด้วย (เผื่อใช้กรณี Restart)
+
         Time.timeScale = 1;
-
-        ShowCursor(false); // 🔒 กลับเข้าเกม → ซ่อนเมาส์
+        isGameOver = false;
+        ShowCursor(false);
     }
-
 
     public void PauseMenuHandler()
     {
@@ -47,35 +71,36 @@ public class UiManager : MonoBehaviour
         {
             Time.timeScale = 1;
             pauseMenu.SetActive(false);
-
-            ShowCursor(false); // 🔒 ซ่อนเมาส์
+            ShowCursor(false);
         }
         else
         {
             Time.timeScale = 0;
             pauseMenu.SetActive(true);
-
-            ShowCursor(true); // 🔓 แสดงเมาส์
+            ShowCursor(true);
         }
     }
 
     public void OpenSettingMenu()
     {
-        settingMenu.SetActive(true);
+        settingMenu?.SetActive(true);
     }
+
     public void CloseSettingMenu()
     {
         settingMenu?.SetActive(false);
     }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     public void GoToMainMenu()
     {
-        // 1. ต้องคืนค่า Time Scale เป็นปกติก่อน (ไม่งั้น Scene หน้าอาจจะหยุดนิ่ง)
         Time.timeScale = 1;
-
-        // 2. ปลดล็อกเมาส์ให้แสดงผลสำหรับหน้า Main Menu
         ShowCursor(true);
-
-        // 3. แล้วค่อยโหลด Scene
         SceneManager.LoadScene(sceneNum);
     }
 }
